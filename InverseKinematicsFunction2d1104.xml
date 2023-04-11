@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+  <!--(*
+ *
+ * File: Crane_model240323_joystick.xml
+ *
+ * IEC 61131-3 Structured Text (ST) code generated for subsystem "Crane_model240323_joystick/Forward kinematics model1/Inverse kinematics/Inverse kinematics function"
+ *
+ * Model name                      : Crane_model240323_joystick
+ * Model version                   : 1.45
+ * Model creator                   : krgar
+ * Model last modified by          : krgar
+ * Model last modified on          : Tue Apr 11 09:20:05 2023
+ * Model sample time               : 0.001s
+ * Subsystem name                  : Crane_model240323_joystick/Forward kinematics model1/Inverse kinematics/Inverse kinematics function
+ * Subsystem sample time           : 0.001s
+ * Simulink PLC Coder version      : 3.7 (R2022b) 13-May-2022
+ * ST code generated on            : Tue Apr 11 09:30:35 2023
+ *
+ * Target IDE selection            : PLCopen XML
+ * Test Bench included             : No
+ *
+ *)
+-->
+  <fileHeader companyName="The Mathworks, Inc." companyURL="www.mathworks.com" contentDescription="" creationDateTime="2023-04-11T09:30:35" productName="Simulink PLC Coder" productRelease="(R2022b)" productVersion="3.7"/>
+  <contentHeader name="Crane_model240323_joystick">
+    <coordinateInfo>
+      <fbd>
+        <scaling x="0" y="0"/>
+      </fbd>
+      <ld>
+        <scaling x="0" y="0"/>
+      </ld>
+      <sfc>
+        <scaling x="0" y="0"/>
+      </sfc>
+    </coordinateInfo>
+  </contentHeader>
+  <types>
+    <dataTypes/>
+    <pous>
+      <pou name="Inverse" pouType="functionBlock">
+        <interface>
+          <inputVars>
+            <variable name="fPtXd">
+              <type>
+                <LREAL/>
+              </type>
+            </variable>
+            <variable name="fPtYd">
+              <type>
+                <LREAL/>
+              </type>
+            </variable>
+            <variable name="fTheta1">
+              <type>
+                <LREAL/>
+              </type>
+            </variable>
+          </inputVars>
+          <outputVars>
+            <variable name="fStrokeActuatorMain">
+              <type>
+                <LREAL/>
+              </type>
+            </variable>
+            <variable name="fStrokeActuatorKnuckle">
+              <type>
+                <LREAL/>
+              </type>
+            </variable>
+            <variable name="fTheta3">
+              <type>
+                <LREAL/>
+              </type>
+            </variable>
+            <variable name="fTheta4">
+              <type>
+                <LREAL/>
+              </type>
+            </variable>
+          </outputVars>
+          <localVars>
+            <variable name="h">
+              <type>
+                <LREAL/>
+              </type>
+            </variable>
+            <variable name="ThetaB">
+              <type>
+                <LREAL/>
+              </type>
+            </variable>
+            <variable name="ThetaB_tmp">
+              <type>
+                <LREAL/>
+              </type>
+            </variable>
+            <variable name="b_a_tmp">
+              <type>
+                <LREAL/>
+              </type>
+            </variable>
+            <variable name="a_tmp">
+              <type>
+                <LREAL/>
+              </type>
+            </variable>
+            <variable name="i0_cosd">
+              <type>
+                <derived name="cosd"/>
+              </type>
+            </variable>
+          </localVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml"><![CDATA[
+(* MATLAB Function: '<Root>/Inverse kinematics function' *)
+(* clc; close all; clear; *)
+(* MATLAB Function 'Inverse kinematics function': '<S1>:1' *)
+(* Inputs *)
+(* Desired global coordinates *)
+(* fPtXd		= 0.75 + 1.5; *)
+(* fPtYd		= 1.065 + 0.176; *)
+
+(* %     fPtXd		= 0.75 + 0.716; *)
+(* %  	fPtYd		= 1.065 + 0.705; *)
+(* Platform constants *)
+(* '<S1>:1:14' h0 = 1.0; *)
+(* '<S1>:1:15' l0 = 0.75; *)
+(* Crane constants *)
+(* '<S1>:1:18' h1 = 1.334 + 0.065; *)
+(* '<S1>:1:19' lm = 1.5; *)
+(* '<S1>:1:20' lk = 1.158; *)
+(* Calculate position of a2 as function of Theta1 *)
+(* '<S1>:1:23' a2x = l0*cos(fTheta1) + h1*cos(fTheta1 + pi/2); *)
+(* '<S1>:1:24' a2y = h0 + l0*sin(fTheta1) + h1*sin(fTheta1 + pi/2); *)
+(* '<S1>:1:26' h = sqrt((fPtXd - a2x)^2 + (fPtYd - a2y)^2); *)
+a_tmp := fPtXd - ((COS(fTheta1 + 1.5707963267948966) * 1.399) + (0.75 * COS(fTheta1)));
+b_a_tmp := fPtYd - (((0.75 * SIN(fTheta1)) + 1.0) + (SIN(fTheta1 + 1.5707963267948966) * 1.399));
+h := SQRT((a_tmp * a_tmp) + (b_a_tmp * b_a_tmp));
+(* '<S1>:1:27' phi = atan((fPtYd - a2y) / (fPtXd - a2x)); *)
+(* Calculate ThetaA and ThetaB *)
+(* '<S1>:1:30' ThetaA = acos ((lm^2 + h^2 - lk^2) / (2*lm*h)); *)
+(* '<S1>:1:31' ThetaB = acos ((lk^2 + lm^2 - h^2) / (2*lm*lk)); *)
+ThetaB_tmp := h * h;
+ThetaB := ACOS((3.5909639999999996 - ThetaB_tmp) / 3.4739999999999998);
+(* '<S1>:1:33' fTheta3 = ThetaA + phi - fTheta1; *)
+fTheta3 := (ACOS(((ThetaB_tmp + 2.25) - 1.3409639999999998) / (3.0 * h)) + ATAN(b_a_tmp / a_tmp)) - fTheta1;
+(* '<S1>:1:34' fTheta4 = ThetaB - pi/2; *)
+(* '<S1>:1:36' fTheta3deg = rad2deg(fTheta3); *)
+(* '<S1>:1:37' fTheta4deg = rad2deg(fTheta4); *)
+(* Crane constant parameters *)
+(* '<S1>:1:40' fLengthP2PMainArm			= lm; *)
+(* '<S1>:1:41' fLengthP2PKnuckleArm		= lk; *)
+(* '<S1>:1:43' fLengthAMain				= 0.614; *)
+(* '<S1>:1:44' fLengthBMain				= 0.571; *)
+(* '<S1>:1:45' fMinLengthActuatorMain		= 0.692; *)
+(* '<S1>:1:46' fMaxStrokeActuatorMain		= 0.320; *)
+(* '<S1>:1:48' fOffsetAngleDegMainAct		= 62.1; *)
+(* '<S1>:1:50' fLengthAKnuckle				= 0.767; *)
+(* '<S1>:1:51' fLengthBKnuckle				= 0.184; *)
+(* '<S1>:1:52' fMinLengthActuatorKnuckle	= 0.627; *)
+(* '<S1>:1:53' fMaxStrokeActuatorKnuckle	= 0.260; *)
+(* '<S1>:1:55' fOffsetAngleDegKnuckleAct	= 86.3; *)
+(* '<S1>:1:58' fAngleMainArmAct			= fTheta3deg + fOffsetAngleDegMainAct; *)
+(* '<S1>:1:59' fAngleKnuckleArmAct         = fTheta4deg + fOffsetAngleDegKnuckleAct; *)
+(* '<S1>:1:61' fLengthActuatorMain         = sqrt(fLengthAMain^2 + fLengthBMain^2 -(2*fLengthAMain*fLengthBMain*cosd(fAngleMainArmAct))); *)
+(* '<S1>:1:62' fStrokeActuatorMain         = fLengthActuatorMain - fMinLengthActuatorMain; *)
+a_tmp := (57.295779513082323 * fTheta3) + 62.1;
+b_a_tmp := a_tmp;
+i0_cosd(x := b_a_tmp);
+(* Outport: '<Root>/fStrokeActuatorMain' incorporates:
+ *  MATLAB Function: '<Root>/Inverse kinematics function' *)
+fStrokeActuatorMain := SQRT(0.70303699999999991 - (0.70118799999999992 * b_a_tmp)) - 0.692;
+(* MATLAB Function: '<Root>/Inverse kinematics function' *)
+(* '<S1>:1:64' if fStrokeActuatorMain < 0 *)
+b_a_tmp := a_tmp;
+i0_cosd(x := b_a_tmp);
+
+IF (SQRT(0.70303699999999991 - (0.70118799999999992 * b_a_tmp)) - 0.692) < 0.0 THEN 
+    (* Outport: '<Root>/fStrokeActuatorMain' *)
+    (* '<S1>:1:65' fStrokeActuatorMain = 0; *)
+    fStrokeActuatorMain := 0.0;
+END_IF;
+
+(* '<S1>:1:70' fLengthActuatorKnuckle         = sqrt(fLengthAKnuckle^2 + fLengthBKnuckle^2 -(2*fLengthAKnuckle*fLengthBKnuckle*cosd(fAngleKnuckleArmAct))); *)
+(* '<S1>:1:71' fStrokeActuatorKnuckle         = fLengthActuatorKnuckle - fMinLengthActuatorKnuckle; *)
+a_tmp := ((ThetaB - 1.5707963267948966) * 57.295779513082323) + 86.3;
+b_a_tmp := a_tmp;
+i0_cosd(x := b_a_tmp);
+(* Outport: '<Root>/fStrokeActuatorKnuckle' incorporates:
+ *  MATLAB Function: '<Root>/Inverse kinematics function' *)
+fStrokeActuatorKnuckle := SQRT(0.62214500000000006 - (0.282256 * b_a_tmp)) - 0.627;
+(* MATLAB Function: '<Root>/Inverse kinematics function' *)
+(* '<S1>:1:73' if fStrokeActuatorKnuckle < 0 *)
+b_a_tmp := a_tmp;
+i0_cosd(x := b_a_tmp);
+
+IF (SQRT(0.62214500000000006 - (0.282256 * b_a_tmp)) - 0.627) < 0.0 THEN 
+    (* Outport: '<Root>/fStrokeActuatorKnuckle' *)
+    (* '<S1>:1:74' fStrokeActuatorKnuckle = 0; *)
+    fStrokeActuatorKnuckle := 0.0;
+END_IF;
+
+(* Outport: '<Root>/fTheta4' incorporates:
+ *  MATLAB Function: '<Root>/Inverse kinematics function' *)
+fTheta4 := ThetaB - 1.5707963267948966;
+
+]]></xhtml>
+          </ST>
+        </body>
+      </pou>
+      <pou name="cosd" pouType="functionBlock">
+        <interface>
+          <inputVars/>
+          <outputVars/>
+          <inOutVars>
+            <variable name="x">
+              <type>
+                <LREAL/>
+              </type>
+            </variable>
+          </inOutVars>
+          <localVars>
+            <variable name="b_n">
+              <type>
+                <SINT/>
+              </type>
+            </variable>
+            <variable name="b_x">
+              <type>
+                <LREAL/>
+              </type>
+            </variable>
+            <variable name="absx">
+              <type>
+                <LREAL/>
+              </type>
+            </variable>
+          </localVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml"><![CDATA[
+b_x := rt_remd(u0 := x, u1 := 360.0);
+absx := ABS(b_x);
+
+IF absx > 180.0 THEN 
+
+    IF b_x > 0.0 THEN 
+        b_x := b_x - 360.0;
+    ELSE 
+        b_x := b_x + 360.0;
+    END_IF;
+
+    absx := ABS(b_x);
+END_IF;
+
+
+IF absx <= 45.0 THEN 
+    b_x := 0.017453292519943295 * b_x;
+    b_n := 0;
+ELSIF absx <= 135.0 THEN 
+
+    IF b_x > 0.0 THEN 
+        b_x := (b_x - 90.0) * 0.017453292519943295;
+        b_n := 1;
+    ELSE 
+        b_x := (b_x + 90.0) * 0.017453292519943295;
+        b_n := -1;
+    END_IF;
+
+ELSIF b_x > 0.0 THEN 
+    b_x := (b_x - 180.0) * 0.017453292519943295;
+    b_n := 2;
+ELSE 
+    b_x := (b_x + 180.0) * 0.017453292519943295;
+    b_n := -2;
+END_IF;
+
+
+CASE b_n OF
+    0: 
+        x := COS(b_x);
+    1: 
+        x :=  -SIN(b_x);
+    -1: 
+        x := SIN(b_x);
+    ELSE
+        x :=  -COS(b_x);
+END_CASE;
+
+
+]]></xhtml>
+          </ST>
+        </body>
+      </pou>
+      <pou name="rt_remd" pouType="function">
+        <interface>
+          <returnType>
+            <LREAL/>
+          </returnType>
+          <inputVars>
+            <variable name="u0">
+              <type>
+                <LREAL/>
+              </type>
+            </variable>
+            <variable name="u1">
+              <type>
+                <LREAL/>
+              </type>
+            </variable>
+          </inputVars>
+          <localVars>
+            <variable name="u">
+              <type>
+                <LREAL/>
+              </type>
+            </variable>
+            <variable name="tmp">
+              <type>
+                <LREAL/>
+              </type>
+            </variable>
+          </localVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml"><![CDATA[
+u := u0 / u1;
+
+IF u1 <= rt_floord(u := u1) THEN 
+    rt_remd := u0 - (DINT_TO_LREAL(TRUNC(u)) * u1);
+ELSE 
+    tmp := ABS(u);
+
+    IF tmp < 4.503599627370496E+15 THEN 
+
+        IF u >= 0.5 THEN 
+            rt_remd := rt_floord(u := u + 0.5);
+        ELSIF u > -0.5 THEN 
+            rt_remd := 0.0;
+        ELSE 
+            rt_remd := rt_ceild(u := u - 0.5);
+        END_IF;
+
+    ELSE 
+        rt_remd := u;
+    END_IF;
+
+
+    IF ABS(u - rt_remd) <= (2.2204460492503131E-16 * tmp) THEN 
+        rt_remd := 0.0;
+    ELSE 
+        rt_remd := (u - DINT_TO_LREAL(TRUNC(u))) * u1;
+    END_IF;
+
+END_IF;
+
+
+]]></xhtml>
+          </ST>
+        </body>
+      </pou>
+      <pou name="rt_floord" pouType="function">
+        <interface>
+          <returnType>
+            <LREAL/>
+          </returnType>
+          <inputVars>
+            <variable name="u">
+              <type>
+                <LREAL/>
+              </type>
+            </variable>
+          </inputVars>
+          <localVars/>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml"><![CDATA[
+rt_floord := DINT_TO_LREAL(TRUNC(u));
+
+IF u = rt_floord THEN 
+    rt_floord := u;
+ELSIF u < 0.0 THEN 
+    rt_floord := rt_floord - 1.0;
+END_IF;
+
+
+]]></xhtml>
+          </ST>
+        </body>
+      </pou>
+      <pou name="rt_ceild" pouType="function">
+        <interface>
+          <returnType>
+            <LREAL/>
+          </returnType>
+          <inputVars>
+            <variable name="u">
+              <type>
+                <LREAL/>
+              </type>
+            </variable>
+          </inputVars>
+          <localVars/>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml"><![CDATA[
+rt_ceild := DINT_TO_LREAL(TRUNC(u));
+
+IF u = rt_ceild THEN 
+    rt_ceild := u;
+ELSIF u >= 0.0 THEN 
+    rt_ceild := rt_ceild + 1.0;
+END_IF;
+
+
+]]></xhtml>
+          </ST>
+        </body>
+      </pou>
+    </pous>
+  </types>
+  <instances>
+    <configurations/>
+  </instances>
+</project>
