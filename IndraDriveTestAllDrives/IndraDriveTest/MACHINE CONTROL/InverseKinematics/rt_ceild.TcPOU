@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="rt_ceild" Id="{443fbc25-9d16-40e2-b007-bbb1345740e9}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION rt_ceild : LREAL
+VAR_INPUT
+	u: LREAL;
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+rt_ceild := DINT_TO_LREAL(TRUNC(u));
+
+IF u = rt_ceild THEN 
+    rt_ceild := u;
+ELSIF u >= 0.0 THEN 
+    rt_ceild := rt_ceild + 1.0;
+END_IF;
+
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="rt_ceild">
+      <LineId Id="3" Count="9" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

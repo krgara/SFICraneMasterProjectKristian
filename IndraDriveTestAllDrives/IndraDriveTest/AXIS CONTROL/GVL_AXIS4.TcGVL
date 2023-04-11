@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <GVL Name="GVL_AXIS4" Id="{8782cd13-a394-42dd-a95e-adf285bdbf46}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL
+
+//Axis4 Winch Motor 'WM'
+WMAxis : AXIS_REF;
+
+//Motion Control Function Block Instant Variable 
+fbWM_Reset				: MC_Reset;
+fbWM_Power				: MC_Power;
+fbWM_Home				: MC_Home;
+fbWM_Jog				: MC_Jog;
+fbWM_MoveVelocity		: MC_MoveVelocity;
+fbWM_Stop				: MC_Stop;
+fbWM_MoveAbs			: MC_MoveAbsolute;
+
+//Input: Command
+bWM_ResetExe			: BOOL;
+
+bWM_PowerEnCmd			: BOOL;
+bWM_PowerEnPositive		: BOOL;
+bWM_PowerEnNegative 	: BOOL;
+
+bWM_HomeExe				: BOOL;
+bWM_HomeCamInput		: BOOL;
+
+bWM_JogFwd				: BOOL;
+bWM_JogRev				: BOOL;	
+
+bWM_MoveVelExe			: BOOL;
+	
+bWM_StopExe				: BOOL;
+
+bWM_MoveAbsExe			: BOOL;
+
+stWM_VelCmd				: ST_MC_CMD := (bExe := FALSE, lrVelocity := 100, EnuDirection := MC_Positive_Direction); 
+//stWM_VelCmd				: ST_MC_CMD := (bExe := FALSE, lrVelocity := 100, lrAcceleration := 0, lrDeceleration := 0, lrJerk := 0, lrDistance := 0, lrPosition := 0, EnuDirection := MC_Positive_Direction, EnuBufferMode := 0, EnuOptions := 0 ); 
+
+//Variables/Parameters
+lrWM_PowerOverride		: LREAL;
+lrWM_HomePosition		: LREAL;
+lrWM_SetPosition		: LREAL;
+lrWM_JogVelocity		: LREAL;
+lrWM_MoveVelVelocity	: LREAL;
+lrWM_MoveAbsPosition	: LREAL;
+
+//Direction
+EnuMoveVelDirection		: MC_Direction;
+
+// Status
+stWM_Reset				: ST_MC_Status;
+stWM_Power				: ST_MC_Status;
+stWM_Home				: ST_MC_Status;
+stWM_SetPosition		: ST_MC_Status;
+stWM_Jog				: ST_MC_Status;
+stWM_MoveVelocity		: ST_MC_Status;
+stWM_Stop				: ST_MC_Status;
+stWM_MoveAbs			: ST_MC_Status;
+
+//Safety
+bInAckSignal		AT %I*	:BOOL;
+
+
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

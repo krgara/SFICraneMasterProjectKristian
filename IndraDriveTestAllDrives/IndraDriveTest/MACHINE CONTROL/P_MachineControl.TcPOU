@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="P_MachineControl" Id="{a90e0789-57c0-407b-b2f1-afc96a165b42}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM P_MachineControl
+VAR
+	//fbManualControlWinch 		: FB_ManualControl;
+	//fbManualControlCyl	 	: FB_ManualControl;
+	//fbAutomaticControlWinch 	: FB_AutomaticControl_old;
+	//fbAutomaticControlCyl	 	: FB_AutomaticControl_old;
+	//fWinchControlSignalManual 			: LREAL;
+	//fCylControlSignalManual 			: LREAL;
+	//fWinchControlSignalAuto 			: LREAL;
+	//fCylControlSignalAuto				: LREAL;
+	//fbAutomaticControlWinch 	:	FB_AutomaticControlWinch;
+	//fbAutomaticControlCylinder 		:	FB_AutomaticControl;
+	//fbModifyAutomaticControlSettingsWinch : FB_ModifyAutomaticControlSettings;
+	//fbModifyAutomaticControlSettingsCylinder : FB_ModifyAutomaticControlSettings;
+	fbInverse					: FB_InverseKin;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[G_Work.bManualMode := G_Inputs.bManualModeSelector;
+G_Work.bAutoMode := G_Inputs.bAutoModeSelector;
+
+fbInverse(
+	fTooltipXCoordGlobal := GVL_InverseKinematics.fTooltipXCoordGlobalIni, 
+	fTooltipYCoordGlobal := GVL_InverseKinematics.fTooltipYCoordGlobalIni, 
+	fTooltipZCoordGlobal := GVL_InverseKinematics.fTooltipZCoordGlobalIni, 
+	fAngleMainArm => GVL_InverseKinematics.fAngleMainArmInverse, 
+	fAngleKnuckleArm => GVL_InverseKinematics.fAngleKnuckleArmInverse,
+	fStrokeActuatorMain => GVL_InverseKinematics.fStrokeActuatorMainInverse,
+	fStrokeActuatorKnuckle => GVL_InverseKinematics.fStrokeActuatorKnuckleInverse,	
+);
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="P_MachineControl">
+      <LineId Id="5" Count="0" />
+      <LineId Id="81" Count="0" />
+      <LineId Id="153" Count="0" />
+      <LineId Id="152" Count="0" />
+      <LineId Id="155" Count="2" />
+      <LineId Id="160" Count="1" />
+      <LineId Id="164" Count="0" />
+      <LineId Id="162" Count="0" />
+      <LineId Id="158" Count="0" />
+      <LineId Id="68" Count="0" />
+      <LineId Id="136" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
