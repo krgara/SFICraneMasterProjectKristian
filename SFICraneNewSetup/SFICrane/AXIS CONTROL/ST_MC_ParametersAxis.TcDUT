@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <DUT Name="ST_MC_ParametersAxis" Id="{1dd533a3-f30c-45d0-b9f6-087478b2a3a3}">
+    <Declaration><![CDATA[TYPE ST_MC_ParametersAxis :
+STRUCT
+	
+	
+
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

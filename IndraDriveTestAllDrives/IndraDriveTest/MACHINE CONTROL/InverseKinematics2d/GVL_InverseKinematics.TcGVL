@@ -5,7 +5,7 @@
 VAR_GLOBAL
 	fTooltipXCoordGlobalIni: LREAL := 2.8;
 	fTooltipYCoordGlobalIni: LREAL := 0.0;
-	fTooltipZCoordGlobalIni: LREAL := 2.2;
+	//fTooltipZCoordGlobalIni: LREAL := 0.0;
 	fAngleMainArmInverse :	LREAL;
 	fAngleKnuckleArmInverse : LREAL;
 	fStrokeActuatorMainInverse : LREAL;

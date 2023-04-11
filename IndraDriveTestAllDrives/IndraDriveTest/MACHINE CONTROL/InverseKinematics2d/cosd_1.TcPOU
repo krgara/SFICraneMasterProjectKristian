@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
-  <POU Name="cosd" Id="{b3fd6147-76c7-4f10-99ab-1daa3a31ab1d}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK cosd
+  <POU Name="cosd_1" Id="{0001aeb4-7e3c-46fe-896c-f876ee45eedc}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK cosd_1
 VAR_INPUT
 END_VAR
 VAR_OUTPUT
@@ -68,7 +68,7 @@ END_CASE;
 
 ]]></ST>
     </Implementation>
-    <LineIds Name="cosd">
+    <LineIds Name="cosd_1">
       <LineId Id="3" Count="49" />
       <LineId Id="2" Count="0" />
     </LineIds>

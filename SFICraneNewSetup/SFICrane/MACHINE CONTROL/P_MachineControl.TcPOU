@@ -4,16 +4,23 @@
     <Declaration><![CDATA[PROGRAM P_MachineControl
 VAR
 	fbInverse					: FB_InverseKin2d;
+	fRefPosX					: LREAL := GVL_InverseKinematics.fTooltipXCoordGlobalIni;
+	fRefPosY					: LREAL := GVL_InverseKinematics.fTooltipYCoordGlobalIni;					
 END_VAR
 ]]></Declaration>
     <Implementation>
       <ST><![CDATA[G_Work.bManualMode := G_Inputs.bManualModeSelector;
 G_Work.bAutoMode := G_Inputs.bAutoModeSelector;
 
+IF G_Inputs.bAutoModeSelector THEN
+fRefPosX := fRefPosX + G_Sensors.fJoystickLeftNormalizedX*-0.001;
+fRefPosY := fRefPosY + G_Sensors.fJoystickLeftNormalizedY*0.001;
+END_IF
+
 fbInverse(
-	fPtXd := GVL_InverseKinematics.fTooltipXCoordGlobalIni, 
-	fPtYd := GVL_InverseKinematics.fTooltipYCoordGlobalIni, 
-	fTheta1: LREAL := 0;
+	fPtXd := fRefPosX, 
+	fPtYd := fRefPosY, 
+	fTheta1 :=GVL_InverseKinematics.fTheta1,
 	
 	fTheta3 => GVL_InverseKinematics.fAngleMainArmInverse, 
 	fTheta4 => GVL_InverseKinematics.fAngleKnuckleArmInverse,
@@ -26,6 +33,11 @@ fbInverse(
     <LineIds Name="P_MachineControl">
       <LineId Id="5" Count="0" />
       <LineId Id="81" Count="0" />
+      <LineId Id="201" Count="0" />
+      <LineId Id="193" Count="0" />
+      <LineId Id="192" Count="0" />
+      <LineId Id="194" Count="0" />
+      <LineId Id="207" Count="0" />
       <LineId Id="153" Count="0" />
       <LineId Id="152" Count="0" />
       <LineId Id="155" Count="1" />

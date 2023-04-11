@@ -1783,7 +1783,7 @@ External Setpoint Generation:
 						</Var>
 					</Vars>
 				</Axis>
-				<Axis Id="2" Disabled="true" CreateSymbols="true" AxisType="1">
+				<Axis Id="2" CreateSymbols="true" AxisType="1">
 					<Name>Axis 2 - Slew motor</Name>
 					<AxisPara>
 						<General UnitName="Degree"/>

@@ -90,23 +90,23 @@
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
     </Compile>
-    <Compile Include="MACHINE CONTROL\InverseKinematics\cosd.TcPOU">
+    <Compile Include="MACHINE CONTROL\InverseKinematics2d\cosd_1.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MACHINE CONTROL\InverseKinematics\FB_InverseKin.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="MACHINE CONTROL\InverseKinematics\GVL_InverseKinematics.TcGVL">
+    <Compile Include="MACHINE CONTROL\InverseKinematics2d\GVL_InverseKinematics.TcGVL">
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
     </Compile>
-    <Compile Include="MACHINE CONTROL\InverseKinematics\rt_ceild.TcPOU">
+    <Compile Include="MACHINE CONTROL\InverseKinematics2d\FB_InverseKin2d.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MACHINE CONTROL\InverseKinematics\rt_floord.TcPOU">
+    <Compile Include="MACHINE CONTROL\InverseKinematics2d\rt_ceild_1.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MACHINE CONTROL\InverseKinematics\rt_remd.TcPOU">
+    <Compile Include="MACHINE CONTROL\InverseKinematics2d\rt_floord_1.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MACHINE CONTROL\InverseKinematics2d\rt_remd_1.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="MACHINE CONTROL\P_MachineControl.TcPOU">
@@ -138,7 +138,7 @@
     <Folder Include="INPUTS\Functions" />
     <Folder Include="INPUTS\Struct" />
     <Folder Include="MACHINE CONTROL" />
-    <Folder Include="MACHINE CONTROL\InverseKinematics" />
+    <Folder Include="MACHINE CONTROL\InverseKinematics2d" />
     <Folder Include="MACHINE CONTROL\Struct" />
     <Folder Include="OUTPUTS" />
     <Folder Include="OUTPUTS\Function blocks" />

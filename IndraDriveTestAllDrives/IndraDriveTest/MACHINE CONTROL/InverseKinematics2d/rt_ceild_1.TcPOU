@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
-  <POU Name="rt_ceild" Id="{443fbc25-9d16-40e2-b007-bbb1345740e9}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION rt_ceild : LREAL
+  <POU Name="rt_ceild_1" Id="{3065b5b4-c09b-4eb8-99d7-d73a8e8c680b}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION rt_ceild_1 : LREAL
 VAR_INPUT
 	u: LREAL;
 END_VAR
@@ -21,7 +21,7 @@ END_IF;
 
 ]]></ST>
     </Implementation>
-    <LineIds Name="rt_ceild">
+    <LineIds Name="rt_ceild_1">
       <LineId Id="3" Count="9" />
       <LineId Id="2" Count="0" />
     </LineIds>
