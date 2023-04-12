@@ -1643,7 +1643,10 @@ External Setpoint Generation:
 						<OtherSettings AllowMotionCmdToSlave="true"/>
 					</AxisPara>
 					<Encoder Name="Enc" EncType="8">
-						<EncPara MaxCount="#x0036ee7f"/>
+						<EncPara MaxCount="#x0036ee7f">
+							<SoftEndMinControl Range="25"/>
+							<SoftEndMaxControl Range="295"/>
+						</EncPara>
 						<Vars VarGrpType="1">
 							<Name>Inputs</Name>
 							<Var>
@@ -1921,7 +1924,10 @@ External Setpoint Generation:
 						<OtherSettings AllowMotionCmdToSlave="true"/>
 					</AxisPara>
 					<Encoder Name="Enc" EncType="8">
-						<EncPara MaxCount="#x0036ee7f"/>
+						<EncPara MaxCount="#x0036ee7f">
+							<SoftEndMinControl Range="25"/>
+							<SoftEndMaxControl Range="220"/>
+						</EncPara>
 						<Vars VarGrpType="1">
 							<Name>Inputs</Name>
 							<Var>
@@ -2197,7 +2203,7 @@ External Setpoint Generation:
 		</Motion>
 		<Plc>
 			<Project GUID="{64FB78BA-5775-4793-83DB-E4463DEFB246}" Name="SFICrane" PrjFilePath="SFICrane\SFICrane.plcproj" TmcFilePath="SFICrane\SFICrane.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="SFICrane\SFICrane.tmc" TmcHash="{7E3736AF-4B06-A01C-3042-A209BEB26009}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="SFICrane\SFICrane.tmc" TmcHash="{49A0B851-7899-2D85-93E0-10D48CE5DB77}">
 					<Name>SFICrane Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
@@ -2209,6 +2215,10 @@ External Setpoint Generation:
 						<Var>
 							<Name>GVL_AXIS1.BCAxis.NcToPlc</Name>
 							<Type GUID="{25521FAA-EA5F-4C7F-8864-BBCCDACD2E98}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+						</Var>
+						<Var>
+							<Name>GVL_AXIS1.lrBC_ActPos</Name>
+							<Type>LREAL</Type>
 						</Var>
 						<Var>
 							<Name>GVL_AXIS2.SJAxis.NcToPlc</Name>
@@ -3423,6 +3433,7 @@ Bit 8 - 15 : reserved]]></Comment>
 			</OwnerB>
 			<OwnerB Name="TINC^NC-Task 1 SAF^Axes^Axis 1 - Bottom cylinder">
 				<Link VarA="PlcTask Inputs^GVL_AXIS1.BCAxis.NcToPlc" VarB="Outputs^ToPlc"/>
+				<Link VarA="PlcTask Inputs^GVL_AXIS1.lrBC_ActPos" VarB="Outputs^ToPlc^ActPos"/>
 				<Link VarA="PlcTask Outputs^GVL_AXIS1.BCAxis.PlcToNc" VarB="Inputs^FromPlc"/>
 			</OwnerB>
 			<OwnerB Name="TINC^NC-Task 1 SAF^Axes^Axis 2 - Slew motor">

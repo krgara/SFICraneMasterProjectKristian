@@ -59,7 +59,11 @@ lrBC_MoveVelVelocity	: LREAL;
 lrBC_MoveAbsPosition	: LREAL;
 lrBC_MoveContAbsPos		: LREAL;
 lrBC_MoveContAbsEndVel 	: LREAL := 0;
-lrBC_MoveAddPos		: LREAL;
+lrBC_MoveAddPos			: LREAL;
+lrBC_ActPos					AT %I* : LREAL;
+lrBC_PosError			: LREAL;
+lrBC_VelContrGain		: LREAL := 1.0;
+lrBC_ControllerVelRef	: LREAL;
 
 //Direction
 EnuMoveVelDirection		: MC_Direction;

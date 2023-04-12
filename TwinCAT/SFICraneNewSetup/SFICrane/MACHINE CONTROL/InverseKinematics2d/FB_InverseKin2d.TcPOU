@@ -116,11 +116,31 @@ END_IF;
  *  MATLAB Function: '<Root>/Inverse kinematics function' *)
 fTheta4 := ThetaB - 1.5707963267948966;
 
+
+IF fStrokeActuatorMain > fUpperLimitMain THEN
+	fStrokeActuatorMain := fUpperLimitMain;
+ELSIF fStrokeActuatorMain < fLowerLimitMain THEN
+	fStrokeActuatorMain := fLowerLimitMain;
+END_IF
+
+IF fStrokeActuatorKnuckle > fUpperLimitKnuckle THEN
+	fStrokeActuatorKnuckle := fUpperLimitKnuckle;
+ELSIF fStrokeActuatorKnuckle < fLowerLimitKnuckle THEN
+	fStrokeActuatorKnuckle := fLowerLimitKnuckle;
+END_IF
 ]]></ST>
     </Implementation>
     <LineIds Name="FB_InverseKin2d">
-      <LineId Id="3" Count="92" />
+      <LineId Id="3" Count="91" />
+      <LineId Id="130" Count="0" />
+      <LineId Id="120" Count="0" />
+      <LineId Id="95" Count="0" />
+      <LineId Id="121" Count="0" />
+      <LineId Id="123" Count="1" />
+      <LineId Id="122" Count="0" />
+      <LineId Id="125" Count="4" />
       <LineId Id="2" Count="0" />
+      <LineId Id="131" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

@@ -19,11 +19,14 @@ GVL_AXIS1.bBC_PowerEnNegative := G_Inputs.bManualModeSelector OR G_Inputs.bAutoM
 GVL_AXIS1.bBC_PowerEnPositive := G_Inputs.bManualModeSelector OR G_Inputs.bAutoModeSelector;
 
 GVL_AXIS1.lrBC_JogVelocity := 100;
-GVL_AXIS1.lrBC_PowerOverride := 50;
+//GVL_AXIS1.lrBC_PowerOverride := 50;
 
 GVL_AXIS1.lrBC_MoveAddPos := GVL_InverseKinematics.fStrokeActuatorMainInverse*1000; //Position in mm
 
 GVL_AXIS1.lrBC_MoveContAbsEndVel := 0;
+
+
+
 
 // Jog control
 
@@ -46,28 +49,35 @@ IF G_Sensors.fJoystickLeftNormalizedX  >= 0 AND G_Inputs.bJoystickLeftEnable AND
 	GVL_AXIS1.lrBC_PowerOverride := ABS(G_Sensors.fJoystickLeftNormalizedX) * 100;
 	GVL_AXIS1.stBC_VelCmd.EnuDirection := MC_Positive_Direction;
 	GVL_AXIS1.stBC_VelCmd.bExe := TRUE;
-	GVL_AXIS1.bBC_StopExe := FALSE;
 ELSIF G_Sensors.fJoystickLeftNormalizedX < 0 AND G_Inputs.bJoystickLeftEnable AND G_Inputs.bManualModeSelector THEN
 	GVL_AXIS1.lrBC_PowerOverride := ABS(G_Sensors.fJoystickLeftNormalizedX) * 100;
 	GVL_AXIS1.stBC_VelCmd.EnuDirection := MC_Negative_Direction;
 	GVL_AXIS1.stBC_VelCmd.bExe := TRUE;
-	GVL_AXIS1.bBC_StopExe := FALSE;
-ELSIF G_Inputs.bAutoModeSelector THEN
-	GVL_AXIS1.lrBC_PowerOverride := 20;
-	GVL_AXIS1.bBC_StopExe := FALSE;
-	//GVL_AXIS1.stBC_VelCmd.EnuDirection := MC_Positive_Direction;
+ELSIF G_Inputs.bAutoModeSelector AND G_Inputs.bJoystickRightEnable THEN
+	GVL_AXIS1.lrBC_PosError := GVL_InverseKinematics.fStrokeActuatorMainInverse*1000 - GVL_AXIS1.lrBC_ActPos;
+	GVL_AXIS1.lrBC_ControllerVelRef := GVL_AXIS1.lrBC_PosError*GVL_AXIS1.lrBC_VelContrGain*0.1;
+		IF GVL_AXIS1.lrBC_PosError >= 0 THEN
+			GVL_AXIS1.stBC_VelCmd.EnuDirection := MC_Positive_Direction;
+			GVL_AXIS1.lrBC_PowerOverride := ABS(GVL_AXIS1.lrBC_ControllerVelRef);
+		ELSIF GVL_AXIS1.lrBC_PosError < 0 THEN
+			GVL_AXIS1.stBC_VelCmd.EnuDirection := MC_Negative_Direction;
+			GVL_AXIS1.lrBC_PowerOverride := ABS(GVL_AXIS1.lrBC_ControllerVelRef);
+		END_IF
+		
+		IF GVL_AXIS1.lrBC_PowerOverride > 100 THEN
+				GVL_AXIS1.lrBC_PowerOverride := 100;
+		END_IF
+	
+	
 	//GVL_AXIS1.stBC_VelCmd.bExe := TRUE;
-	//GVL_AXIS1.bBC_MoveAddExe := TRUE;
+
 ELSE
 	 GVL_AXIS1.lrBC_PowerOverride := 0;
 	 //GVL_AXIS1.stBC_VelCmd.EnuDirection := MC_Current_Direction;
-	 GVL_AXIS1.stBC_VelCmd.bExe := FALSE;
+	 //GVL_AXIS1.stBC_VelCmd.bExe := FALSE;
 	 //GVL_AXIS1.bBC_StopExe := TRUE;
 END_IF
 
-IF GVL_AXIS1.stBC_MoveAdd.Done THEN
-	GVL_AXIS1.bBC_MoveAddExe := FALSE;
-END_IF
 
 (*
 // Automatic position control
@@ -10255,6 +10265,9 @@ END_VAR
       <LineId Id="246" Count="0" />
       <LineId Id="278" Count="0" />
       <LineId Id="261" Count="0" />
+      <LineId Id="286" Count="0" />
+      <LineId Id="295" Count="0" />
+      <LineId Id="288" Count="0" />
       <LineId Id="26" Count="0" />
       <LineId Id="15" Count="0" />
       <LineId Id="55" Count="0" />
@@ -10271,16 +10284,25 @@ END_VAR
       <LineId Id="41" Count="2" />
       <LineId Id="51" Count="0" />
       <LineId Id="53" Count="0" />
-      <LineId Id="266" Count="0" />
       <LineId Id="44" Count="0" />
       <LineId Id="52" Count="0" />
       <LineId Id="45" Count="0" />
       <LineId Id="54" Count="0" />
-      <LineId Id="268" Count="0" />
       <LineId Id="251" Count="0" />
-      <LineId Id="254" Count="0" />
-      <LineId Id="270" Count="0" />
-      <LineId Id="255" Count="1" />
+      <LineId Id="300" Count="1" />
+      <LineId Id="320" Count="0" />
+      <LineId Id="303" Count="0" />
+      <LineId Id="307" Count="0" />
+      <LineId Id="311" Count="0" />
+      <LineId Id="305" Count="0" />
+      <LineId Id="315" Count="0" />
+      <LineId Id="299" Count="0" />
+      <LineId Id="306" Count="0" />
+      <LineId Id="313" Count="1" />
+      <LineId Id="312" Count="0" />
+      <LineId Id="290" Count="0" />
+      <LineId Id="319" Count="0" />
+      <LineId Id="291" Count="0" />
       <LineId Id="253" Count="0" />
       <LineId Id="252" Count="0" />
       <LineId Id="47" Count="1" />
@@ -10288,7 +10310,6 @@ END_VAR
       <LineId Id="265" Count="0" />
       <LineId Id="40" Count="0" />
       <LineId Id="272" Count="0" />
-      <LineId Id="279" Count="2" />
       <LineId Id="215" Count="0" />
       <LineId Id="214" Count="0" />
       <LineId Id="216" Count="0" />

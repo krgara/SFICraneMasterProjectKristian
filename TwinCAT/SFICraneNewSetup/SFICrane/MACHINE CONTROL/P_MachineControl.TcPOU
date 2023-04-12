@@ -5,7 +5,8 @@
 VAR
 	fbInverse					: FB_InverseKin2d;
 	fRefPosX					: LREAL := GVL_InverseKinematics.fTooltipXCoordGlobalIni;
-	fRefPosY					: LREAL := GVL_InverseKinematics.fTooltipYCoordGlobalIni;					
+	fRefPosY					: LREAL := GVL_InverseKinematics.fTooltipYCoordGlobalIni;	
+			
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -28,6 +29,7 @@ fbInverse(
 	fStrokeActuatorKnuckle => GVL_InverseKinematics.fStrokeActuatorKnuckleInverse,	
 );
 
+
 ]]></ST>
     </Implementation>
     <LineIds Name="P_MachineControl">
@@ -47,7 +49,7 @@ fbInverse(
       <LineId Id="164" Count="0" />
       <LineId Id="162" Count="0" />
       <LineId Id="158" Count="0" />
-      <LineId Id="68" Count="0" />
+      <LineId Id="218" Count="1" />
       <LineId Id="136" Count="0" />
     </LineIds>
   </POU>
