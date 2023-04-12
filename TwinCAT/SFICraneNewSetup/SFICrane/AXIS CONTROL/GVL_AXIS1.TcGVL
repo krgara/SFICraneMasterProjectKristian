@@ -48,7 +48,7 @@ bBC_MoveAddExe			: BOOL;
 fBC_MoveContAbsExeTrig	: UINT;
 
 
-stBC_VelCmd				: ST_MC_CMD := (bExe := FALSE, lrVelocity := 100, EnuDirection := MC_Positive_Direction); 
+stBC_VelCmd				: ST_MC_CMD := (bExe := FALSE, lrVelocity := 100);//, EnuDirection := MC_Positive_Direction); 
 //stBC_VelCmd				: ST_MC_CMD := (bExe := FALSE, lrVelocity := 100, lrAcceleration := 0, lrDeceleration := 0, lrJerk := 0, lrDistance := 0, lrPosition := 0, EnuDirection := MC_Positive_Direction, EnuBufferMode := 0, EnuOptions := 0 ); 
 
 //Variables/Parameters

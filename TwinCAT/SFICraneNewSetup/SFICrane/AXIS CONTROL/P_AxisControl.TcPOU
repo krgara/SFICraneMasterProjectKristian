@@ -55,7 +55,7 @@ ELSIF G_Sensors.fJoystickLeftNormalizedX < 0 AND G_Inputs.bJoystickLeftEnable AN
 	GVL_AXIS1.stBC_VelCmd.bExe := TRUE;
 ELSIF G_Inputs.bAutoModeSelector AND G_Inputs.bJoystickRightEnable THEN
 	GVL_AXIS1.lrBC_PosError := GVL_InverseKinematics.fStrokeActuatorMainInverse*1000 - GVL_AXIS1.lrBC_ActPos;
-	GVL_AXIS1.lrBC_ControllerVelRef := GVL_AXIS1.lrBC_PosError*GVL_AXIS1.lrBC_VelContrGain*0.1;
+	GVL_AXIS1.lrBC_ControllerVelRef := GVL_AXIS1.lrBC_PosError*GVL_AXIS1.lrBC_VelContrGain*0.3;
 		IF GVL_AXIS1.lrBC_PosError >= 0 THEN
 			GVL_AXIS1.stBC_VelCmd.EnuDirection := MC_Positive_Direction;
 			GVL_AXIS1.lrBC_PowerOverride := ABS(GVL_AXIS1.lrBC_ControllerVelRef);
@@ -69,7 +69,7 @@ ELSIF G_Inputs.bAutoModeSelector AND G_Inputs.bJoystickRightEnable THEN
 		END_IF
 	
 	
-	//GVL_AXIS1.stBC_VelCmd.bExe := TRUE;
+	GVL_AXIS1.stBC_VelCmd.bExe := TRUE;
 
 ELSE
 	 GVL_AXIS1.lrBC_PowerOverride := 0;

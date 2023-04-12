@@ -3,7 +3,7 @@
   <POU Name="P_MachineControl" Id="{a90e0789-57c0-407b-b2f1-afc96a165b42}" SpecialFunc="None">
     <Declaration><![CDATA[PROGRAM P_MachineControl
 VAR
-	fbInverse					: FB_InverseKin2d;
+	fbInverse					: FB_Inverse;
 	fRefPosX					: LREAL := GVL_InverseKinematics.fTooltipXCoordGlobalIni;
 	fRefPosY					: LREAL := GVL_InverseKinematics.fTooltipYCoordGlobalIni;	
 			

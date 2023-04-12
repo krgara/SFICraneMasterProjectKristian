@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
-  <POU Name="FB_InverseKin2d" Id="{b7c1a8ce-8495-4ef6-8bcd-3511d51d9606}" SpecialFunc="None">
-    <Declaration><![CDATA[FUNCTION_BLOCK FB_InverseKin2d
+  <POU Name="FB_Inverse" Id="{e8f8ee71-6ad3-46ad-8aa9-88610ca2bf72}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_Inverse
 VAR_INPUT
 	fPtXd: LREAL;
 	fPtYd: LREAL;
@@ -65,17 +65,21 @@ fTheta3 := (ACOS(((ThetaB_tmp + 2.25) - 1.3409639999999998) / (3.0 * h)) + ATAN(
 (* '<S1>:1:43' fLengthAMain				= 0.614; *)
 (* '<S1>:1:44' fLengthBMain				= 0.571; *)
 (* '<S1>:1:45' fMinLengthActuatorMain		= 0.692; *)
-(* '<S1>:1:46' fMaxStrokeActuatorMain		= 0.320; *)
-(* '<S1>:1:48' fOffsetAngleDegMainAct		= 62.1; *)
-(* '<S1>:1:50' fLengthAKnuckle				= 0.767; *)
-(* '<S1>:1:51' fLengthBKnuckle				= 0.184; *)
-(* '<S1>:1:52' fMinLengthActuatorKnuckle	= 0.627; *)
-(* '<S1>:1:53' fMaxStrokeActuatorKnuckle	= 0.260; *)
-(* '<S1>:1:55' fOffsetAngleDegKnuckleAct	= 86.3; *)
-(* '<S1>:1:58' fAngleMainArmAct			= fTheta3deg + fOffsetAngleDegMainAct; *)
-(* '<S1>:1:59' fAngleKnuckleArmAct         = fTheta4deg + fOffsetAngleDegKnuckleAct; *)
-(* '<S1>:1:61' fLengthActuatorMain         = sqrt(fLengthAMain^2 + fLengthBMain^2 -(2*fLengthAMain*fLengthBMain*cosd(fAngleMainArmAct))); *)
-(* '<S1>:1:62' fStrokeActuatorMain         = fLengthActuatorMain - fMinLengthActuatorMain; *)
+(* '<S1>:1:46' fMaxStrokeActuatorMain		= 0.290; *)
+(* 0.320; *)
+(* '<S1>:1:47' fMinStrokeActuatorMain		= 0.025; *)
+(* '<S1>:1:49' fOffsetAngleDegMainAct		= 62.1; *)
+(* '<S1>:1:51' fLengthAKnuckle				= 0.767; *)
+(* '<S1>:1:52' fLengthBKnuckle				= 0.184; *)
+(* '<S1>:1:53' fMinLengthActuatorKnuckle	= 0.627; *)
+(* '<S1>:1:54' fMaxStrokeActuatorKnuckle	= 0.220; *)
+(* 0.260; *)
+(* '<S1>:1:55' fMinStrokeActuatorKnuckle   = 0.025; *)
+(* '<S1>:1:57' fOffsetAngleDegKnuckleAct	= 86.3; *)
+(* '<S1>:1:60' fAngleMainArmAct			= fTheta3deg + fOffsetAngleDegMainAct; *)
+(* '<S1>:1:61' fAngleKnuckleArmAct         = fTheta4deg + fOffsetAngleDegKnuckleAct; *)
+(* '<S1>:1:63' fLengthActuatorMain         = sqrt(fLengthAMain^2 + fLengthBMain^2 -(2*fLengthAMain*fLengthBMain*cosd(fAngleMainArmAct))); *)
+(* '<S1>:1:64' fStrokeActuatorMain         = fLengthActuatorMain - fMinLengthActuatorMain; *)
 a_tmp := (57.295779513082323 * fTheta3) + 62.1;
 b_a_tmp := a_tmp;
 i0_cosd(x := b_a_tmp);
@@ -83,18 +87,18 @@ i0_cosd(x := b_a_tmp);
  *  MATLAB Function: '<Root>/Inverse kinematics function' *)
 fStrokeActuatorMain := SQRT(0.70303699999999991 - (0.70118799999999992 * b_a_tmp)) - 0.692;
 (* MATLAB Function: '<Root>/Inverse kinematics function' *)
-(* '<S1>:1:64' if fStrokeActuatorMain < 0 *)
+(* '<S1>:1:66' if fStrokeActuatorMain < fMinStrokeActuatorMain *)
 b_a_tmp := a_tmp;
 i0_cosd(x := b_a_tmp);
 
-IF (SQRT(0.70303699999999991 - (0.70118799999999992 * b_a_tmp)) - 0.692) < 0.0 THEN 
+IF (SQRT(0.70303699999999991 - (0.70118799999999992 * b_a_tmp)) - 0.692) < 0.025 THEN 
     (* Outport: '<Root>/fStrokeActuatorMain' *)
-    (* '<S1>:1:65' fStrokeActuatorMain = 0; *)
-    fStrokeActuatorMain := 0.0;
+    (* '<S1>:1:67' fStrokeActuatorMain = fMinStrokeActuatorMain; *)
+    fStrokeActuatorMain := 0.025;
 END_IF;
 
-(* '<S1>:1:70' fLengthActuatorKnuckle         = sqrt(fLengthAKnuckle^2 + fLengthBKnuckle^2 -(2*fLengthAKnuckle*fLengthBKnuckle*cosd(fAngleKnuckleArmAct))); *)
-(* '<S1>:1:71' fStrokeActuatorKnuckle         = fLengthActuatorKnuckle - fMinLengthActuatorKnuckle; *)
+(* '<S1>:1:72' fLengthActuatorKnuckle         = sqrt(fLengthAKnuckle^2 + fLengthBKnuckle^2 -(2*fLengthAKnuckle*fLengthBKnuckle*cosd(fAngleKnuckleArmAct))); *)
+(* '<S1>:1:73' fStrokeActuatorKnuckle         = fLengthActuatorKnuckle - fMinLengthActuatorKnuckle; *)
 a_tmp := ((ThetaB - 1.5707963267948966) * 57.295779513082323) + 86.3;
 b_a_tmp := a_tmp;
 i0_cosd(x := b_a_tmp);
@@ -102,45 +106,25 @@ i0_cosd(x := b_a_tmp);
  *  MATLAB Function: '<Root>/Inverse kinematics function' *)
 fStrokeActuatorKnuckle := SQRT(0.62214500000000006 - (0.282256 * b_a_tmp)) - 0.627;
 (* MATLAB Function: '<Root>/Inverse kinematics function' *)
-(* '<S1>:1:73' if fStrokeActuatorKnuckle < 0 *)
+(* '<S1>:1:75' if fStrokeActuatorKnuckle < fMinStrokeActuatorKnuckle *)
 b_a_tmp := a_tmp;
 i0_cosd(x := b_a_tmp);
 
-IF (SQRT(0.62214500000000006 - (0.282256 * b_a_tmp)) - 0.627) < 0.0 THEN 
+IF (SQRT(0.62214500000000006 - (0.282256 * b_a_tmp)) - 0.627) < 0.025 THEN 
     (* Outport: '<Root>/fStrokeActuatorKnuckle' *)
-    (* '<S1>:1:74' fStrokeActuatorKnuckle = 0; *)
-    fStrokeActuatorKnuckle := 0.0;
+    (* '<S1>:1:76' fStrokeActuatorKnuckle = fMinStrokeActuatorKnuckle; *)
+    fStrokeActuatorKnuckle := 0.025;
 END_IF;
 
 (* Outport: '<Root>/fTheta4' incorporates:
  *  MATLAB Function: '<Root>/Inverse kinematics function' *)
 fTheta4 := ThetaB - 1.5707963267948966;
 
-
-IF fStrokeActuatorMain > fUpperLimitMain THEN
-	fStrokeActuatorMain := fUpperLimitMain;
-ELSIF fStrokeActuatorMain < fLowerLimitMain THEN
-	fStrokeActuatorMain := fLowerLimitMain;
-END_IF
-
-IF fStrokeActuatorKnuckle > fUpperLimitKnuckle THEN
-	fStrokeActuatorKnuckle := fUpperLimitKnuckle;
-ELSIF fStrokeActuatorKnuckle < fLowerLimitKnuckle THEN
-	fStrokeActuatorKnuckle := fLowerLimitKnuckle;
-END_IF
 ]]></ST>
     </Implementation>
-    <LineIds Name="FB_InverseKin2d">
-      <LineId Id="3" Count="91" />
-      <LineId Id="130" Count="0" />
-      <LineId Id="120" Count="0" />
-      <LineId Id="95" Count="0" />
-      <LineId Id="121" Count="0" />
-      <LineId Id="123" Count="1" />
-      <LineId Id="122" Count="0" />
-      <LineId Id="125" Count="4" />
+    <LineIds Name="FB_Inverse">
+      <LineId Id="3" Count="96" />
       <LineId Id="2" Count="0" />
-      <LineId Id="131" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

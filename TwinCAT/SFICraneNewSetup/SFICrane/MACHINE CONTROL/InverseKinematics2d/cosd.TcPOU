@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
-  <POU Name="cosd" Id="{0001aeb4-7e3c-46fe-896c-f876ee45eedc}" SpecialFunc="None">
+  <POU Name="cosd" Id="{09500bfd-56c4-47db-bcbf-6c83db73a676}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK cosd
 VAR_INPUT
 END_VAR
