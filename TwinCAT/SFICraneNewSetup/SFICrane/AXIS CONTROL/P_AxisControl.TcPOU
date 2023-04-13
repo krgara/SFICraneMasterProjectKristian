@@ -19,9 +19,10 @@ GVL_AXIS1.bBC_PowerEnNegative := G_Inputs.bManualModeSelector OR G_Inputs.bAutoM
 GVL_AXIS1.bBC_PowerEnPositive := G_Inputs.bManualModeSelector OR G_Inputs.bAutoModeSelector;
 
 GVL_AXIS1.lrBC_JogVelocity := 100;
-//GVL_AXIS1.lrBC_PowerOverride := 50;
+GVL_AXIS1.lrBC_PowerOverride := 50;
 
 GVL_AXIS1.lrBC_MoveAddPos := GVL_InverseKinematics.fStrokeActuatorMainInverse*1000; //Position in mm
+GVL_AXIS1.stBC_VelCmd.lrPosition := GVL_InverseKinematics.fStrokeActuatorMainInverse*1000; //Position in mm
 
 GVL_AXIS1.lrBC_MoveContAbsEndVel := 0;
 
@@ -42,6 +43,24 @@ END_IF
 
 *)
 
+//Position control
+IF G_Inputs.bAutoModeSelector AND G_Inputs.bJoystickLeftEnable THEN
+	GVL_AXIS1.bBC_ExtSetGenDisExe := FALSE;
+	GVL_AXIS1.bBC_ExtSetGenEnaExe := TRUE;
+ELSE
+	GVL_AXIS1.bBC_ExtSetGenDisExe := TRUE;
+	GVL_AXIS1.bBC_ExtSetGenEnaExe := FALSE;
+END_IF
+
+GVL_AXIS1.lrBC_PosError := GVL_InverseKinematics.fStrokeActuatorMainInverse*1000 - GVL_AXIS1.lrBC_ActPos;
+
+IF GVL_AXIS1.lrBC_PosError > 0 THEN
+	GVL_AXIS1.fBC_ExtSetFeedDirection := 1;
+ELSIF GVL_AXIS1.lrBC_PosError < 0 THEN
+	GVL_AXIS1.fBC_ExtSetFeedDirection := -1;
+ELSE
+	GVL_AXIS1.fBC_ExtSetFeedDirection := 0;
+END_IF
 
 
 // Manual velocity control
@@ -53,7 +72,7 @@ ELSIF G_Sensors.fJoystickLeftNormalizedX < 0 AND G_Inputs.bJoystickLeftEnable AN
 	GVL_AXIS1.lrBC_PowerOverride := ABS(G_Sensors.fJoystickLeftNormalizedX) * 100;
 	GVL_AXIS1.stBC_VelCmd.EnuDirection := MC_Negative_Direction;
 	GVL_AXIS1.stBC_VelCmd.bExe := TRUE;
-ELSIF G_Inputs.bAutoModeSelector AND G_Inputs.bJoystickRightEnable THEN
+(*ELSIF G_Inputs.bAutoModeSelector AND G_Inputs.bJoystickRightEnable THEN
 	GVL_AXIS1.lrBC_PosError := GVL_InverseKinematics.fStrokeActuatorMainInverse*1000 - GVL_AXIS1.lrBC_ActPos;
 	GVL_AXIS1.lrBC_ControllerVelRef := GVL_AXIS1.lrBC_PosError*GVL_AXIS1.lrBC_VelContrGain*0.3;
 		IF GVL_AXIS1.lrBC_PosError >= 0 THEN
@@ -70,9 +89,9 @@ ELSIF G_Inputs.bAutoModeSelector AND G_Inputs.bJoystickRightEnable THEN
 	
 	
 	GVL_AXIS1.stBC_VelCmd.bExe := TRUE;
-
-ELSE
-	 GVL_AXIS1.lrBC_PowerOverride := 0;
+*)
+//ELSE
+	 //GVL_AXIS1.lrBC_PowerOverride := 0;
 	 //GVL_AXIS1.stBC_VelCmd.EnuDirection := MC_Current_Direction;
 	 //GVL_AXIS1.stBC_VelCmd.bExe := FALSE;
 	 //GVL_AXIS1.bBC_StopExe := TRUE;
@@ -1114,7 +1133,7 @@ END_VAR
                     <v n="Comment">""</v>
                     <v n="Title">""</v>
                     <v n="Label">""</v>
-                    <v n="OutCommented">false</v>
+                    <v n="OutCommented">true</v>
                     <l2 n="NetworkItems" cet="BoxTreeAssign">
                       <o>
                         <o n="OutputItems" t="OutputItemList">
@@ -1488,7 +1507,7 @@ END_VAR
                     <v n="Comment">""</v>
                     <v n="Title">""</v>
                     <v n="Label">""</v>
-                    <v n="OutCommented">false</v>
+                    <v n="OutCommented">true</v>
                     <l2 n="NetworkItems" cet="BoxTreeAssign">
                       <o>
                         <o n="OutputItems" t="OutputItemList">
@@ -1883,7 +1902,7 @@ END_VAR
                     <v n="Comment">""</v>
                     <v n="Title">""</v>
                     <v n="Label">""</v>
-                    <v n="OutCommented">false</v>
+                    <v n="OutCommented">true</v>
                     <l2 n="NetworkItems" cet="BoxTreeAssign">
                       <o>
                         <o n="OutputItems" t="OutputItemList">
@@ -2173,7 +2192,7 @@ END_VAR
                     <v n="Comment">""</v>
                     <v n="Title">""</v>
                     <v n="Label">""</v>
-                    <v n="OutCommented">false</v>
+                    <v n="OutCommented">true</v>
                     <l2 n="NetworkItems" cet="BoxTreeAssign">
                       <o>
                         <o n="OutputItems" t="OutputItemList">
@@ -3244,6 +3263,666 @@ END_VAR
                     </l2>
                     <l2 n="Connectors" />
                     <v n="Id">60L</v>
+                  </o>
+                  <o>
+                    <v n="ILActive">false</v>
+                    <v n="FBDValid">false</v>
+                    <v n="ILValid">false</v>
+                    <l2 n="ILLines" />
+                    <v n="Comment">""</v>
+                    <v n="Title">""</v>
+                    <v n="Label">""</v>
+                    <v n="OutCommented">false</v>
+                    <l2 n="NetworkItems" cet="BoxTreeAssign">
+                      <o>
+                        <o n="OutputItems" t="OutputItemList">
+                          <l2 n="OutputItems" cet="Operand">
+                            <o>
+                              <v n="Operand">"GVL_AXIS1.stBC_ExtSetDis.Done"</v>
+                              <v n="Type">"BOOL"</v>
+                              <v n="Comment">""</v>
+                              <v n="SymbolComment">""</v>
+                              <v n="Address">""</v>
+                              <o n="Flags" t="Flags">
+                                <v n="Flags">0</v>
+                                <v n="Fixed">false</v>
+                                <v n="Extensible">false</v>
+                              </o>
+                              <v n="LValue">true</v>
+                              <v n="Boolean">true</v>
+                              <v n="IsInstance">false</v>
+                              <v n="Id">436L</v>
+                            </o>
+                          </l2>
+                        </o>
+                        <o n="Flags" t="Flags">
+                          <v n="Flags">0</v>
+                          <v n="Fixed">false</v>
+                          <v n="Extensible">false</v>
+                        </o>
+                        <o n="RValue" t="BoxTreeBox">
+                          <v n="BoxType">"MC_ExtSetPointGenDisable"</v>
+                          <o n="Instance" t="Operand">
+                            <v n="Operand">"GVL_AXIS1.fbBC_ExtSetDis"</v>
+                            <v n="Type">"MC_ExtSetPointGenDisable"</v>
+                            <v n="Comment">""</v>
+                            <v n="SymbolComment">""</v>
+                            <v n="Address">""</v>
+                            <o n="Flags" t="Flags">
+                              <v n="Flags">0</v>
+                              <v n="Fixed">false</v>
+                              <v n="Extensible">false</v>
+                            </o>
+                            <v n="LValue">false</v>
+                            <v n="Boolean">false</v>
+                            <v n="IsInstance">true</v>
+                            <v n="Id">398L</v>
+                          </o>
+                          <o n="OutputItems" t="OutputItemList">
+                            <l2 n="OutputItems" cet="Operand">
+                              <n />
+                              <o>
+                                <v n="Operand">"GVL_AXIS1.stBC_ExtSetDis.Busy"</v>
+                                <v n="Type">"BOOL"</v>
+                                <v n="Comment">""</v>
+                                <v n="SymbolComment">""</v>
+                                <v n="Address">""</v>
+                                <o n="Flags" t="Flags">
+                                  <v n="Flags">0</v>
+                                  <v n="Fixed">false</v>
+                                  <v n="Extensible">false</v>
+                                </o>
+                                <v n="LValue">true</v>
+                                <v n="Boolean">false</v>
+                                <v n="IsInstance">false</v>
+                                <v n="Id">400L</v>
+                              </o>
+                              <o>
+                                <v n="Operand">"GVL_AXIS1.stBC_ExtSetDis.Error"</v>
+                                <v n="Type">"BOOL"</v>
+                                <v n="Comment">""</v>
+                                <v n="SymbolComment">""</v>
+                                <v n="Address">""</v>
+                                <o n="Flags" t="Flags">
+                                  <v n="Flags">0</v>
+                                  <v n="Fixed">false</v>
+                                  <v n="Extensible">false</v>
+                                </o>
+                                <v n="LValue">true</v>
+                                <v n="Boolean">false</v>
+                                <v n="IsInstance">false</v>
+                                <v n="Id">401L</v>
+                              </o>
+                              <o>
+                                <v n="Operand">"GVL_AXIS1.stBC_ExtSetDis.ErrorID"</v>
+                                <v n="Type">"UDINT"</v>
+                                <v n="Comment">""</v>
+                                <v n="SymbolComment">""</v>
+                                <v n="Address">""</v>
+                                <o n="Flags" t="Flags">
+                                  <v n="Flags">0</v>
+                                  <v n="Fixed">false</v>
+                                  <v n="Extensible">false</v>
+                                </o>
+                                <v n="LValue">true</v>
+                                <v n="Boolean">false</v>
+                                <v n="IsInstance">false</v>
+                                <v n="Id">402L</v>
+                              </o>
+                              <o>
+                                <v n="Operand">"GVL_AXIS1.stBC_ExtSetDis.Enabled"</v>
+                                <v n="Type">"BOOL"</v>
+                                <v n="Comment">""</v>
+                                <v n="SymbolComment">""</v>
+                                <v n="Address">""</v>
+                                <o n="Flags" t="Flags">
+                                  <v n="Flags">0</v>
+                                  <v n="Fixed">false</v>
+                                  <v n="Extensible">false</v>
+                                </o>
+                                <v n="LValue">true</v>
+                                <v n="Boolean">false</v>
+                                <v n="IsInstance">false</v>
+                                <v n="Id">403L</v>
+                              </o>
+                            </l2>
+                          </o>
+                          <o n="Flags" t="Flags">
+                            <v n="Flags">0</v>
+                            <v n="Fixed">false</v>
+                            <v n="Extensible">false</v>
+                          </o>
+                          <n n="InputFlags" />
+                          <l2 n="InputItems" cet="BoxTreeOperand">
+                            <o>
+                              <o n="Operand" t="Operand">
+                                <v n="Operand">"GVL_AXIS1.BCAxis"</v>
+                                <v n="Type">"AXIS_REF"</v>
+                                <v n="Comment">""</v>
+                                <v n="SymbolComment">""</v>
+                                <v n="Address">""</v>
+                                <o n="Flags" t="Flags">
+                                  <v n="Flags">0</v>
+                                  <v n="Fixed">false</v>
+                                  <v n="Extensible">false</v>
+                                </o>
+                                <v n="LValue">false</v>
+                                <v n="Boolean">false</v>
+                                <v n="IsInstance">false</v>
+                                <v n="Id">405L</v>
+                              </o>
+                              <v n="Id">404L</v>
+                            </o>
+                            <o>
+                              <o n="Operand" t="Operand">
+                                <v n="Operand">"GVL_AXIS1.bBC_ExtSetGenDisExe"</v>
+                                <v n="Type">"BOOL"</v>
+                                <v n="Comment">""</v>
+                                <v n="SymbolComment">""</v>
+                                <v n="Address">""</v>
+                                <o n="Flags" t="Flags">
+                                  <v n="Flags">0</v>
+                                  <v n="Fixed">false</v>
+                                  <v n="Extensible">false</v>
+                                </o>
+                                <v n="LValue">false</v>
+                                <v n="Boolean">true</v>
+                                <v n="IsInstance">false</v>
+                                <v n="Id">407L</v>
+                              </o>
+                              <v n="Id">406L</v>
+                            </o>
+                          </l2>
+                          <o n="InputParam" t="ParamList">
+                            <l2 n="Names" cet="String">
+                              <v>Axis</v>
+                              <v>Execute</v>
+                            </l2>
+                            <l2 n="Types" cet="String">
+                              <v>AXIS_REF[REF]</v>
+                              <v>BOOL</v>
+                            </l2>
+                          </o>
+                          <o n="OutputParam" t="ParamList">
+                            <l2 n="Names" cet="String">
+                              <v>Done</v>
+                              <v>Busy</v>
+                              <v>Error</v>
+                              <v>ErrorID</v>
+                              <v>Enabled</v>
+                            </l2>
+                            <l2 n="Types" cet="String">
+                              <v>BOOL</v>
+                              <v>BOOL</v>
+                              <v>BOOL</v>
+                              <v>UDINT</v>
+                              <v>BOOL</v>
+                            </l2>
+                          </o>
+                          <v n="CallType" t="Operator">FunctionBlock</v>
+                          <v n="EN">false</v>
+                          <v n="ENO">false</v>
+                          <n n="STSnippet" />
+                          <v n="ContainsExtensibleInputs">false</v>
+                          <v n="ProvidesSTSnippet">false</v>
+                          <v n="Id">399L</v>
+                        </o>
+                        <v n="Id">437L</v>
+                      </o>
+                    </l2>
+                    <l2 n="Connectors" />
+                    <v n="Id">397L</v>
+                  </o>
+                  <o>
+                    <v n="ILActive">false</v>
+                    <v n="FBDValid">false</v>
+                    <v n="ILValid">false</v>
+                    <l2 n="ILLines" />
+                    <v n="Comment">""</v>
+                    <v n="Title">""</v>
+                    <v n="Label">""</v>
+                    <v n="OutCommented">false</v>
+                    <l2 n="NetworkItems" cet="BoxTreeAssign">
+                      <o>
+                        <o n="OutputItems" t="OutputItemList">
+                          <l2 n="OutputItems" cet="Operand">
+                            <o>
+                              <v n="Operand">"GVL_AXIS1.stBC_ExtSetEnab.Done"</v>
+                              <v n="Type">"BOOL"</v>
+                              <v n="Comment">""</v>
+                              <v n="SymbolComment">""</v>
+                              <v n="Address">""</v>
+                              <o n="Flags" t="Flags">
+                                <v n="Flags">0</v>
+                                <v n="Fixed">false</v>
+                                <v n="Extensible">false</v>
+                              </o>
+                              <v n="LValue">true</v>
+                              <v n="Boolean">true</v>
+                              <v n="IsInstance">false</v>
+                              <v n="Id">438L</v>
+                            </o>
+                          </l2>
+                        </o>
+                        <o n="Flags" t="Flags">
+                          <v n="Flags">0</v>
+                          <v n="Fixed">false</v>
+                          <v n="Extensible">false</v>
+                        </o>
+                        <o n="RValue" t="BoxTreeBox">
+                          <v n="BoxType">"MC_ExtSetPointGenEnable"</v>
+                          <o n="Instance" t="Operand">
+                            <v n="Operand">"GVL_AXIS1.fbBC_ExtSetEnab"</v>
+                            <v n="Type">"MC_ExtSetPointGenEnable"</v>
+                            <v n="Comment">""</v>
+                            <v n="SymbolComment">""</v>
+                            <v n="Address">""</v>
+                            <o n="Flags" t="Flags">
+                              <v n="Flags">0</v>
+                              <v n="Fixed">false</v>
+                              <v n="Extensible">false</v>
+                            </o>
+                            <v n="LValue">false</v>
+                            <v n="Boolean">false</v>
+                            <v n="IsInstance">true</v>
+                            <v n="Id">409L</v>
+                          </o>
+                          <o n="OutputItems" t="OutputItemList">
+                            <l2 n="OutputItems" cet="Operand">
+                              <n />
+                              <o>
+                                <v n="Operand">"GVL_AXIS1.stBC_ExtSetEnab.Busy"</v>
+                                <v n="Type">"BOOL"</v>
+                                <v n="Comment">""</v>
+                                <v n="SymbolComment">""</v>
+                                <v n="Address">""</v>
+                                <o n="Flags" t="Flags">
+                                  <v n="Flags">0</v>
+                                  <v n="Fixed">false</v>
+                                  <v n="Extensible">false</v>
+                                </o>
+                                <v n="LValue">true</v>
+                                <v n="Boolean">false</v>
+                                <v n="IsInstance">false</v>
+                                <v n="Id">411L</v>
+                              </o>
+                              <o>
+                                <v n="Operand">"GVL_AXIS1.stBC_ExtSetEnab.Error"</v>
+                                <v n="Type">"BOOL"</v>
+                                <v n="Comment">""</v>
+                                <v n="SymbolComment">""</v>
+                                <v n="Address">""</v>
+                                <o n="Flags" t="Flags">
+                                  <v n="Flags">0</v>
+                                  <v n="Fixed">false</v>
+                                  <v n="Extensible">false</v>
+                                </o>
+                                <v n="LValue">true</v>
+                                <v n="Boolean">false</v>
+                                <v n="IsInstance">false</v>
+                                <v n="Id">412L</v>
+                              </o>
+                              <o>
+                                <v n="Operand">"GVL_AXIS1.stBC_ExtSetEnab.ErrorID"</v>
+                                <v n="Type">"UDINT"</v>
+                                <v n="Comment">""</v>
+                                <v n="SymbolComment">""</v>
+                                <v n="Address">""</v>
+                                <o n="Flags" t="Flags">
+                                  <v n="Flags">0</v>
+                                  <v n="Fixed">false</v>
+                                  <v n="Extensible">false</v>
+                                </o>
+                                <v n="LValue">true</v>
+                                <v n="Boolean">false</v>
+                                <v n="IsInstance">false</v>
+                                <v n="Id">413L</v>
+                              </o>
+                              <o>
+                                <v n="Operand">"GVL_AXIS1.stBC_ExtSetEnab.Enabled"</v>
+                                <v n="Type">"BOOL"</v>
+                                <v n="Comment">""</v>
+                                <v n="SymbolComment">""</v>
+                                <v n="Address">""</v>
+                                <o n="Flags" t="Flags">
+                                  <v n="Flags">0</v>
+                                  <v n="Fixed">false</v>
+                                  <v n="Extensible">false</v>
+                                </o>
+                                <v n="LValue">true</v>
+                                <v n="Boolean">false</v>
+                                <v n="IsInstance">false</v>
+                                <v n="Id">414L</v>
+                              </o>
+                            </l2>
+                          </o>
+                          <o n="Flags" t="Flags">
+                            <v n="Flags">0</v>
+                            <v n="Fixed">false</v>
+                            <v n="Extensible">false</v>
+                          </o>
+                          <n n="InputFlags" />
+                          <l2 n="InputItems" cet="BoxTreeOperand">
+                            <o>
+                              <o n="Operand" t="Operand">
+                                <v n="Operand">"GVL_AXIS1.BCAxis"</v>
+                                <v n="Type">"AXIS_REF"</v>
+                                <v n="Comment">""</v>
+                                <v n="SymbolComment">""</v>
+                                <v n="Address">""</v>
+                                <o n="Flags" t="Flags">
+                                  <v n="Flags">0</v>
+                                  <v n="Fixed">false</v>
+                                  <v n="Extensible">false</v>
+                                </o>
+                                <v n="LValue">false</v>
+                                <v n="Boolean">false</v>
+                                <v n="IsInstance">false</v>
+                                <v n="Id">416L</v>
+                              </o>
+                              <v n="Id">415L</v>
+                            </o>
+                            <o>
+                              <o n="Operand" t="Operand">
+                                <v n="Operand">"GVL_AXIS1.bBC_ExtSetGenEnaExe"</v>
+                                <v n="Type">"BOOL"</v>
+                                <v n="Comment">""</v>
+                                <v n="SymbolComment">""</v>
+                                <v n="Address">""</v>
+                                <o n="Flags" t="Flags">
+                                  <v n="Flags">0</v>
+                                  <v n="Fixed">false</v>
+                                  <v n="Extensible">false</v>
+                                </o>
+                                <v n="LValue">false</v>
+                                <v n="Boolean">true</v>
+                                <v n="IsInstance">false</v>
+                                <v n="Id">418L</v>
+                              </o>
+                              <v n="Id">417L</v>
+                            </o>
+                            <o>
+                              <o n="Operand" t="Operand">
+                                <v n="Operand">"GVL_AXIS1.stBC_VelCmd.lrPosition"</v>
+                                <v n="Type">"LREAL"</v>
+                                <v n="Comment">""</v>
+                                <v n="SymbolComment">""</v>
+                                <v n="Address">""</v>
+                                <o n="Flags" t="Flags">
+                                  <v n="Flags">0</v>
+                                  <v n="Fixed">false</v>
+                                  <v n="Extensible">false</v>
+                                </o>
+                                <v n="LValue">false</v>
+                                <v n="Boolean">false</v>
+                                <v n="IsInstance">false</v>
+                                <v n="Id">420L</v>
+                              </o>
+                              <v n="Id">419L</v>
+                            </o>
+                            <o>
+                              <o n="Operand" t="Operand">
+                                <v n="Operand">"1"</v>
+                                <v n="Type">"INT"</v>
+                                <v n="Comment">""</v>
+                                <v n="SymbolComment">""</v>
+                                <v n="Address">""</v>
+                                <o n="Flags" t="Flags">
+                                  <v n="Flags">0</v>
+                                  <v n="Fixed">false</v>
+                                  <v n="Extensible">false</v>
+                                </o>
+                                <v n="LValue">false</v>
+                                <v n="Boolean">false</v>
+                                <v n="IsInstance">false</v>
+                                <v n="Id">422L</v>
+                              </o>
+                              <v n="Id">421L</v>
+                            </o>
+                          </l2>
+                          <o n="InputParam" t="ParamList">
+                            <l2 n="Names" cet="String">
+                              <v>Axis</v>
+                              <v>Execute</v>
+                              <v>Position</v>
+                              <v>PositionType</v>
+                            </l2>
+                            <l2 n="Types" cet="String">
+                              <v>AXIS_REF[REF]</v>
+                              <v>BOOL</v>
+                              <v>LREAL</v>
+                              <v>E_PositionType</v>
+                            </l2>
+                          </o>
+                          <o n="OutputParam" t="ParamList">
+                            <l2 n="Names" cet="String">
+                              <v>Done</v>
+                              <v>Busy</v>
+                              <v>Error</v>
+                              <v>ErrorID</v>
+                              <v>Enabled</v>
+                            </l2>
+                            <l2 n="Types" cet="String">
+                              <v>BOOL</v>
+                              <v>BOOL</v>
+                              <v>BOOL</v>
+                              <v>UDINT</v>
+                              <v>BOOL</v>
+                            </l2>
+                          </o>
+                          <v n="CallType" t="Operator">FunctionBlock</v>
+                          <v n="EN">false</v>
+                          <v n="ENO">false</v>
+                          <n n="STSnippet" />
+                          <v n="ContainsExtensibleInputs">false</v>
+                          <v n="ProvidesSTSnippet">false</v>
+                          <v n="Id">410L</v>
+                        </o>
+                        <v n="Id">439L</v>
+                      </o>
+                    </l2>
+                    <l2 n="Connectors" />
+                    <v n="Id">408L</v>
+                  </o>
+                  <o>
+                    <v n="ILActive">false</v>
+                    <v n="FBDValid">false</v>
+                    <v n="ILValid">false</v>
+                    <l2 n="ILLines" />
+                    <v n="Comment">""</v>
+                    <v n="Title">""</v>
+                    <v n="Label">""</v>
+                    <v n="OutCommented">false</v>
+                    <l2 n="NetworkItems" cet="BoxTreeAssign">
+                      <o>
+                        <o n="OutputItems" t="OutputItemList">
+                          <l2 n="OutputItems" cet="Operand">
+                            <o>
+                              <v n="Operand">"GVL_AXIS1.stBC_ExtSetFeed.Status"</v>
+                              <v n="Type">"BOOL"</v>
+                              <v n="Comment">""</v>
+                              <v n="SymbolComment">""</v>
+                              <v n="Address">""</v>
+                              <o n="Flags" t="Flags">
+                                <v n="Flags">0</v>
+                                <v n="Fixed">false</v>
+                                <v n="Extensible">false</v>
+                              </o>
+                              <v n="LValue">true</v>
+                              <v n="Boolean">true</v>
+                              <v n="IsInstance">false</v>
+                              <v n="Id">440L</v>
+                            </o>
+                          </l2>
+                        </o>
+                        <o n="Flags" t="Flags">
+                          <v n="Flags">0</v>
+                          <v n="Fixed">false</v>
+                          <v n="Extensible">false</v>
+                        </o>
+                        <o n="RValue" t="BoxTreeBox">
+                          <v n="BoxType">"MC_ExtSetPointGenFeed"</v>
+                          <o n="Instance" t="Operand">
+                            <n n="Operand" />
+                            <v n="Type">""</v>
+                            <v n="Comment">""</v>
+                            <v n="SymbolComment">""</v>
+                            <v n="Address">""</v>
+                            <o n="Flags" t="Flags">
+                              <v n="Flags">0</v>
+                              <v n="Fixed">false</v>
+                              <v n="Extensible">false</v>
+                            </o>
+                            <v n="LValue">false</v>
+                            <v n="Boolean">false</v>
+                            <v n="IsInstance">true</v>
+                            <v n="Id">424L</v>
+                          </o>
+                          <o n="OutputItems" t="OutputItemList">
+                            <l2 n="OutputItems">
+                              <n />
+                            </l2>
+                          </o>
+                          <o n="Flags" t="Flags">
+                            <v n="Flags">0</v>
+                            <v n="Fixed">false</v>
+                            <v n="Extensible">false</v>
+                          </o>
+                          <n n="InputFlags" />
+                          <l2 n="InputItems" cet="BoxTreeOperand">
+                            <o>
+                              <o n="Operand" t="Operand">
+                                <v n="Operand">"GVL_AXIS1.lrBC_MoveAddPos"</v>
+                                <v n="Type">"LREAL"</v>
+                                <v n="Comment">""</v>
+                                <v n="SymbolComment">""</v>
+                                <v n="Address">""</v>
+                                <o n="Flags" t="Flags">
+                                  <v n="Flags">0</v>
+                                  <v n="Fixed">false</v>
+                                  <v n="Extensible">false</v>
+                                </o>
+                                <v n="LValue">false</v>
+                                <v n="Boolean">false</v>
+                                <v n="IsInstance">false</v>
+                                <v n="Id">427L</v>
+                              </o>
+                              <v n="Id">426L</v>
+                            </o>
+                            <o>
+                              <o n="Operand" t="Operand">
+                                <v n="Operand">"GVL_AXIS1.stBC_VelCmd.lrVelocity"</v>
+                                <v n="Type">"LREAL"</v>
+                                <v n="Comment">""</v>
+                                <v n="SymbolComment">""</v>
+                                <v n="Address">""</v>
+                                <o n="Flags" t="Flags">
+                                  <v n="Flags">0</v>
+                                  <v n="Fixed">false</v>
+                                  <v n="Extensible">false</v>
+                                </o>
+                                <v n="LValue">false</v>
+                                <v n="Boolean">false</v>
+                                <v n="IsInstance">false</v>
+                                <v n="Id">429L</v>
+                              </o>
+                              <v n="Id">428L</v>
+                            </o>
+                            <o>
+                              <o n="Operand" t="Operand">
+                                <v n="Operand">"GVL_AXIS1.stBC_VelCmd.lrAcceleration"</v>
+                                <v n="Type">"LREAL"</v>
+                                <v n="Comment">""</v>
+                                <v n="SymbolComment">""</v>
+                                <v n="Address">""</v>
+                                <o n="Flags" t="Flags">
+                                  <v n="Flags">0</v>
+                                  <v n="Fixed">false</v>
+                                  <v n="Extensible">false</v>
+                                </o>
+                                <v n="LValue">false</v>
+                                <v n="Boolean">false</v>
+                                <v n="IsInstance">false</v>
+                                <v n="Id">431L</v>
+                              </o>
+                              <v n="Id">430L</v>
+                            </o>
+                            <o>
+                              <o n="Operand" t="Operand">
+                                <v n="Operand">"1"</v>
+                                <v n="Type">"INT"</v>
+                                <v n="Comment">""</v>
+                                <v n="SymbolComment">""</v>
+                                <v n="Address">""</v>
+                                <o n="Flags" t="Flags">
+                                  <v n="Flags">0</v>
+                                  <v n="Fixed">false</v>
+                                  <v n="Extensible">false</v>
+                                </o>
+                                <v n="LValue">false</v>
+                                <v n="Boolean">false</v>
+                                <v n="IsInstance">false</v>
+                                <v n="Id">433L</v>
+                              </o>
+                              <v n="Id">432L</v>
+                            </o>
+                            <o>
+                              <o n="Operand" t="Operand">
+                                <v n="Operand">"GVL_AXIS1.BCAxis"</v>
+                                <v n="Type">"AXIS_REF"</v>
+                                <v n="Comment">""</v>
+                                <v n="SymbolComment">""</v>
+                                <v n="Address">""</v>
+                                <o n="Flags" t="Flags">
+                                  <v n="Flags">0</v>
+                                  <v n="Fixed">false</v>
+                                  <v n="Extensible">false</v>
+                                </o>
+                                <v n="LValue">false</v>
+                                <v n="Boolean">false</v>
+                                <v n="IsInstance">false</v>
+                                <v n="Id">435L</v>
+                              </o>
+                              <v n="Id">434L</v>
+                            </o>
+                          </l2>
+                          <o n="InputParam" t="ParamList">
+                            <l2 n="Names" cet="String">
+                              <v>Position</v>
+                              <v>Velocity</v>
+                              <v>Acceleration</v>
+                              <v>Direction</v>
+                              <v>Axis</v>
+                            </l2>
+                            <l2 n="Types" cet="String">
+                              <v>LREAL</v>
+                              <v>LREAL</v>
+                              <v>LREAL</v>
+                              <v>DINT</v>
+                              <v>AXIS_REF[REF]</v>
+                            </l2>
+                          </o>
+                          <o n="OutputParam" t="ParamList">
+                            <l2 n="Names" cet="String">
+                              <v>   </v>
+                            </l2>
+                            <l2 n="Types" cet="String">
+                              <v>BOOL</v>
+                            </l2>
+                          </o>
+                          <v n="CallType" t="Operator">Function</v>
+                          <v n="EN">false</v>
+                          <v n="ENO">false</v>
+                          <n n="STSnippet" />
+                          <v n="ContainsExtensibleInputs">false</v>
+                          <v n="ProvidesSTSnippet">false</v>
+                          <v n="Id">425L</v>
+                        </o>
+                        <v n="Id">441L</v>
+                      </o>
+                    </l2>
+                    <l2 n="Connectors" />
+                    <v n="Id">423L</v>
                   </o>
                 </l2>
                 <v n="BranchCounter">0</v>
@@ -10263,6 +10942,7 @@ END_VAR
       <LineId Id="27" Count="0" />
       <LineId Id="247" Count="0" />
       <LineId Id="246" Count="0" />
+      <LineId Id="338" Count="0" />
       <LineId Id="278" Count="0" />
       <LineId Id="261" Count="0" />
       <LineId Id="286" Count="0" />
@@ -10279,6 +10959,16 @@ END_VAR
       <LineId Id="31" Count="0" />
       <LineId Id="57" Count="0" />
       <LineId Id="56" Count="0" />
+      <LineId Id="325" Count="0" />
+      <LineId Id="324" Count="0" />
+      <LineId Id="326" Count="1" />
+      <LineId Id="332" Count="0" />
+      <LineId Id="329" Count="1" />
+      <LineId Id="333" Count="0" />
+      <LineId Id="331" Count="0" />
+      <LineId Id="334" Count="0" />
+      <LineId Id="339" Count="3" />
+      <LineId Id="344" Count="3" />
       <LineId Id="39" Count="0" />
       <LineId Id="49" Count="1" />
       <LineId Id="41" Count="2" />

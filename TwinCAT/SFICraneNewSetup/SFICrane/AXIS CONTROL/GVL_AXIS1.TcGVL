@@ -18,6 +18,9 @@ fbBC_MoveAbs			: MC_MoveAbsolute;
 fbBC_MoveContAbs		: MC_MoveContinuousAbsolute;
 fbBC_SetPosition		: MC_SetPosition;
 fbBC_MoveAdditive		: MC_MoveAdditive;
+fbBC_ExtSetDis			: MC_ExtSetPointGenDisable;
+fbBC_ExtSetEnab			: MC_ExtSetPointGenEnable;
+
 
 //Input: Command
 bBC_ResetExe			: BOOL;
@@ -44,6 +47,10 @@ bBC_MoveContAbsInEndVel	: BOOL;
 
 bBC_MoveAddExe			: BOOL;
 
+bBC_ExtSetGenDisExe		: BOOL;
+bBC_ExtSetGenEnaExe		: BOOL;
+
+fBC_ExtSetFeedDirection	: DINT;
 
 fBC_MoveContAbsExeTrig	: UINT;
 
@@ -78,6 +85,9 @@ stBC_Stop				: ST_MC_Status;
 stBC_MoveAbs			: ST_MC_Status;
 stBC_MoveContAbs		: ST_MC_Status;
 stBC_MoveAdd			: ST_MC_Status;
+stBC_ExtSetDis			: ST_MC_Status;
+stBC_ExtSetEnab			: ST_MC_Status;
+stBC_ExtSetFeed			: ST_MC_Status;
 
 END_VAR]]></Declaration>
   </GVL>

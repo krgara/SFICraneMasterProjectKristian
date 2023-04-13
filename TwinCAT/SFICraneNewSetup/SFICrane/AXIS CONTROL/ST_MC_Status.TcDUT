@@ -12,6 +12,7 @@ Active			: BOOL;
 CmdAborted		: BOOL;
 InVelocity		: BOOL;
 ErrorID			: UDINT;
+Enabled			: BOOL;
 
 END_STRUCT
 END_TYPE
