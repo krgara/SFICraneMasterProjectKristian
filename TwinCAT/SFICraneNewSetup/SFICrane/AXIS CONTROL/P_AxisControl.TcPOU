@@ -90,11 +90,11 @@ ELSIF G_Sensors.fJoystickLeftNormalizedX < 0 AND G_Inputs.bJoystickLeftEnable AN
 	
 	GVL_AXIS1.stBC_VelCmd.bExe := TRUE;
 *)
-//ELSE
-	 //GVL_AXIS1.lrBC_PowerOverride := 0;
-	 //GVL_AXIS1.stBC_VelCmd.EnuDirection := MC_Current_Direction;
-	 //GVL_AXIS1.stBC_VelCmd.bExe := FALSE;
-	 //GVL_AXIS1.bBC_StopExe := TRUE;
+ELSE
+	 GVL_AXIS1.lrBC_PowerOverride := 0;
+	 GVL_AXIS1.stBC_VelCmd.EnuDirection := MC_Current_Direction;
+	 GVL_AXIS1.stBC_VelCmd.bExe := FALSE;
+	 GVL_AXIS1.bBC_StopExe := TRUE;
 END_IF
 
 

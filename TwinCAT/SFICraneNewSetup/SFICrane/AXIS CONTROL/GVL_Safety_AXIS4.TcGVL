@@ -4,10 +4,11 @@
     <Declaration><![CDATA[{attribute 'qualified_only'}
 VAR_GLOBAL
 	
-	bErrorAck			AT %Q* 	: BOOL;
-	bSafetyRun			AT %Q* 	: BOOL;
-	bSafetyRestart		AT %Q* 	: BOOL;
-
+	bWinchMotor24vDisable AT %Q* : BOOL;
+	TwinSafeGroupComErrAck AT %Q* : BOOL; 
+	TwinSafeGroupRunStop AT %Q* : BOOL; 
+	ChA_STO_Enable AT %Q* : BOOL;
+	ChA_STO_Active AT %I* : BOOL;  
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

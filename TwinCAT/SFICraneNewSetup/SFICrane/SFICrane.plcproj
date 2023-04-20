@@ -37,10 +37,6 @@
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
     </Compile>
-    <Compile Include="AXIS CONTROL\GVL_Safety_IO.TcGVL">
-      <SubType>Code</SubType>
-      <LinkAlways>true</LinkAlways>
-    </Compile>
     <Compile Include="AXIS CONTROL\P_AxisControl.TcPOU">
       <SubType>Code</SubType>
     </Compile>
