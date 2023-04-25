@@ -19,6 +19,8 @@ VAR_GLOBAL
 	fControlSignCyl			: LREAL;
 	fPositionErrorWinch_mm 	: LREAL;
 	fPositionErrorCylinder_mm : LREAL;
+	fSampleTime				: LREAL := 0.002;
+	fTimeSinceStart			: LREAL := 0.0;
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>
