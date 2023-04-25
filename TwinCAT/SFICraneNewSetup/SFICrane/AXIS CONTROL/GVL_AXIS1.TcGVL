@@ -15,11 +15,11 @@ fbBC_Jog				: MC_Jog;
 fbBC_MoveVelocity		: MC_MoveVelocity;
 fbBC_Stop				: MC_Stop;
 fbBC_MoveAbs			: MC_MoveAbsolute;
-fbBC_MoveContAbs		: MC_MoveContinuousAbsolute;
-fbBC_SetPosition		: MC_SetPosition;
-fbBC_MoveAdditive		: MC_MoveAdditive;
 fbBC_ExtSetDis			: MC_ExtSetPointGenDisable;
 fbBC_ExtSetEnab			: MC_ExtSetPointGenEnable;
+fbBC_Rtrig				: R_TRIG;
+fbBC_SetReset			: SR;
+fbBC_ResetSet			: RS;
 
 
 //Input: Command
@@ -50,6 +50,8 @@ bBC_MoveAddExe			: BOOL;
 bBC_ExtSetGenDisExe		: BOOL;
 bBC_ExtSetGenEnaExe		: BOOL;
 
+bBC_MoveAbsDone			: BOOL;
+
 fBC_ExtSetFeedDirection	: DINT;
 
 fBC_MoveContAbsExeTrig	: UINT;
@@ -73,7 +75,7 @@ lrBC_VelContrGain		: LREAL := 1.0;
 lrBC_ControllerVelRef	: LREAL;
 
 //Direction
-EnuMoveVelDirection		: MC_Direction;
+//EnuMoveVelDirection		: MC_Direction;
 
 // Status
 stBC_Reset				: ST_MC_Status;

@@ -8,8 +8,7 @@ VAR
 	
 	fbJoystickRightVert 				: FB_JoystickInputScaling;
 	fbJoystickRightHor 					: FB_JoystickInputScaling;
-	
-	
+		
 END_VAR]]></Declaration>
     <Implementation>
       <ST><![CDATA[ fbJoystickLeftVert(
@@ -18,6 +17,12 @@ END_VAR]]></Declaration>
 	stJoystickInputScaling := G_Parameters.stParam.stJoystickInputScalingLeftY,
 	fNormalizedOutput => G_Sensors.fJoystickLeftNormalizedY
 );
+
+IF G_Sensors.fJoystickLeftNormalizedY < 0 THEN
+	G_Sensors.MCDirectionAxis3 := MC_Negative_Direction;
+ELSIF G_Sensors.fJoystickLeftNormalizedY > 0 THEN
+	G_Sensors.MCDirectionAxis3 := MC_Positive_Direction;	
+END_IF
 
 fbJoystickLeftHor(
 	bEnable := TRUE,
@@ -30,8 +35,6 @@ IF G_Sensors.fJoystickLeftNormalizedX < 0 THEN
 	G_Sensors.MCDirectionAxis1 := MC_Positive_Direction;
 ELSIF G_Sensors.fJoystickLeftNormalizedX > 0 THEN
 	G_Sensors.MCDirectionAxis1 := MC_Negative_Direction;	
-//ELSE
-//	G_Sensors.MCDirectionAxis1 := MC_Current_Direction;
 END_IF
 
 
@@ -42,12 +45,26 @@ fbJoystickRightVert(
 	fNormalizedOutput => G_Sensors.fJoystickRightNormalizedY
 );
 
+IF G_Sensors.fJoystickRightNormalizedY < 0 THEN
+	G_Sensors.MCDirectionAxis4 := MC_Negative_Direction;
+ELSIF G_Sensors.fJoystickRightNormalizedY > 0 THEN
+	G_Sensors.MCDirectionAxis4 := MC_Positive_Direction;	
+END_IF
+
+
+
 fbJoystickRightHor(
 	bEnable := TRUE,
 	nRawInput := G_Inputs.stJoyRX.nValue,
 	stJoystickInputScaling := G_Parameters.stParam.stJoystickInputScalingRightX,
 	fNormalizedOutput => G_Sensors.fJoystickRightNormalizedX
 );
+
+IF G_Sensors.fJoystickRightNormalizedX < 0 THEN
+	G_Sensors.MCDirectionAxis2 := MC_Positive_Direction;
+ELSIF G_Sensors.fJoystickRightNormalizedX > 0 THEN
+	G_Sensors.MCDirectionAxis2 := MC_Negative_Direction;	
+END_IF
 ]]></ST>
     </Implementation>
     <LineIds Name="P_Inputs">
@@ -57,17 +74,27 @@ fbJoystickRightHor(
       <LineId Id="173" Count="0" />
       <LineId Id="12" Count="0" />
       <LineId Id="8" Count="0" />
+      <LineId Id="309" Count="4" />
+      <LineId Id="308" Count="0" />
       <LineId Id="128" Count="0" />
       <LineId Id="252" Count="4" />
       <LineId Id="38" Count="0" />
       <LineId Id="292" Count="0" />
       <LineId Id="289" Count="0" />
       <LineId Id="293" Count="0" />
-      <LineId Id="295" Count="3" />
+      <LineId Id="295" Count="1" />
       <LineId Id="294" Count="0" />
       <LineId Id="288" Count="0" />
-      <LineId Id="258" Count="12" />
+      <LineId Id="258" Count="6" />
+      <LineId Id="331" Count="4" />
+      <LineId Id="330" Count="0" />
+      <LineId Id="317" Count="0" />
+      <LineId Id="316" Count="0" />
+      <LineId Id="265" Count="5" />
       <LineId Id="257" Count="0" />
+      <LineId Id="325" Count="0" />
+      <LineId Id="336" Count="3" />
+      <LineId Id="324" Count="0" />
       <LineId Id="279" Count="0" />
     </LineIds>
   </POU>

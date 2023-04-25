@@ -40,6 +40,9 @@
     <Compile Include="AXIS CONTROL\P_AxisControl.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="AXIS CONTROL\P_AxisControl_1.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="AXIS CONTROL\ST_MC_CMD.TcDUT">
       <SubType>Code</SubType>
     </Compile>

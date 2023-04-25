@@ -14,8 +14,8 @@ END_VAR
 G_Work.bAutoMode := G_Inputs.bAutoModeSelector;
 
 IF G_Inputs.bAutoModeSelector THEN
-fRefPosX := fRefPosX + G_Sensors.fJoystickLeftNormalizedX*-0.001;
-fRefPosY := fRefPosY + G_Sensors.fJoystickLeftNormalizedY*0.001;
+fRefPosX := fRefPosX + G_Sensors.fJoystickLeftNormalizedX*-0.0005;
+fRefPosY := fRefPosY + G_Sensors.fJoystickLeftNormalizedY*0.0005;
 END_IF
 
 fbInverse(

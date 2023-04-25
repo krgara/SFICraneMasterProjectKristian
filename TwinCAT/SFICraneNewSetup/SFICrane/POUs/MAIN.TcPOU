@@ -4,6 +4,7 @@
     <Declaration><![CDATA[PROGRAM MAIN
 
 VAR
+	(*
 bEnable: BOOL := FALSE;
 bMove: BOOL := FALSE;
 fAxis1VelocityPercent: LREAL := 0;	
@@ -12,6 +13,10 @@ fbAxis1Power: MC_Power;
 fbAxis1MoveVelocity: MC_MoveVelocity;
 MCDirectionAxis1 : MC_Direction;
 fAxis1ReferenceVelocity: LREAL := 100;
+*)
+
+fbGetCurTaskIdx  : GETCURTASKINDEX;
+nCycleTime       : UDINT;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -19,6 +24,9 @@ END_VAR
 P_MachineControl();
 P_AxisControl();
 P_Outputs();
+
+fbGetCurTaskIdx();
+nCycleTime := _TaskInfo[fbGetCurTaskIdx.index].CycleTime;
 
 (*
 
@@ -64,7 +72,10 @@ ErrorID=> );
     </Implementation>
     <LineIds Name="MAIN">
       <LineId Id="8" Count="2" />
-      <LineId Id="133" Count="2" />
+      <LineId Id="133" Count="0" />
+      <LineId Id="154" Count="1" />
+      <LineId Id="153" Count="0" />
+      <LineId Id="134" Count="1" />
       <LineId Id="117" Count="0" />
       <LineId Id="113" Count="0" />
       <LineId Id="118" Count="0" />
