@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <GVL Name="G_StablePlatformParameters" Id="{79a6a2b5-12ae-4ebf-be10-8db21e6200f0}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL
+	stPressureSensorScaling400bar 	: ST_AnalogInputScaling := (fMaxInputValue := 32767.0, fMinInputValue := 0.0, fMaxOutputValue := 400.0, fMinOutputValue := 0.0);
+	stJoystickInputScalingX 		: ST_JoystickInputScaling := (fMaxInputValue := 20625.0, fMinInputValue := 11800.0, fNeutralInputValue := 16265, fNeutralDeadband := 100.0, fMaxOutputValue := 1.0, fMinOutputValue := -1.0, fNeutralOutputValue := 0.0);
+	stSVValveDeadBand 				: ST_ValveDeadBand := (fPosMax := 29490.0, fPosMin := 20950.0, fNegMin := 18250.0, fNegMax := 9830.0);
+	stSVFeedbackScaling 			: ST_AnalogInputScaling := (fMaxInputValue := 32767.0, fMinInputValue := 0.0, fMaxOutputValue := 20.0, fMinOutputValue := 4.0);
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

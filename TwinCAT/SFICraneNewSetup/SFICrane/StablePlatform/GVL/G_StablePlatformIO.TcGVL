@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <GVL Name="G_StablePlatformIO" Id="{b36605ef-a704-4f9f-8f85-1dbd66c3d11e}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL
+	bSVEnable AT %Q* : BOOL; 
+	nSVControlSignal AT %Q* : INT; 
+	//fJoyLeftX AT %I* : INT; 
+	
+	//bJoyLeftPushButton AT %I* : BOOL; 
+	
+	npA AT %I* : INT;
+	npB AT %I* : INT;
+	npS AT %I* : INT;
+	
+	nSVFeedback AT %I* : INT;
+	
+	bModeSwitchOff AT %I* : BOOL;
+	
+	nPistonPosition AT %I* : INT;
+	nPistonVelocity AT %I* : INT;
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

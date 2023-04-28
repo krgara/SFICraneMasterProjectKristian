@@ -127,6 +127,42 @@
     <Compile Include="POUs\MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="StablePlatform\Function Blocks\FB_AnalogInputScaling_1.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="StablePlatform\Function Blocks\FB_JoystickInputScaling_1.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="StablePlatform\Function Blocks\FB_ValveOutput.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="StablePlatform\GVL\G_StablePlatformIO.TcGVL">
+      <SubType>Code</SubType>
+      <LinkAlways>true</LinkAlways>
+    </Compile>
+    <Compile Include="StablePlatform\GVL\G_StablePlatformParameters.TcGVL">
+      <SubType>Code</SubType>
+      <LinkAlways>true</LinkAlways>
+    </Compile>
+    <Compile Include="StablePlatform\GVL\G_StablePlatformScaledIO.TcGVL">
+      <SubType>Code</SubType>
+      <LinkAlways>true</LinkAlways>
+    </Compile>
+    <Compile Include="StablePlatform\P_StablePlatform.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="StablePlatform\Struct\ST_AnalogInputScaling_1.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="StablePlatform\Struct\ST_JoystickInputScaling_1.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="StablePlatform\Struct\ST_ValveDeadBand.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="StablePlatform\Struct\ST_ValveOutput.TcDUT">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <PlaceholderReference Include="Tc2_MC2">
@@ -165,10 +201,14 @@
     <Folder Include="MACHINE CONTROL" />
     <Folder Include="MACHINE CONTROL\InverseKinematics2d" />
     <Folder Include="MACHINE CONTROL\Struct" />
+    <Folder Include="StablePlatform" />
     <Folder Include="OUTPUTS" />
     <Folder Include="OUTPUTS\Function blocks" />
     <Folder Include="OUTPUTS\Struct" />
     <Folder Include="POUs" />
+    <Folder Include="StablePlatform\GVL" />
+    <Folder Include="StablePlatform\Function Blocks" />
+    <Folder Include="StablePlatform\Struct" />
     <Folder Include="VISUs" />
   </ItemGroup>
   <ItemGroup>

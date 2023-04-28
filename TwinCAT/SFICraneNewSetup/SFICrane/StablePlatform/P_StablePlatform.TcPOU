@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="P_StablePlatform" Id="{c20de7b0-d2cd-4536-8a51-2764cdc32403}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM P_StablePlatform
+VAR
+	fbpA 		: FB_AnalogInputScaling;
+	fbpB 		: FB_AnalogInputScaling;
+	fbpS 	 	: FB_AnalogInputScaling;
+	fSVFeedback : FB_AnalogInputScaling;
+	fbJoystick  : FB_JoystickInputScaling;
+	fbSVOutput 	: FB_ValveOutput;
+	bManualMode : BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// Inputs
+fbpA(
+	nRawInput := G_StablePlatformIO.npA,
+	stAnalogInputScaling := G_StablePlatformParameters.stPressureSensorScaling400bar,
+	fOutput => G_StablePlatformScaledIO.bpA
+);
+
+fbpB(
+	nRawInput := G_StablePlatformIO.npB,
+	stAnalogInputScaling := G_StablePlatformParameters.stPressureSensorScaling400bar,
+	fOutput => G_StablePlatformScaledIO.bpB
+);
+
+fbpS(
+	nRawInput := G_StablePlatformIO.npS,
+	stAnalogInputScaling := G_StablePlatformParameters.stPressureSensorScaling400bar,
+	fOutput => G_StablePlatformScaledIO.bpS
+);
+
+fSVFeedback(
+	nRawInput := G_StablePlatformIO.nSVFeedback,
+	stAnalogInputScaling := G_StablePlatformParameters.stSVFeedbackScaling,
+	fOutput => G_StablePlatformScaledIO.fSVFeedback
+);
+
+
+fbJoystick(
+	bEnable := bManualMode,
+	nRawInput := G_Inputs.stJoyLX.nValue,
+	stJoystickInputScaling := G_StablePlatformParameters.stJoystickInputScalingX,
+	fNormalizedOutput => G_StablePlatformScaledIO.fJoystickNormalizedX
+);
+
+// Outputs
+fbSVOutput(
+	bEnable := G_Inputs.bJoystickLeftEnable AND bManualMode,
+	bDeadBandCompOn := FALSE,
+	stValveDeadBand := G_StablePlatformParameters.stSVValveDeadBand,
+	fNormalizedInput := -G_StablePlatformScaledIO.fJoystickNormalizedX,
+	nOutput => G_StablePlatformIO.nSVControlSignal
+);
+
+G_StablePlatformIO.bSVEnable := NOT(G_StablePlatformIO.bModeSwitchOff) AND (G_Inputs.bAutoModeSelector OR G_Inputs.bManualModeSelector) AND bManualMode;]]></ST>
+    </Implementation>
+    <LineIds Name="P_StablePlatform">
+      <LineId Id="5" Count="0" />
+      <LineId Id="13" Count="22" />
+      <LineId Id="54" Count="0" />
+      <LineId Id="36" Count="7" />
+      <LineId Id="12" Count="0" />
+      <LineId Id="45" Count="7" />
+      <LineId Id="44" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

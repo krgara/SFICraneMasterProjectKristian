@@ -24,6 +24,7 @@ END_VAR
 P_MachineControl();
 P_AxisControl();
 P_Outputs();
+P_StablePlatform();
 
 fbGetCurTaskIdx();
 nCycleTime := _TaskInfo[fbGetCurTaskIdx.index].CycleTime;
@@ -73,6 +74,7 @@ ErrorID=> );
     <LineIds Name="MAIN">
       <LineId Id="8" Count="2" />
       <LineId Id="133" Count="0" />
+      <LineId Id="173" Count="0" />
       <LineId Id="154" Count="1" />
       <LineId Id="153" Count="0" />
       <LineId Id="134" Count="1" />

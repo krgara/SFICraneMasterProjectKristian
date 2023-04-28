@@ -65,20 +65,20 @@
           <TcLink>
             <TcPrjPath>..\SFICraneNewSetup\SFICraneKristian.tsproj</TcPrjPath>
             <IoItemPathName>TIID^Device 5 (EtherCAT)^Box 17 (AMI8000-0100)</IoItemPathName>
-            <NcItemPathName>TINC^NC-Task 1 SAF^Axes^Axis 4 - Winch motor</NcItemPathName>
+            <NcItemPathName>TINC^NC-Task 1 SAF^Axes^Axis 4</NcItemPathName>
           </TcLink>
           <SelectedModifyOptPDOsMode>0</SelectedModifyOptPDOsMode>
           <Block Id="0">
             <Motor IsManualInput="false" IsManualMFiInput="false" DataSource="2" SerialNo="aa974901">
               <DatabaseType>
-                <SchemaVersion></SchemaVersion>
+                <SchemaVersion />
                 <DataVersion>1.25</DataVersion>
                 <OrderCode>AMI8122-3100-0J11</OrderCode>
-                <GroupType></GroupType>
+                <GroupType />
                 <ElectricMotorType>AMI8122-3100-0J11</ElectricMotorType>
                 <MotorfeedbackType>xxx</MotorfeedbackType>
                 <MotorbrakeType>AMI8122-3100-0J11-brake</MotorbrakeType>
-                <AssemblyType></AssemblyType>
+                <AssemblyType />
                 <VendorName>Beckhoff</VendorName>
                 <IsAc>true</IsAc>
                 <ConstructType>0</ConstructType>
@@ -402,8 +402,8 @@
                 <OrderCode>xxx</OrderCode>
                 <IsRotary>true</IsRotary>
                 <AbsolutePosInterface>5</AbsolutePosInterface>
-                <GroupType></GroupType>
-                <ElectricFeedbackType></ElectricFeedbackType>
+                <GroupType />
+                <ElectricFeedbackType />
               </DatabaseType>
               <DatabaseParameters>
                 <Parameter>
@@ -560,7 +560,7 @@
       <ProcessData>
         <Send>
           <BitStart>712</BitStart>
-          <BitLength>160</BitLength>
+          <BitLength>128</BitLength>
         </Send>
         <Recv>
           <BitStart>712</BitStart>
@@ -573,7 +573,6 @@
           <ControlByte>36</ControlByte>
           <Enable>1</Enable>
           <Pdo>5632</Pdo>
-          <Pdo>5633</Pdo>
           <Pdo>5638</Pdo>
           <Pdo>5664</Pdo>
           <Pdo>5680</Pdo>
@@ -950,7 +949,7 @@ Bit 8 - 15 : reserved</Comment>
             </AdsInfo>
           </Entry>
         </RxPdo>
-        <RxPdo Fixed="true" Sm="2">
+        <RxPdo Fixed="true">
           <Index>#x1601</Index>
           <Name>DRV Target velocity</Name>
           <Entry>
@@ -959,14 +958,6 @@ Bit 8 - 15 : reserved</Comment>
             <BitLen>32</BitLen>
             <Name>Target velocity</Name>
             <DataType>DINT</DataType>
-            <AdsInfo>
-              <AmsAddress>
-                <AmsPort>11</AmsPort>
-              </AmsAddress>
-              <IndexGroup>50593856</IndexGroup>
-              <IndexOffset>-2130706341</IndexOffset>
-              <Length>4</Length>
-            </AdsInfo>
           </Entry>
         </RxPdo>
         <RxPdo Fixed="true">
@@ -1027,7 +1018,7 @@ Bit 8 - 15 : reserved</Comment>
                 <AmsPort>11</AmsPort>
               </AmsAddress>
               <IndexGroup>50593856</IndexGroup>
-              <IndexOffset>-2130706337</IndexOffset>
+              <IndexOffset>-2130706341</IndexOffset>
               <Length>4</Length>
             </AdsInfo>
           </Entry>
@@ -1486,7 +1477,7 @@ Bit 8 - 15 : reserved</Comment>
               <Ccs>1</Ccs>
               <Index>7186</Index>
               <SubIndex>0</SubIndex>
-              <Data>0600001601160616201630163f16</Data>
+              <Data>050000160616201630163f16</Data>
             </InitCmd>
             <InitCmd Fixed="true" CompleteAccess="true">
               <Transition>PS</Transition>
@@ -1710,15 +1701,6 @@ Bit 8 - 15 : reserved</Comment>
               <Index>32784</Index>
               <SubIndex>20</SubIndex>
               <Data>96000000</Data>
-            </InitCmd>
-            <InitCmd>
-              <Transition>PS</Transition>
-              <Comment><![CDATA[DRV Outputs / Modes of operation]]></Comment>
-              <Timeout>0</Timeout>
-              <Ccs>1</Ccs>
-              <Index>28688</Index>
-              <SubIndex>3</SubIndex>
-              <Data>09</Data>
             </InitCmd>
           </InitCmds>
           <CanOpenType>47</CanOpenType>
@@ -2141,7 +2123,7 @@ Bit 8 - 15 : reserved</Comment>
           <Cmd>5</Cmd>
           <Adp>1004</Adp>
           <Ado>2064</Ado>
-          <Data>0012140024000100</Data>
+          <Data>0012100024000100</Data>
           <Cnt>1</Cnt>
           <Retries>3</Retries>
         </InitCmd>
@@ -2161,7 +2143,7 @@ Bit 8 - 15 : reserved</Comment>
           <Cmd>5</Cmd>
           <Adp>1004</Adp>
           <Ado>1536</Ado>
-          <Data>12000001140000070012000201000000</Data>
+          <Data>12000001100000070012000201000000</Data>
           <Cnt>1</Cnt>
           <Retries>3</Retries>
         </InitCmd>
@@ -2779,7 +2761,7 @@ Bit 8 - 15 : reserved</Comment>
                   <AmsPort>11</AmsPort>
                 </AmsAddress>
                 <IndexGroup>50593856</IndexGroup>
-                <IndexOffset>-2130706333</IndexOffset>
+                <IndexOffset>-2130706337</IndexOffset>
                 <Length>1</Length>
               </AdsInfo>
             </Entry>
@@ -2794,7 +2776,7 @@ Bit 8 - 15 : reserved</Comment>
                   <AmsPort>11</AmsPort>
                 </AmsAddress>
                 <IndexGroup>50593856</IndexGroup>
-                <IndexOffset>-1056963808</IndexOffset>
+                <IndexOffset>-1056963840</IndexOffset>
                 <Length>1</Length>
               </AdsInfo>
             </Entry>
@@ -2814,7 +2796,7 @@ Bit 8 - 15 : reserved</Comment>
                   <AmsPort>11</AmsPort>
                 </AmsAddress>
                 <IndexGroup>50593856</IndexGroup>
-                <IndexOffset>-2130706330</IndexOffset>
+                <IndexOffset>-2130706334</IndexOffset>
                 <Length>2</Length>
               </AdsInfo>
             </Entry>
@@ -2829,7 +2811,7 @@ Bit 8 - 15 : reserved</Comment>
                   <AmsPort>11</AmsPort>
                 </AmsAddress>
                 <IndexGroup>50593856</IndexGroup>
-                <IndexOffset>-2130706328</IndexOffset>
+                <IndexOffset>-2130706332</IndexOffset>
                 <Length>2</Length>
               </AdsInfo>
             </Entry>
@@ -2876,7 +2858,7 @@ Bit 8 - 15 : reserved</Comment>
                   <AmsPort>11</AmsPort>
                 </AmsAddress>
                 <IndexGroup>50593856</IndexGroup>
-                <IndexOffset>-1056963760</IndexOffset>
+                <IndexOffset>-1056963792</IndexOffset>
                 <Length>1</Length>
               </AdsInfo>
             </Entry>
@@ -2891,7 +2873,7 @@ Bit 8 - 15 : reserved</Comment>
                   <AmsPort>11</AmsPort>
                 </AmsAddress>
                 <IndexGroup>50593856</IndexGroup>
-                <IndexOffset>-1056963759</IndexOffset>
+                <IndexOffset>-1056963791</IndexOffset>
                 <Length>1</Length>
               </AdsInfo>
             </Entry>
@@ -2906,7 +2888,7 @@ Bit 8 - 15 : reserved</Comment>
                   <AmsPort>11</AmsPort>
                 </AmsAddress>
                 <IndexGroup>50593856</IndexGroup>
-                <IndexOffset>-1056963758</IndexOffset>
+                <IndexOffset>-1056963790</IndexOffset>
                 <Length>1</Length>
               </AdsInfo>
             </Entry>
@@ -2921,7 +2903,7 @@ Bit 8 - 15 : reserved</Comment>
                   <AmsPort>11</AmsPort>
                 </AmsAddress>
                 <IndexGroup>50593856</IndexGroup>
-                <IndexOffset>-1056963757</IndexOffset>
+                <IndexOffset>-1056963789</IndexOffset>
                 <Length>1</Length>
               </AdsInfo>
             </Entry>
@@ -2936,7 +2918,7 @@ Bit 8 - 15 : reserved</Comment>
                   <AmsPort>11</AmsPort>
                 </AmsAddress>
                 <IndexGroup>50593856</IndexGroup>
-                <IndexOffset>-1056963756</IndexOffset>
+                <IndexOffset>-1056963788</IndexOffset>
                 <Length>1</Length>
               </AdsInfo>
             </Entry>
@@ -2951,7 +2933,7 @@ Bit 8 - 15 : reserved</Comment>
                   <AmsPort>11</AmsPort>
                 </AmsAddress>
                 <IndexGroup>50593856</IndexGroup>
-                <IndexOffset>-1056963755</IndexOffset>
+                <IndexOffset>-1056963787</IndexOffset>
                 <Length>1</Length>
               </AdsInfo>
             </Entry>
@@ -2966,7 +2948,7 @@ Bit 8 - 15 : reserved</Comment>
                   <AmsPort>11</AmsPort>
                 </AmsAddress>
                 <IndexGroup>50593856</IndexGroup>
-                <IndexOffset>-1056963754</IndexOffset>
+                <IndexOffset>-1056963786</IndexOffset>
                 <Length>1</Length>
               </AdsInfo>
             </Entry>
@@ -2981,7 +2963,7 @@ Bit 8 - 15 : reserved</Comment>
                   <AmsPort>11</AmsPort>
                 </AmsAddress>
                 <IndexGroup>50593856</IndexGroup>
-                <IndexOffset>-1056963753</IndexOffset>
+                <IndexOffset>-1056963785</IndexOffset>
                 <Length>1</Length>
               </AdsInfo>
             </Entry>
@@ -3042,6 +3024,6 @@ Bit 8 - 15 : reserved</Comment>
       <AmsNetId>5.107.189.26.6.1</AmsNetId>
       <AmsPort>1004</AmsPort>
     </AmsAddress>
-    <LinkedAxis>TINC^NC-Task 1 SAF^Axes^Axis 4 - Winch motor</LinkedAxis>
+    <LinkedAxis>TINC^NC-Task 1 SAF^Axes^Axis 4</LinkedAxis>
   </EtherCAT>
 </TreeItem>

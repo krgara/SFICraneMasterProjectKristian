@@ -8,11 +8,15 @@ VAR
 	
 	fbJoystickRightVert 				: FB_JoystickInputScaling;
 	fbJoystickRightHor 					: FB_JoystickInputScaling;
+	
+	bEnableJoystick : BOOL;
 		
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[ fbJoystickLeftVert(
-	bEnable := TRUE,
+      <ST><![CDATA[bEnableJoystick := NOT(P_StablePlatform.bManualMode);
+
+fbJoystickLeftVert(
+	bEnable := bEnableJoystick,
 	nRawInput := G_Inputs.stJoyLY.nValue,
 	stJoystickInputScaling := G_Parameters.stParam.stJoystickInputScalingLeftY,
 	fNormalizedOutput => G_Sensors.fJoystickLeftNormalizedY
@@ -25,7 +29,7 @@ ELSIF G_Sensors.fJoystickLeftNormalizedY > 0 THEN
 END_IF
 
 fbJoystickLeftHor(
-	bEnable := TRUE,
+	bEnable := bEnableJoystick,
 	nRawInput := G_Inputs.stJoyLX.nValue,
 	stJoystickInputScaling := G_Parameters.stParam.stJoystickInputScalingLeftX,
 	fNormalizedOutput => G_Sensors.fJoystickLeftNormalizedX
@@ -39,7 +43,7 @@ END_IF
 
 
 fbJoystickRightVert(
-	bEnable := TRUE,
+	bEnable := bEnableJoystick,
 	nRawInput := G_Inputs.stJoyRY.nValue,
 	stJoystickInputScaling := G_Parameters.stParam.stJoystickInputScalingRightY,
 	fNormalizedOutput => G_Sensors.fJoystickRightNormalizedY
@@ -54,7 +58,7 @@ END_IF
 
 
 fbJoystickRightHor(
-	bEnable := TRUE,
+	bEnable := bEnableJoystick,
 	nRawInput := G_Inputs.stJoyRX.nValue,
 	stJoystickInputScaling := G_Parameters.stParam.stJoystickInputScalingRightX,
 	fNormalizedOutput => G_Sensors.fJoystickRightNormalizedX
@@ -68,6 +72,8 @@ END_IF
 ]]></ST>
     </Implementation>
     <LineIds Name="P_Inputs">
+      <LineId Id="349" Count="0" />
+      <LineId Id="348" Count="0" />
       <LineId Id="5" Count="0" />
       <LineId Id="65" Count="0" />
       <LineId Id="11" Count="0" />

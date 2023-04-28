@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_ValveOutput" Id="{f59c2bfb-80b3-4afa-9ddc-65e6b1ad119e}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_ValveOutput
+VAR_INPUT
+	bEnable 			: BOOL;
+	bDeadBandCompOn 	: BOOL;
+	stValveDeadBand 	: ST_ValveDeadBand;
+	fNormalizedInput 	: LREAL;
+END_VAR
+VAR_OUTPUT
+	bEnableValveOutput : BOOL;
+	nOutput : INT; 
+END_VAR
+VAR
+	nOffset 	: INT := 16383;
+	nMaxValue	: INT := 32767;
+	nMinValue 	: INT := 0;
+	nTempOutput : INT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF	bDeadBandCompOn THEN
+	IF fNormalizedInput > 0.0 THEN
+		nTempOutput := LREAL_TO_INT(ABS(fNormalizedInput*(stValveDeadBand.fPosMax - stValveDeadBand.fPosMin) + stValveDeadBand.fPosMin));
+	ELSIF fNormalizedInput < 0.0 THEN
+		nTempOutput := LREAL_TO_INT(ABS(fNormalizedInput*(stValveDeadBand.fNegMax - stValveDeadBand.fNegMin) - stValveDeadBand.fNegMin));
+	ELSE
+		nTempOutput := nOffset;
+	END_IF
+ELSE
+	IF fNormalizedInput > 0.0 THEN
+		nTempOutput := LREAL_TO_INT(ABS(fNormalizedInput*(32767.0 - 16383.0) + 16383.0));
+	ELSIF fNormalizedInput < 0.0 THEN
+		nTempOutput := LREAL_TO_INT(ABS(fNormalizedInput*(0 - 16383.0) - 16383.0));
+	ELSE
+		nTempOutput := nOffset;
+	END_IF	
+END_IF	
+
+IF bEnable THEN
+	nOutput := LIMIT(nMinValue, nTempOutput, nMaxValue);
+	bEnableValveOutput := TRUE; 
+ELSE 	
+	nOutput := nOffset;
+	bEnableValveOutput := FALSE;	
+END_IF
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="FB_ValveOutput">
+      <LineId Id="46" Count="0" />
+      <LineId Id="89" Count="0" />
+      <LineId Id="49" Count="0" />
+      <LineId Id="51" Count="3" />
+      <LineId Id="50" Count="0" />
+      <LineId Id="91" Count="0" />
+      <LineId Id="93" Count="5" />
+      <LineId Id="92" Count="0" />
+      <LineId Id="90" Count="0" />
+      <LineId Id="36" Count="1" />
+      <LineId Id="78" Count="0" />
+      <LineId Id="43" Count="0" />
+      <LineId Id="74" Count="1" />
+      <LineId Id="73" Count="0" />
+      <LineId Id="35" Count="0" />
+      <LineId Id="42" Count="0" />
+      <LineId Id="41" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
