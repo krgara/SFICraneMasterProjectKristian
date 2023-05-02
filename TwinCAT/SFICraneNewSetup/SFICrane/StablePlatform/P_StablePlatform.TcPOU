@@ -7,6 +7,8 @@ VAR
 	fbpB 		: FB_AnalogInputScaling;
 	fbpS 	 	: FB_AnalogInputScaling;
 	fSVFeedback : FB_AnalogInputScaling;
+	fbPistonPos	: FB_AnalogInputScaling;
+	fbPistonVel	: FB_AnalogInputScaling;
 	fbJoystick  : FB_JoystickInputScaling;
 	fbSVOutput 	: FB_ValveOutput;
 	bManualMode : BOOL;
@@ -55,7 +57,23 @@ fbSVOutput(
 	nOutput => G_StablePlatformIO.nSVControlSignal
 );
 
-G_StablePlatformIO.bSVEnable := NOT(G_StablePlatformIO.bModeSwitchOff) AND (G_Inputs.bAutoModeSelector OR G_Inputs.bManualModeSelector) AND bManualMode;]]></ST>
+G_StablePlatformIO.bSVEnable := NOT(G_StablePlatformIO.bModeSwitchOff) AND (G_Inputs.bAutoModeSelector OR G_Inputs.bManualModeSelector) AND bManualMode;
+
+//G_StablePlatformScaledIO.fPistonPosition := 
+
+fbPistonPos(
+	nRawInput := G_StablePlatformIO.nPistonPosition,
+	stAnalogInputScaling := G_StablePlatformParameters.stPistonPos,
+	fOutput => G_StablePlatformScaledIO.fPistonPosition
+);
+
+fbPistonVel(
+	nRawInput := G_StablePlatformIO.nPistonVelocity,
+	stAnalogInputScaling := G_StablePlatformParameters.stPistonVel,
+	fOutput => G_StablePlatformScaledIO.fPistonPosition
+);
+
+G_StablePlatformParameters.fPlatformAngle := fPlatformAngleTheta1(G_StablePlatformScaledIO.fPistonPosition);]]></ST>
     </Implementation>
     <LineIds Name="P_StablePlatform">
       <LineId Id="5" Count="0" />
@@ -63,8 +81,16 @@ G_StablePlatformIO.bSVEnable := NOT(G_StablePlatformIO.bModeSwitchOff) AND (G_In
       <LineId Id="54" Count="0" />
       <LineId Id="36" Count="7" />
       <LineId Id="12" Count="0" />
-      <LineId Id="45" Count="7" />
+      <LineId Id="45" Count="6" />
+      <LineId Id="65" Count="1" />
+      <LineId Id="52" Count="0" />
       <LineId Id="44" Count="0" />
+      <LineId Id="70" Count="4" />
+      <LineId Id="69" Count="0" />
+      <LineId Id="76" Count="4" />
+      <LineId Id="75" Count="0" />
+      <LineId Id="82" Count="0" />
+      <LineId Id="81" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

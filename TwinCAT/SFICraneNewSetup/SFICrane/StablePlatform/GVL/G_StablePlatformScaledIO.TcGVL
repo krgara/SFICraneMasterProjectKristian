@@ -8,6 +8,9 @@ VAR_GLOBAL
 	bpS : LREAL; // 0..400bar
 	fSVFeedback : LREAL; // 4..20 mA  | 0 = fault/off
 	fJoystickNormalizedX : LREAL; // -1..0..1
+	fPistonPosition : LREAL; //Piston position in meters
+	fPistonVelocity : LREAL; //Piston velocity in meters/second
+
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

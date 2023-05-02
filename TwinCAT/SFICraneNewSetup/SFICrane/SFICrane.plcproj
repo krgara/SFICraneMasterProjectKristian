@@ -148,6 +148,9 @@
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
     </Compile>
+    <Compile Include="StablePlatform\fPlatformAngleTheta1.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="StablePlatform\P_StablePlatform.TcPOU">
       <SubType>Code</SubType>
     </Compile>
