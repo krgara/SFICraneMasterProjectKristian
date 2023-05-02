@@ -4,6 +4,7 @@
     <Declaration><![CDATA[PROGRAM P_MachineControl
 VAR
 	fbInverse					: FB_Inverse;
+	fbWinchHeight				: FB_WinchHeight;
 	fRefPosX					: LREAL := GVL_InverseKinematics.fTooltipXCoordGlobalIni;
 	fRefPosY					: LREAL := GVL_InverseKinematics.fTooltipYCoordGlobalIni;	
 	bStartWave					: BOOL;
@@ -22,20 +23,20 @@ END_IF
 
 bStartWave := NOT G_Inputs.bRedButton;
 
-(*
+
 IF bStartWave THEN
 	//Clock
 	G_Work.fTimeSinceStart := G_Work.fTimeSinceStart + G_Work.fSampleTime;
 	GVL_InverseKinematics.fTheta1 := 0.012*SIN(2.5*G_Work.fTimeSinceStart);
 END_IF
-*)
 
+(*
 IF bStartWave THEN
 	//Clock
 	G_Work.fTimeSinceStart := G_Work.fTimeSinceStart + G_Work.fSampleTime;
 	GVL_InverseKinematics.fTheta1 := G_StablePlatformParameters.fPlatformAngle;
 END_IF
-
+*)
 
 fbInverse(
 	fPtXd := fRefPosX, 
@@ -48,7 +49,14 @@ fbInverse(
 	fStrokeActuatorKnuckle => GVL_InverseKinematics.fStrokeActuatorKnuckleInverse,	
 );
 
-
+fbWinchHeight(
+	fTheta1 := 0,
+	fStrokeActuatorMain := 0,
+	fStrokeActuatorKnuckle := 0,
+	thetaWinchMotorIni := 0,
+	desiredHeightPayload := 0,
+	thetaWinchMotor => G_Work.fPosRefWinch
+);
 ]]></ST>
     </Implementation>
     <LineIds Name="P_MachineControl">
@@ -80,7 +88,9 @@ fbInverse(
       <LineId Id="164" Count="0" />
       <LineId Id="162" Count="0" />
       <LineId Id="158" Count="0" />
-      <LineId Id="218" Count="1" />
+      <LineId Id="218" Count="0" />
+      <LineId Id="277" Count="6" />
+      <LineId Id="274" Count="0" />
       <LineId Id="136" Count="0" />
     </LineIds>
   </POU>

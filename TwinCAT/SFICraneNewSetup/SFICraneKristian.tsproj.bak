@@ -1661,7 +1661,7 @@ External Setpoint Generation:
 		<ImageData Id="1008">424dd6020000000000003600000028000000100000000e0000000100180000000000a0020000c40e0000c40e00000000000000000000ff00ffff00ffff00ffff00ffff00ffff00ff808080808080808080808080808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000ffffc0c0c000ffff808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0ff0000c0c0c0ff0000808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff0000ff0000ff0000ff0000ff0000ff0000c0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff0000ff0000ff0000ff0000ff0000ff0000c0c0c00000ffc0c0c00000ff808080ff00ffff00ffff00ffff00ffff00ffff0000ff0000ff0000ff0000ff0000ff0000c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff0000ff0000ff0000ff0000ff0000ff0000c0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff0000ff0000ff0000ff0000ff0000ff0000c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff0000ff0000ff0000ff0000ff0000ff0000c0c0c0008000c0c0c0008000808080ff00ffff00ffff00ffff00ffff00ffff0000ff0000ff0000ff0000ff0000ff0000c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ff</ImageData>
 		<ImageData Id="1009">424dd6020000000000003600000028000000100000000e0000000100180000000000a002000000000000000000000000000000000000ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff00f2ff00f2ff00f2ff00f2ff00f2ff00f2ff00f2ff00f2ff00f2ff00f2ff00f2ffff00ffff00ffff00ffff00ffff00ff00f2ff00f2ff00f2ff00f2ff00f2ff00f2ff00f2ff00000000f2ff00f2ff00f2ffff00ffff00ffff00ffff00ffff00ff00f2ff00000000000000000000000000000000000000000000f2ff00f2ff00f2ffff00ffff00ffff00ffff00ffff00ff00f2ff0000000000000000000000000000000000000000000909ff0909ff00f2ffff00ffff00ffff00ffff00ffff00ff00f2ff00000000000000000000000000000000000000000000f2ff00f2ff00f2ffff00ffff00ffff00ffff00ffff00ff00f2ff00f2ff00f2ff00f2ff00000000f2ff00f2ff00000000f2ff00f2ff00f2ffff00ffff00ffff00ffff00ffff00ff00f2ff00000000000000000000000000f2ff00f2ff00f2ff00f2ff00f2ff00f2ffff00ffff00ffff00ffff00ffff00ff00f2ff00f2ff00f2ff00f2ff00f2ff00f2ff00f2ff00f2ff00f2ff00f2ff00f2ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ff</ImageData>
 	</ImageDatas>
-	<Project ProjectGUID="{36AAB0B2-5D18-4D07-B9D0-56D7982BB26F}" Target64Bit="true" ShowHideConfigurations="#x106">
+	<Project ProjectGUID="{36AAB0B2-5D18-4D07-B9D0-56D7982BB26F}" TargetNetId="5.107.189.26.1.1" Target64Bit="true" ShowHideConfigurations="#x106">
 		<System>
 			<Settings MaxCpus="4"/>
 			<Tasks>
@@ -2260,7 +2260,7 @@ External Setpoint Generation:
 		</Motion>
 		<Plc>
 			<Project GUID="{64FB78BA-5775-4793-83DB-E4463DEFB246}" Name="SFICrane" PrjFilePath="SFICrane\SFICrane.plcproj" TmcFilePath="SFICrane\SFICrane.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="SFICrane\SFICrane.tmc" TmcHash="{FA3DC299-06E2-7284-9A13-08A3C339CA2C}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="SFICrane\SFICrane.tmc" TmcHash="{BFD636A6-7794-0889-7671-BC0D64E33AC3}">
 					<Name>SFICrane Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
@@ -5316,6 +5316,22 @@ Bit 8 - 15 : reserved]]></Comment>
 				<Link VarA="PlcTask Inputs^G_Inputs.stJoyRX.stStatus" VarB="AI Standard Channel 3^Status"/>
 				<Link VarA="PlcTask Inputs^G_Inputs.stJoyRY.nValue" VarB="AI Standard Channel 4^Value"/>
 				<Link VarA="PlcTask Inputs^G_Inputs.stJoyRY.stStatus" VarB="AI Standard Channel 4^Status"/>
+			</OwnerB>
+			<OwnerB Name="TINC^NC-Task 1 SAF^Axes^Axis 1 - Main boom Cylinder">
+				<Link VarA="PlcTask Inputs^GVL_AXIS1.BCAxis.NcToPlc" VarB="Outputs^ToPlc"/>
+				<Link VarA="PlcTask Outputs^GVL_AXIS1.BCAxis.PlcToNc" VarB="Inputs^FromPlc"/>
+			</OwnerB>
+			<OwnerB Name="TINC^NC-Task 1 SAF^Axes^Axis 2 - Slew Motor">
+				<Link VarA="PlcTask Inputs^GVL_AXIS2.SJAxis.NcToPlc" VarB="Outputs^ToPlc"/>
+				<Link VarA="PlcTask Outputs^GVL_AXIS2.SJAxis.PlcToNc" VarB="Inputs^FromPlc"/>
+			</OwnerB>
+			<OwnerB Name="TINC^NC-Task 1 SAF^Axes^Axis 3 - Knuckle boom Cylinder">
+				<Link VarA="PlcTask Inputs^GVL_AXIS3.TCAxis.NcToPlc" VarB="Outputs^ToPlc"/>
+				<Link VarA="PlcTask Outputs^GVL_AXIS3.TCAxis.PlcToNc" VarB="Inputs^FromPlc"/>
+			</OwnerB>
+			<OwnerB Name="TINC^NC-Task 1 SAF^Axes^Axis 4 - Winch Motor">
+				<Link VarA="PlcTask Inputs^GVL_AXIS4.WMAxis.NcToPlc" VarB="Outputs^ToPlc"/>
+				<Link VarA="PlcTask Outputs^GVL_AXIS4.WMAxis.PlcToNc" VarB="Inputs^FromPlc"/>
 			</OwnerB>
 		</OwnerA>
 	</Mappings>

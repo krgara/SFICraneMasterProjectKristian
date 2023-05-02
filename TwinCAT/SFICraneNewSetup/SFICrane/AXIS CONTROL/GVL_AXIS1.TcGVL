@@ -66,6 +66,7 @@ lrBC_HomePosition		: LREAL;
 lrBC_JogVelocity		: LREAL;
 lrBC_MoveVelVelocity	: LREAL;
 lrBC_MoveAbsPosition	: LREAL;
+lrBC_MoveAbsVelocity	: LREAL;
 lrBC_MoveContAbsPos		: LREAL;
 lrBC_MoveContAbsEndVel 	: LREAL := 0;
 lrBC_MoveAddPos			: LREAL;

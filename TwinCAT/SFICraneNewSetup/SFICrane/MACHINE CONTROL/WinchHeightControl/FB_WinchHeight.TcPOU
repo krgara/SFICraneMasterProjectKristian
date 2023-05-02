@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_WinchHeight" Id="{57b1ecae-5157-47c3-9889-d956ea3f135d}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_WinchHeight
+VAR_INPUT
+	fTheta1: LREAL;
+	fStrokeActuatorMain: LREAL;
+	fStrokeActuatorKnuckle: LREAL;
+	thetaWinchMotorIni: LREAL;
+	desiredHeightPayload: LREAL;
+END_VAR
+VAR_OUTPUT
+	PTx: LREAL;
+	PTy: LREAL;
+	fTheta3: LREAL;
+	fTheta4: LREAL;
+	thetaWinchMotor: LREAL;
+END_VAR
+VAR
+	PTy_tmp: LREAL;
+	PTy_tmp_0: LREAL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+(* MATLAB Function: '<Root>/WinchHeightControlFunction' *)
+(* Platform constants *)
+(* MATLAB Function 'WinchHeightControlFunction': '<S1>:1' *)
+(* '<S1>:1:4' fHeightPlatform = 1.402; *)
+(* '<S1>:1:5' fHeightPlatformKing = 0.09; *)
+(* '<S1>:1:6' fLengthPlatform = 1.30; *)
+(* Crane and platform dimensions *)
+(* Crane constant parameters *)
+(* '<S1>:1:11' fHeightKingSlew             = 0.623; *)
+(* '<S1>:1:12' fHeightSlewTop              = 0.711; *)
+(* '<S1>:1:13' fLengthMainArm			    = 1.5; *)
+(* '<S1>:1:14' fLengthKnuckleArm		    = 1.158; *)
+(* '<S1>:1:16' fLengthAMain				= 0.614; *)
+(* '<S1>:1:17' fLengthBMain				= 0.571; *)
+(* '<S1>:1:18' fMinLengthActuatorMain		= 0.692; *)
+(* '<S1>:1:19' fMaxStrokeActuatorMain		= 0.320; *)
+(* '<S1>:1:21' fOffsetAngleDegMainAct		= 62.1; *)
+(* '<S1>:1:22' fOffsetAngleRadMainAct		= deg2rad(fOffsetAngleDegMainAct); *)
+(* '<S1>:1:24' fLengthAKnuckle				= 0.767; *)
+(* '<S1>:1:25' fLengthBKnuckle				= 0.184; *)
+(* '<S1>:1:26' fMinLengthActuatorKnuckle	= 0.627; *)
+(* '<S1>:1:27' fMaxStrokeActuatorKnuckle	= 0.260; *)
+(* '<S1>:1:29' fOffsetAngleDegKnuckleAct	= 86.3; *)
+(* '<S1>:1:30' fOffsetAngleRadKnuckleAct	= deg2rad(fOffsetAngleDegKnuckleAct); *)
+(* '<S1>:1:32' lengthOrigoToWinch = 0.2199; *)
+(* '<S1>:1:33' heightOrigoToWinch = 0.0895; *)
+(* '<S1>:1:34' lengthOrigoToSheave1 = 0.2348; *)
+(* '<S1>:1:35' heightOrigoToSheave1 = 0.060; *)
+(* '<S1>:1:36' lengthOrigoToSheave2 = 1.520; *)
+(* '<S1>:1:37' heigthOrigoToSheave2 = 0.095; *)
+(* '<S1>:1:38' lengthMainArmToSheave3 = 0.2591; *)
+(* '<S1>:1:39' lengthMainArmToSheave4 = 1.158; *)
+(* '<S1>:1:40' offsetAngleSheave3deg = 49.7; *)
+(* '<S1>:1:41' offsetAngleSheave3rad = deg2rad(offsetAngleSheave3deg); *)
+(* '<S1>:1:42' offsetAngleSheave4deg = 90; *)
+(* '<S1>:1:43' offsetAngleSheave4rad = deg2rad(offsetAngleSheave4deg); *)
+(* '<S1>:1:45' lengthMainArm = 1.500; *)
+(* '<S1>:1:46' pitchRadiusWinch = 0.0716; *)
+(* '<S1>:1:47' pitchRadiusSheave = 0.034; *)
+(* Calculating angles for main arm *)
+(* '<S1>:1:50' fLengthActuatorMain = fStrokeActuatorMain + fMinLengthActuatorMain; *)
+(* '<S1>:1:52' fAngleMainArmAct = acos((fLengthBMain^2 + fLengthAMain^2 - fLengthActuatorMain^2) / (2 * fLengthBMain * fLengthAMain)); *)
+(* '<S1>:1:54' fTheta3 = fAngleMainArmAct - fOffsetAngleRadMainAct; *)
+fTheta3 := ACOS((0.70303699999999991 - ((fStrokeActuatorMain + 0.692) * (fStrokeActuatorMain + 0.692))) / 0.70118799999999992) - 1.0838494654884787;
+(* Calculating angles for knuckle arm *)
+(* '<S1>:1:57' fLengthActuatorKnuckle = fStrokeActuatorKnuckle + fMinLengthActuatorKnuckle; *)
+(* '<S1>:1:59' fAngleKnuckleArmAct = acos((fLengthBKnuckle^2 + fLengthAKnuckle^2 - fLengthActuatorKnuckle^2) / (2 * fLengthBKnuckle * fLengthAKnuckle)); *)
+(* '<S1>:1:61' fTheta4 = fAngleKnuckleArmAct - fOffsetAngleRadKnuckleAct; *)
+fTheta4 := ACOS((0.62214500000000006 - ((fStrokeActuatorKnuckle + 0.627) * (fStrokeActuatorKnuckle + 0.627))) / 0.282256) - 1.5062191444711064;
+(* '<S1>:1:64' fHeightMain                 = fHeightPlatformKing + fHeightKingSlew + fHeightSlewTop; *)
+(* '<S1>:1:66' PTx = fLengthPlatform*cos(fTheta1) + fHeightMain*cos(fTheta1 + pi/2) + fLengthMainArm*cos(fTheta1 + fTheta3) + fLengthKnuckleArm * cos (fTheta1 + fTheta3 + fTheta4 - pi/2); *)
+(* '<S1>:1:67' PTy = fHeightPlatform + fLengthPlatform*sin(fTheta1) + fHeightMain * sin(fTheta1 + pi/2) + fLengthMainArm *sin(fTheta1 + fTheta3) + fLengthKnuckleArm*sin(fTheta1 + fTheta3 + fTheta4 - pi/2); *)
+PTy_tmp := fTheta1 + fTheta3;
+PTy_tmp_0 := (PTy_tmp + fTheta4) - 1.5707963267948966;
+PTy := ((((1.3 * SIN(fTheta1)) + 1.402) + (SIN(fTheta1 + 1.5707963267948966) * 1.424)) + (SIN(PTy_tmp) * 1.5)) + (SIN(PTy_tmp_0) * 1.158);
+(* Outport: '<Root>/PTx' incorporates:
+ *  MATLAB Function: '<Root>/WinchHeightControlFunction' *)
+(* '<S1>:1:70' Pwx = -lengthOrigoToWinch; *)
+(* '<S1>:1:71' Pwy = -heightOrigoToWinch; *)
+(* '<S1>:1:72' Ps1x = lengthOrigoToSheave1 * cos(fTheta3) - heightOrigoToSheave1 * sin(fTheta3); *)
+(* '<S1>:1:73' Ps1y = lengthOrigoToSheave1 * sin(fTheta3) + heightOrigoToSheave1 * cos(fTheta3); *)
+(* '<S1>:1:74' Ps2x = lengthOrigoToSheave2 * cos(fTheta3) - heigthOrigoToSheave2 * sin(fTheta3); *)
+(* '<S1>:1:75' Ps2y = lengthOrigoToSheave2 * sin(fTheta3) + heigthOrigoToSheave2 * cos(fTheta3); *)
+(* '<S1>:1:76' Ps3x = lengthMainArm * cos(fTheta3) + lengthMainArmToSheave3 * cos(fTheta3 + fTheta4 - offsetAngleSheave3rad); *)
+(* '<S1>:1:77' Ps3y = lengthMainArm * sin(fTheta3) + lengthMainArmToSheave3 * sin(fTheta3 + fTheta4 - offsetAngleSheave3rad); *)
+(* '<S1>:1:78' Ps4x = lengthMainArm * cos(fTheta3) + lengthMainArmToSheave4 * cos(fTheta3 + fTheta4 - offsetAngleSheave4rad); *)
+(* '<S1>:1:79' Ps4y = lengthMainArm * sin(fTheta3) + lengthMainArmToSheave4 * sin(fTheta3 + fTheta4 - offsetAngleSheave4rad); *)
+(* function distance = distanceTwoPoints(P1x, P1y, P2x, P2y) *)
+(* distance = sqrt((P2x - P1x)^2 + (P2y - P1y)^2); *)
+(* end *)
+(* '<S1>:1:85' distanceWinchSheave1 =  sqrt((Ps1x - Pwx)^2 + (Ps1y - Pwy)^2); *)
+(* distanceTwoPoints(Pwx, Pwy, Ps1x, Ps1y); *)
+(* '<S1>:1:86' distanceSheave1Sheave2 = sqrt((Ps2x - Ps1x)^2 + (Ps2y - Ps1y)^2); *)
+(* distanceTwoPoints(Ps2x, Ps2y, Ps1x, Ps1y); *)
+(* '<S1>:1:87' distanceSheave2Sheave3 = sqrt((Ps3x - Ps2x)^2 + (Ps3y - Ps2y)^2); *)
+(* distanceTwoPoints(Ps2x, Ps2y, Ps3x, Ps3y); *)
+(* '<S1>:1:88' distanceSheave3Sheave4 = sqrt((Ps4x - Ps3x)^2 + (Ps4y - Ps3y)^2); *)
+(* distanceTwoPoints(Ps4x, Ps4y, Ps3x, Ps3y); *)
+(* function tangentLength = tangentLengthFunction(distance, radius1, radius2) *)
+(* tangentLength = sqrt(distance^2 -(radius1 -radius2)^2); *)
+(* end *)
+(* '<S1>:1:94' tangentLengthWinchSheave1 = sqrt(distanceWinchSheave1^2 -(pitchRadiusWinch -pitchRadiusSheave)^2); *)
+(* tangentLengthFunction(distanceWinchSheave1, pitchRadiusWinch, pitchRadiusSheave); *)
+(* '<S1>:1:95' tangentLengthSheave1Sheave2 = sqrt(distanceSheave1Sheave2^2 -(pitchRadiusSheave -pitchRadiusSheave)^2); *)
+(* tangentLengthFunction(distanceSheave1Sheave2, pitchRadiusSheave, pitchRadiusSheave); *)
+(* '<S1>:1:96' tangentLengthSheave2Sheave3 = sqrt(distanceSheave2Sheave3^2 -(pitchRadiusSheave -pitchRadiusSheave)^2); *)
+(* tangentLengthFunction(distanceSheave2Sheave3, pitchRadiusSheave, pitchRadiusSheave); *)
+(* '<S1>:1:97' tangentLengthSheave3Sheave4 = sqrt(distanceSheave3Sheave4^2 -(pitchRadiusSheave -pitchRadiusSheave)^2); *)
+(* tangentLengthFunction(distanceSheave3Sheave4, pitchRadiusSheave, pitchRadiusSheave); *)
+(* '<S1>:1:99' offsetAngleDeg = 113.6 + 9.9; *)
+(* '<S1>:1:100' offsetAngleRad = deg2rad(offsetAngleDeg); *)
+(* '<S1>:1:102' wrapAngle = offsetAngleRad - fTheta3 - fTheta4; *)
+(* '<S1>:1:103' wrapLength = wrapAngle * pitchRadiusSheave; *)
+(* '<S1>:1:105' wireLengthOnCrane = tangentLengthWinchSheave1 + tangentLengthSheave1Sheave2 + tangentLengthSheave2Sheave3 + tangentLengthSheave3Sheave4 + wrapLength; *)
+(* '<S1>:1:107' lengthWinchWireIni = 3; *)
+(* '<S1>:1:108' pitchRadiusWinch = 0.0716; *)
+(* '<S1>:1:109' pitchRadiusSheave = 0.034; *)
+(* '<S1>:1:110' gearRatioWinch = 32; *)
+(* '<S1>:1:112' lengthWinchWire = PTy - desiredHeightPayload; *)
+(* '<S1>:1:113' thetaWinch = (lengthWinchWire - lengthWinchWireIni) / pitchRadiusWinch; *)
+(* '<S1>:1:114' thetaWinchMotor = thetaWinch*gearRatioWinch + thetaWinchMotorIni; *)
+(* function distance = distanceTwoPoints(P1x, P1y, P2x, P2y) *)
+(* distance = sqrt((P2x - P1x)^2 + (P2y - P1y)^2); *)
+(* end *)
+
+(* function tangentLength = tangentLengthFunction(distance, radius1, radius2) *)
+(* tangentLength = sqrt(distance^2 -(radius1 -radius2)^2); *)
+(* end *)
+PTx := (((COS(fTheta1 + 1.5707963267948966) * 1.424) + (1.3 * COS(fTheta1))) + (COS(PTy_tmp) * 1.5)) + (COS(PTy_tmp_0) * 1.158);
+(* Outport: '<Root>/thetaWinchMotor' incorporates:
+ *  MATLAB Function: '<Root>/WinchHeightControlFunction' *)
+thetaWinchMotor := ((((PTy - desiredHeightPayload) - 3.0) / 0.0716) * 32.0) + thetaWinchMotorIni;
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="FB_WinchHeight">
+      <LineId Id="3" Count="113" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

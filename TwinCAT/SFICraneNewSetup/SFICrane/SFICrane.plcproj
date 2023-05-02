@@ -114,6 +114,12 @@
     <Compile Include="MACHINE CONTROL\Struct\ST_Parameters.TcDUT">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="MACHINE CONTROL\WinchHeightControl\FB_WinchHeight.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MAIN.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="OUTPUTS\G_Outputs.TcGVL">
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
@@ -122,9 +128,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="PlcTask.TcTTO">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="POUs\MAIN.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="StablePlatform\Function Blocks\FB_AnalogInputScaling_1.TcPOU">
@@ -195,24 +198,21 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AXIS CONTROL" />
-    <Folder Include="DUTs" />
-    <Folder Include="GVLs" />
     <Folder Include="INPUTS" />
     <Folder Include="INPUTS\Function Blocks" />
     <Folder Include="INPUTS\Functions" />
     <Folder Include="INPUTS\Struct" />
     <Folder Include="MACHINE CONTROL" />
     <Folder Include="MACHINE CONTROL\InverseKinematics2d" />
+    <Folder Include="MACHINE CONTROL\WinchHeightControl" />
     <Folder Include="MACHINE CONTROL\Struct" />
     <Folder Include="StablePlatform" />
     <Folder Include="OUTPUTS" />
     <Folder Include="OUTPUTS\Function blocks" />
     <Folder Include="OUTPUTS\Struct" />
-    <Folder Include="POUs" />
     <Folder Include="StablePlatform\GVL" />
     <Folder Include="StablePlatform\Function Blocks" />
     <Folder Include="StablePlatform\Struct" />
-    <Folder Include="VISUs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SFICrane.tmc">
