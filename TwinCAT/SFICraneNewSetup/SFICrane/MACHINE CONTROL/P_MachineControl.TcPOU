@@ -7,6 +7,7 @@ VAR
 	fbWinchHeight				: FB_WinchHeight;
 	fRefPosX					: LREAL := GVL_InverseKinematics.fTooltipXCoordGlobalIni;
 	fRefPosY					: LREAL := GVL_InverseKinematics.fTooltipYCoordGlobalIni;	
+	fRefPosWinch				: LREAL := GVL_WinchHeightControl.fPayloadHeightIni;
 	bStartWave					: BOOL;
 			
 END_VAR
@@ -18,6 +19,7 @@ G_Work.bAutoMode := G_Inputs.bAutoModeSelector;
 IF G_Inputs.bAutoModeSelector THEN
 fRefPosX := fRefPosX + G_Sensors.fJoystickLeftNormalizedX*-0.0005;
 fRefPosY := fRefPosY + G_Sensors.fJoystickLeftNormalizedY*0.0005;
+//fRefPosWinch := 
 END_IF
 
 
@@ -49,14 +51,16 @@ fbInverse(
 	fStrokeActuatorKnuckle => GVL_InverseKinematics.fStrokeActuatorKnuckleInverse,	
 );
 
+(*
 fbWinchHeight(
 	fTheta1 := 0,
-	fStrokeActuatorMain := 0,
-	fStrokeActuatorKnuckle := 0,
+	fStrokeActuatorMain := G_Work.fStrokeActuatorMain,
+	fStrokeActuatorKnuckle := G_Work.fStrokeActuatorKnuckle,
 	thetaWinchMotorIni := 0,
 	desiredHeightPayload := 0,
 	thetaWinchMotor => G_Work.fPosRefWinch
 );
+*)
 ]]></ST>
     </Implementation>
     <LineIds Name="P_MachineControl">
@@ -66,6 +70,7 @@ fbWinchHeight(
       <LineId Id="193" Count="0" />
       <LineId Id="192" Count="0" />
       <LineId Id="194" Count="0" />
+      <LineId Id="293" Count="0" />
       <LineId Id="207" Count="0" />
       <LineId Id="237" Count="0" />
       <LineId Id="235" Count="1" />
@@ -88,9 +93,11 @@ fbWinchHeight(
       <LineId Id="164" Count="0" />
       <LineId Id="162" Count="0" />
       <LineId Id="158" Count="0" />
+      <LineId Id="295" Count="0" />
       <LineId Id="218" Count="0" />
       <LineId Id="277" Count="6" />
       <LineId Id="274" Count="0" />
+      <LineId Id="296" Count="0" />
       <LineId Id="136" Count="0" />
     </LineIds>
   </POU>

@@ -3,14 +3,14 @@
   <PropertyGroup>
     <Name>Drive Manager 2</Name>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{95bd8122-9e90-4e14-a1e3-c99fbe44715a}</ProjectGuid>
+    <ProjectGuid>{7c70babd-7baf-4d95-94bb-eeb25903f808}</ProjectGuid>
     <TcPath>
     </TcPath>
     <AssemblyName>TwinCAT Drive Manager 2 Project1</AssemblyName>
     <RootNamespace>TwinCAT Drive Manager 2 Project1</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="Box 6 %28AMI8000-0100%29.tcdmdrv">
+    <Content Include="Box 24 %28AMI8000-0100%29.tcdmdrv">
       <SubType>Content</SubType>
     </Content>
   </ItemGroup>

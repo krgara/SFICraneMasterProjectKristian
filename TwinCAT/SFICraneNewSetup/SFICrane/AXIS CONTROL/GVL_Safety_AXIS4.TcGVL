@@ -6,8 +6,8 @@ VAR_GLOBAL
 	
 	bWinchMotor24vDisable AT %Q* : BOOL;
 	TwinSafeGroupComErrAck AT %Q* : BOOL; 
-	TwinSafeGroupRunStop AT %Q* : BOOL; 
-	ChA_STO_Enable AT %Q* : BOOL;
+	TwinSafeGroupRunStop AT %Q* : BOOL := TRUE; 
+	ChA_STO_Enable AT %Q* : BOOL := TRUE;
 	ChA_STO_Active AT %I* : BOOL;  
 END_VAR]]></Declaration>
   </GVL>

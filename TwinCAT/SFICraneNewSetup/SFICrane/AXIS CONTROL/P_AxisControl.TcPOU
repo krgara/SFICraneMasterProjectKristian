@@ -44,7 +44,7 @@ GVL_AXIS1.bBC_PowerEnNegative := G_Inputs.bAutoModeSelector;
 GVL_AXIS1.bBC_PowerEnPositive := G_Inputs.bAutoModeSelector;
 
 GVL_AXIS1.lrBC_MoveAbsPosition := GVL_InverseKinematics.fStrokeActuatorMainInverse*1000;
-GVL_AXIS1.lrBC_MoveAbsVelocity := 10;
+GVL_AXIS1.lrBC_MoveAbsVelocity := 30;
 GVL_AXIS1.bBC_MoveAbsExe := G_Inputs.bGreenButton;
 
 
@@ -76,6 +76,7 @@ GVL_AXIS3.bTC_PowerEnNegative := G_Inputs.bAutoModeSelector;
 GVL_AXIS3.bTC_PowerEnPositive := G_Inputs.bAutoModeSelector;
 
 GVL_AXIS3.lrTC_MoveAbsPosition := GVL_InverseKinematics.fStrokeActuatorKnuckleInverse*1000;
+GVL_AXIS3.lrTC_MoveAbsVelocity := 30;
 GVL_AXIS3.bTC_MoveAbsExe := G_Inputs.bGreenButton;
 
 
@@ -8755,7 +8756,7 @@ END_VAR
                             </o>
                             <o>
                               <o n="Operand" t="Operand">
-                                <v n="Operand">"GVL_AXIS3.stTC_VelCmd.lrVelocity"</v>
+                                <v n="Operand">"GVL_AXIS3.lrTC_MoveAbsVelocity"</v>
                                 <v n="Type">"LREAL"</v>
                                 <v n="Comment">""</v>
                                 <v n="SymbolComment">""</v>
@@ -11659,7 +11660,9 @@ GVL_AXIS4.bWM_ResetExe := TRUE;
       <LineId Id="145" Count="1" />
       <LineId Id="144" Count="0" />
       <LineId Id="101" Count="0" />
-      <LineId Id="118" Count="25" />
+      <LineId Id="118" Count="8" />
+      <LineId Id="154" Count="0" />
+      <LineId Id="127" Count="16" />
       <LineId Id="25" Count="0" />
       <LineId Id="5" Count="0" />
     </LineIds>

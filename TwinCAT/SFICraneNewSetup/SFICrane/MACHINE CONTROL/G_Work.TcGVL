@@ -21,6 +21,10 @@ VAR_GLOBAL
 	fPositionErrorCylinder_mm : LREAL;
 	fSampleTime				: LREAL := 0.002;
 	fTimeSinceStart			: LREAL := 0.0;
+	fStrokeActuatorMain 	AT %I* : LREAL;
+	fStrokeActuatorKnuckle 	AT %I* : LREAL;
+	fSlewMotorAngle			AT %I* : LREAL;
+	fWinchMotorAngle		AT %I* : LREAL;	
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

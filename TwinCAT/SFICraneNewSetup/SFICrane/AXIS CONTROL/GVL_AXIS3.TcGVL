@@ -59,6 +59,7 @@ lrTC_SetPosition		: LREAL;
 lrTC_JogVelocity		: LREAL;
 lrTC_MoveVelVelocity	: LREAL;
 lrTC_MoveAbsPosition	: LREAL;
+lrTC_MoveAbsVelocity	: LREAL;
 lrTC_MoveAddPos			: LREAL;
 
 //Direction
