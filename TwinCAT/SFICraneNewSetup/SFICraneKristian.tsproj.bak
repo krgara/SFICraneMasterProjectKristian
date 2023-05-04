@@ -2122,9 +2122,11 @@ External Setpoint Generation:
 				<Axis Id="4" CreateSymbols="true" AxisType="1" GroupId="2">
 					<Name>Axis 4 - Winch Motor</Name>
 					<AxisPara>
-						<Dynamic AccelerationMaximum="48322.755" DecelerationMaximum="48322.755" Acceleration="8053.7925" Deceleration="8053.7925" Jerk="24161.3775"/>
-						<Velo RefSearch="53.69195" RefSync="53.69195" SlowManual="268.45975" FastManual="1610.7585" Fast="5369.195" Maximum="5369.195"/>
+						<General UnitName="°"/>
+						<Dynamic AccelerationMaximum="48322.755" DecelerationMaximum="48322.755" Acceleration="8053.79" Deceleration="8053.79" Jerk="24161.4"/>
+						<Velo RefSearch="53.69195" RefSync="53.69195" SlowManual="268.45975" FastManual="1610.7585" Fast="5369.195"/>
 						<OtherSettings AllowMotionCmdToSlave="true"/>
+						<ParameterChanged>39</ParameterChanged>
 					</AxisPara>
 					<Encoder Name="Enc" EncType="19">
 						<EncPara ScaleFactorNumerator="60" ScaleFactorDenominator="1048576" MaxCount="#xffffffff"/>
@@ -2265,7 +2267,7 @@ External Setpoint Generation:
 		</Motion>
 		<Plc>
 			<Project GUID="{64FB78BA-5775-4793-83DB-E4463DEFB246}" Name="SFICrane" PrjFilePath="SFICrane\SFICrane.plcproj" TmcFilePath="SFICrane\SFICrane.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="SFICrane\SFICrane.tmc" TmcHash="{61906C90-B260-B058-CE70-60724BD58519}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="SFICrane\SFICrane.tmc" TmcHash="{3550C98C-9D03-AC91-9113-6F7E08B5851A}">
 					<Name>SFICrane Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
@@ -2287,6 +2289,19 @@ External Setpoint Generation:
 							<Type>LREAL</Type>
 						</Var>
 						<Var>
+							<Name>GVL_AXIS4.WMAxis.NcToPlc</Name>
+							<Type GUID="{25521FAA-EA5F-4C7F-8864-BBCCDACD2E98}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+						</Var>
+						<Var>
+							<Name>GVL_AXIS4.bInAckSignal</Name>
+							<Comment><![CDATA[Safety]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL_AXIS3.TCAxis.NcToPlc</Name>
+							<Type GUID="{25521FAA-EA5F-4C7F-8864-BBCCDACD2E98}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+						</Var>
+						<Var>
 							<Name>GVL_AXIS1.BCAxis.NcToPlc</Name>
 							<Type GUID="{25521FAA-EA5F-4C7F-8864-BBCCDACD2E98}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 						</Var>
@@ -2295,25 +2310,12 @@ External Setpoint Generation:
 							<Type>LREAL</Type>
 						</Var>
 						<Var>
-							<Name>GVL_AXIS3.TCAxis.NcToPlc</Name>
-							<Type GUID="{25521FAA-EA5F-4C7F-8864-BBCCDACD2E98}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
-						</Var>
-						<Var>
 							<Name>GVL_Safety_AXIS4.ChA_STO_Active</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
 							<Name>GVL_AXIS2.SJAxis.NcToPlc</Name>
 							<Type GUID="{25521FAA-EA5F-4C7F-8864-BBCCDACD2E98}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
-						</Var>
-						<Var>
-							<Name>GVL_AXIS4.WMAxis.NcToPlc</Name>
-							<Type GUID="{25521FAA-EA5F-4C7F-8864-BBCCDACD2E98}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
-						</Var>
-						<Var>
-							<Name>GVL_AXIS4.bInAckSignal</Name>
-							<Comment><![CDATA[Safety]]></Comment>
-							<Type>BOOL</Type>
 						</Var>
 						<Var>
 							<Name>G_Inputs.bManualModeSelector</Name>
@@ -2372,10 +2374,6 @@ External Setpoint Generation:
 							<Type>INT</Type>
 						</Var>
 						<Var>
-							<Name>G_StablePlatformIO.bModeSwitchOff</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
 							<Name>G_StablePlatformIO.npA</Name>
 							<Comment><![CDATA[fJoyLeftX AT %I* : INT; 
 bJoyLeftPushButton AT %I* : BOOL; ]]></Comment>
@@ -2394,6 +2392,10 @@ bJoyLeftPushButton AT %I* : BOOL; ]]></Comment>
 							<Type>INT</Type>
 						</Var>
 						<Var>
+							<Name>G_StablePlatformIO.bModeSwitchOff</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
 							<Name>G_StablePlatformIO.nPistonPosition</Name>
 							<Type>INT</Type>
 						</Var>
@@ -2405,7 +2407,7 @@ bJoyLeftPushButton AT %I* : BOOL; ]]></Comment>
 					<Vars VarGrpType="2" AreaNo="1">
 						<Name>PlcTask Outputs</Name>
 						<Var>
-							<Name>GVL_AXIS1.BCAxis.PlcToNc</Name>
+							<Name>GVL_AXIS4.WMAxis.PlcToNc</Name>
 							<Type GUID="{96B75FEB-2D84-43BE-A3EC-D9A681F27D52}" Namespace="MC">PLCTONC_AXIS_REF</Type>
 						</Var>
 						<Var>
@@ -2413,8 +2415,8 @@ bJoyLeftPushButton AT %I* : BOOL; ]]></Comment>
 							<Type GUID="{96B75FEB-2D84-43BE-A3EC-D9A681F27D52}" Namespace="MC">PLCTONC_AXIS_REF</Type>
 						</Var>
 						<Var>
-							<Name>GVL_Safety_AXIS4.ChA_STO_Enable</Name>
-							<Type>BOOL</Type>
+							<Name>GVL_AXIS1.BCAxis.PlcToNc</Name>
+							<Type GUID="{96B75FEB-2D84-43BE-A3EC-D9A681F27D52}" Namespace="MC">PLCTONC_AXIS_REF</Type>
 						</Var>
 						<Var>
 							<Name>GVL_Safety_AXIS4.bWinchMotor24vDisable</Name>
@@ -2429,11 +2431,11 @@ bJoyLeftPushButton AT %I* : BOOL; ]]></Comment>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>GVL_AXIS2.SJAxis.PlcToNc</Name>
-							<Type GUID="{96B75FEB-2D84-43BE-A3EC-D9A681F27D52}" Namespace="MC">PLCTONC_AXIS_REF</Type>
+							<Name>GVL_Safety_AXIS4.ChA_STO_Enable</Name>
+							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>GVL_AXIS4.WMAxis.PlcToNc</Name>
+							<Name>GVL_AXIS2.SJAxis.PlcToNc</Name>
 							<Type GUID="{96B75FEB-2D84-43BE-A3EC-D9A681F27D52}" Namespace="MC">PLCTONC_AXIS_REF</Type>
 						</Var>
 						<Var>

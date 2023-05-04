@@ -1223,112 +1223,6 @@
                         <o n="VisualElemMemberList" t="VisualElemMemberList">
                           <l n="VisualElemMemberList" t="VisualElemMemberCollection" cet="VisualElemMember">
                             <o>
-                              <v n="Id">1931512087L</v>
-                              <v n="Value">"TOGGLE"</v>
-                            </o>
-                            <o>
-                              <v n="Id">300685745L</v>
-                              <v n="Value">false</v>
-                            </o>
-                            <o>
-                              <v n="Id">2812299069L</v>
-                              <v n="Value">4294967295U</v>
-                            </o>
-                            <o>
-                              <v n="Id">494569607L</v>
-                              <v n="Value">4278190080U</v>
-                            </o>
-                            <o>
-                              <v n="Id">3719097617L</v>
-                              <v n="Value">0</v>
-                            </o>
-                            <o>
-                              <v n="Id">1649127785L</v>
-                              <v n="Value">18</v>
-                            </o>
-                            <o>
-                              <v n="Id">357335551L</v>
-                              <v n="Value">54</v>
-                            </o>
-                            <o>
-                              <v n="Id">2422045748L</v>
-                              <v n="Value">70</v>
-                            </o>
-                            <o>
-                              <v n="Id">2134141914L</v>
-                              <v n="Value">70</v>
-                            </o>
-                            <o>
-                              <v n="Id">1360784741L</v>
-                              <v n="Value">false</v>
-                            </o>
-                            <o>
-                              <v n="Id">4062784938L</v>
-                              <v n="Value">"Element-Switch-RotarySwitch-Gray"</v>
-                            </o>
-                            <o>
-                              <v n="Id">493260384L</v>
-                              <v n="Value">4294967295U</v>
-                            </o>
-                            <o>
-                              <v n="Id">135947015L</v>
-                              <v n="Value">4278190080U</v>
-                            </o>
-                            <o>
-                              <v n="Id">2678395525L</v>
-                              <v n="Value">1U</v>
-                            </o>
-                            <o>
-                              <v n="Id">2340015797L</v>
-                              <v n="Value">"HCENTER"</v>
-                            </o>
-                            <o>
-                              <v n="Id">2565699834L</v>
-                              <v n="Value">"VCENTER"</v>
-                            </o>
-                            <o>
-                              <v n="Id">296037572L</v>
-                              <v n="Value">""</v>
-                            </o>
-                            <o>
-                              <v n="Id">390574330L</v>
-                              <v n="Value">""</v>
-                            </o>
-                            <o>
-                              <v n="Id">571893170L</v>
-                              <v n="Value">""</v>
-                            </o>
-                            <o>
-                              <v n="Id">743958181L</v>
-                              <v n="Value">"GVL_Safety_AXIS4.ChA_STO_Enable"</v>
-                            </o>
-                            <o>
-                              <v n="Id">2597686782L</v>
-                              <v n="Value">false</v>
-                            </o>
-                          </l>
-                        </o>
-                        <v n="VisualElementName">"RotarySwitch"</v>
-                        <v n="VisualElementTypeName">"VisuFbElemRotarySwitch"</v>
-                        <v n="VisualElementIsRectangle">true</v>
-                        <v n="VisualElementIdentifier">"GenElemInst_45"</v>
-                        <n n="VisualElementOfflinePaintCommands" />
-                        <n n="VisualElementFrameInformation" />
-                        <d n="VisualElementInputActions" t="Hashtable" />
-                        <v n="VisualElementIdentification">{d5ea2f59-e10e-43d2-9eb0-27dbb1c55c1d}</v>
-                        <v n="VisualElementOwningObjectGuid">{4fc9a593-5585-4c7b-9c87-b23c76f2039c}</v>
-                        <a n="LMGuids" et="Guid" />
-                        <d n="SubElements" t="Hashtable" />
-                        <v n="VisualElementId">44</v>
-                        <l n="UserManagementAccessRights" t="ArrayList" />
-                      </o>
-                      <o>
-                        <a n="ConfiguredComplexInputs" et="ComplexInput" />
-                        <l n="Elements" t="ArrayList" />
-                        <n n="VisualElementDescription" />
-                        <o n="VisualElemMemberList" t="VisualElemMemberList">
-                          <l n="VisualElemMemberList" t="VisualElemMemberCollection" cet="VisualElemMember">
-                            <o>
                               <v n="Id">2812299069L</v>
                               <v n="Value">4294967295U</v>
                             </o>
@@ -2165,16 +2059,16 @@
                           <v n="Value">"%f Cylinder Position [m]"</v>
                         </o>
                         <o>
-                          <v n="Id">823443203L</v>
-                          <v n="Value">"695"</v>
-                        </o>
-                        <o>
                           <v n="Id">2477733581L</v>
                           <v n="Value">"G_StablePlatformScaledIO.fPistonPosition"</v>
                         </o>
                         <o>
                           <v n="Id">2597686782L</v>
                           <v n="Value">false</v>
+                        </o>
+                        <o>
+                          <v n="Id">823443203L</v>
+                          <v n="Value">"695"</v>
                         </o>
                       </l>
                     </o>
@@ -2330,12 +2224,12 @@
                           <v n="Value">"G_StablePlatformScaledIO.fPistonVelocity"</v>
                         </o>
                         <o>
-                          <v n="Id">823443203L</v>
-                          <v n="Value">"963"</v>
-                        </o>
-                        <o>
                           <v n="Id">2597686782L</v>
                           <v n="Value">false</v>
+                        </o>
+                        <o>
+                          <v n="Id">823443203L</v>
+                          <v n="Value">"963"</v>
                         </o>
                       </l>
                     </o>

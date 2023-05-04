@@ -3,7 +3,7 @@
   <GVL Name="GVL_WinchHeightControl" Id="{eaddd7bf-d6bd-481d-8985-3b578109bf07}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 VAR_GLOBAL
-	fPayloadHeightIni: LREAL := 1.0;
+	fPayloadHeightIni: LREAL := 0.0;
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

@@ -69,6 +69,10 @@
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
     </Compile>
+    <Compile Include="INPUTS\G_ScalingParameters.TcGVL">
+      <SubType>Code</SubType>
+      <LinkAlways>true</LinkAlways>
+    </Compile>
     <Compile Include="INPUTS\G_Sensors.TcGVL">
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
@@ -88,9 +92,8 @@
     <Compile Include="INPUTS\Struct\ST_JoystickInputScaling.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MACHINE CONTROL\G_Parameters.TcGVL">
+    <Compile Include="INPUTS\Struct\ST_Parameters.TcDUT">
       <SubType>Code</SubType>
-      <LinkAlways>true</LinkAlways>
     </Compile>
     <Compile Include="MACHINE CONTROL\G_Work.TcGVL">
       <SubType>Code</SubType>
@@ -116,9 +119,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="MACHINE CONTROL\P_MachineControl.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="MACHINE CONTROL\Struct\ST_Parameters.TcDUT">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="MACHINE CONTROL\WinchHeightControl\FB_WinchHeight.TcPOU">
