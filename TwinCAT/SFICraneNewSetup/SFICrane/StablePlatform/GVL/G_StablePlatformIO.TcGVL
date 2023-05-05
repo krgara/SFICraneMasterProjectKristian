@@ -19,6 +19,8 @@ VAR_GLOBAL
 	
 	nPistonPosition AT %I* : INT;
 	nPistonVelocity AT %I* : INT;
+	
+	bEMG_OK AT %I* : BOOL;
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

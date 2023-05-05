@@ -57,7 +57,7 @@ fbSVOutput(
 	nOutput => G_StablePlatformIO.nSVControlSignal
 );
 
-G_StablePlatformIO.bSVEnable := bManualMode;
+G_StablePlatformIO.bSVEnable := bManualMode AND G_StablePlatformIO.bEMG_OK;
 
 fbPistonPos(
 	nRawInput := G_StablePlatformIO.nPistonPosition,

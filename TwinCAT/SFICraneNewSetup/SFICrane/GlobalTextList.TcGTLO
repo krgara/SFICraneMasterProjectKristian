@@ -46,6 +46,11 @@
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>
+              <v n="TextID">"810"</v>
+              <v n="TextDefault">"EMG Stop"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
               <v n="TextID">"418"</v>
               <v n="TextDefault">"Enable"</v>
               <l n="LanguageTexts" t="ArrayList" />
@@ -73,6 +78,11 @@
             <o>
               <v n="TextID">"107"</v>
               <v n="TextDefault">"PowerRefresh"</v>
+              <l n="LanguageTexts" t="ArrayList" />
+            </o>
+            <o>
+              <v n="TextID">"181"</v>
+              <v n="TextDefault">"Restart"</v>
               <l n="LanguageTexts" t="ArrayList" />
             </o>
             <o>

@@ -9,6 +9,7 @@ VAR_GLOBAL
 	TwinSafeGroupRunStop AT %Q* : BOOL := TRUE; 
 	ChA_STO_Enable AT %Q* : BOOL;
 	ChA_STO_Active AT %I* : BOOL;  
+	EMGRestart AT %Q* : BOOL; 
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>
