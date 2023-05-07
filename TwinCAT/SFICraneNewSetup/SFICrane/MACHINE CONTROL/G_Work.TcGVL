@@ -25,6 +25,15 @@ VAR_GLOBAL
 	fStrokeActuatorKnuckle 	AT %I* : LREAL;
 	fSlewMotorAngle			AT %I* : LREAL;
 	fWinchMotorAngle		AT %I* : LREAL;	
+	fPitchRadiusWinchLayer1	: LREAL := 0.0716;
+	fPitchRadiusWinchLayer2	: LREAL := 0.0731;
+	
+	fEncoderValue0Turns		: LREAL;
+	fEncoderValue5Turns		: LREAL;
+	fEncoderValueLayer2		: LREAL;
+	fEncoderValuePayload0	: LREAL;
+	fWinchGearRatio			: LREAL := 32;
+	fThetaWinchMotor		: LREAL;
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

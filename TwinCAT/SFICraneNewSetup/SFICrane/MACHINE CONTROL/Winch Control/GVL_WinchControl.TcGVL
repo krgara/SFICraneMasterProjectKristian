@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <GVL Name="GVL_WinchControl" Id="{74b1df0c-5514-476b-862c-9c5770f7fa30}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL
+	fCraneTooltipYCoordinate	: LREAL;
+	fWireLengthOnCrane			: LREAL;
+	fTheta3						: LREAL;
+	fTheta4						: LREAL;
+	fPayloadHeightIni			: LREAL := 1.0;
+	
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

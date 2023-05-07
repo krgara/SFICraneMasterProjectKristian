@@ -4,13 +4,18 @@
     <Declaration><![CDATA[PROGRAM P_MachineControl
 VAR
 	fbInverse					: FB_Inverse;
-	fbWinchHeight				: FB_WinchHeight;
+	fbForwardKinematics			: FB_ForwardKinematics;
+	fbWireLengthOnCrane			: FB_wireLengthOnCraneFunction;
 	fRefPosX					: LREAL := GVL_InverseKinematics.fTooltipXCoordGlobalIni;
 	fRefPosY					: LREAL := GVL_InverseKinematics.fTooltipYCoordGlobalIni;	
-	fRefPosPayload				: LREAL := GVL_WinchHeightControl.fPayloadHeightIni;
+	fRefPosPayload				: LREAL := GVL_WinchControl.fPayloadHeightIni;
 	fThetaWinchMotorIni			: LREAL;
-	bStartWave					: BOOL;
-			
+	fWireLengthOut				: LREAL;
+	fPitchRadiusWinch			: LREAL;
+	fThetaWinch					: LREAL;
+	bStartWave					: BOOL;		
+	
+	
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -56,15 +61,34 @@ IF NOT (G_Inputs.bAutoModeSelector OR G_Inputs.bJoystickRightEnable) THEN
 	fThetaWinchMotorIni := G_Work.fWinchMotorAngle;
 END_IF
 
+//Set correct pitch radius depending on winch layer on drum
+IF G_Work.fWinchMotorAngle > G_Work.fEncoderValueLayer2 THEN
+	fPitchRadiusWinch := G_Work.fPitchRadiusWinchLayer2;
+ELSE
+	fPitchRadiusWinch := G_Work.fPitchRadiusWinchLayer1;	
+END_IF
 
-fbWinchHeight(
-	fTheta1 := 0,
-	fStrokeActuatorMain := G_Work.fStrokeActuatorMain/1000,
-	fStrokeActuatorKnuckle := G_Work.fStrokeActuatorKnuckle/1000,
-	thetaWinchMotorIni := fThetaWinchMotorIni*PI/180, //Convert to radians
-	desiredHeightPayload := fRefPosPayload,
-	thetaWinchMotor => G_Work.fPosRefWinch //Radians
+
+fbForwardKinematics(
+	fTheta1 := G_StablePlatformParameters.fPlatformAngle,
+	fStrokeActuatorMain := G_Work.fStrokeActuatorMain,
+	fStrokeActuatorKnuckle := G_Work.fStrokeActuatorKnuckle,
+	y => GVL_WinchControl.fCraneTooltipYCoordinate,
+	fTheta3 => GVL_WinchControl.fTheta3,
+	fTheta4 => GVL_WinchControl.fTheta4,
 );
+
+fbWireLengthOnCrane(
+	fTheta3 := GVL_WinchControl.fTheta3,
+	fTheta4 := GVL_WinchControl.fTheta4,
+	wireLengthOnCrane => GVL_WinchControl.fWireLengthOnCrane,
+); 
+
+fWireLengthOut := GVL_WinchControl.fWireLengthOnCrane + (GVL_WinchControl.fCraneTooltipYCoordinate - fRefPosPayload);
+
+fThetaWinch := fWireLengthOut/fPitchRadiusWinch;
+
+G_Work.fThetaWinchMotor := fThetaWinch*G_Work.fWinchGearRatio + G_Work.fEncoderValuePayload0;
 
 ]]></ST>
     </Implementation>
@@ -102,11 +126,28 @@ fbWinchHeight(
       <LineId Id="308" Count="0" />
       <LineId Id="307" Count="0" />
       <LineId Id="309" Count="1" />
-      <LineId Id="295" Count="0" />
-      <LineId Id="218" Count="0" />
-      <LineId Id="277" Count="6" />
-      <LineId Id="274" Count="0" />
-      <LineId Id="296" Count="0" />
+      <LineId Id="358" Count="0" />
+      <LineId Id="352" Count="0" />
+      <LineId Id="351" Count="0" />
+      <LineId Id="353" Count="0" />
+      <LineId Id="355" Count="1" />
+      <LineId Id="354" Count="0" />
+      <LineId Id="325" Count="0" />
+      <LineId Id="295" Count="1" />
+      <LineId Id="328" Count="0" />
+      <LineId Id="330" Count="2" />
+      <LineId Id="342" Count="1" />
+      <LineId Id="333" Count="0" />
+      <LineId Id="336" Count="0" />
+      <LineId Id="335" Count="0" />
+      <LineId Id="337" Count="3" />
+      <LineId Id="345" Count="0" />
+      <LineId Id="344" Count="0" />
+      <LineId Id="360" Count="0" />
+      <LineId Id="347" Count="0" />
+      <LineId Id="363" Count="0" />
+      <LineId Id="362" Count="0" />
+      <LineId Id="334" Count="0" />
       <LineId Id="136" Count="0" />
     </LineIds>
   </POU>

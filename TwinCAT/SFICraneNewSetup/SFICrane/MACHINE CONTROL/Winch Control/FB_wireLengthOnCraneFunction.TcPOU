@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_wireLengthOnCraneFunction" Id="{542276a2-75e6-47f5-bcca-64c72f3a87b0}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_wireLengthOnCraneFunction
+VAR_INPUT
+	fTheta3: LREAL;
+	fTheta4: LREAL;
+END_VAR
+VAR_OUTPUT
+	wireLengthOnCrane: LREAL;
+END_VAR
+VAR
+	Ps1x: LREAL;
+	Ps1y: LREAL;
+	Ps2x: LREAL;
+	Ps2y: LREAL;
+	Ps3x: LREAL;
+	Ps3y: LREAL;
+	b_a: LREAL;
+	d_a: LREAL;
+	Ps1x_tmp: LREAL;
+	Ps1x_tmp_0: LREAL;
+	Ps3x_tmp_tmp: LREAL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+(* MATLAB Function: '<Root>/wireLengthOnCraneFunction1' *)
+(* MATLAB Function 'wireLengthOnCraneFunction1': '<S1>:1' *)
+(* '<S1>:1:3' lengthOrigoToWinch = 0.2199; *)
+(* '<S1>:1:4' heightOrigoToWinch = 0.0895; *)
+(* '<S1>:1:5' lengthOrigoToSheave1 = 0.2348; *)
+(* '<S1>:1:6' heightOrigoToSheave1 = 0.060; *)
+(* '<S1>:1:7' lengthOrigoToSheave2 = 1.520; *)
+(* '<S1>:1:8' heigthOrigoToSheave2 = 0.095; *)
+(* '<S1>:1:9' lengthMainArmToSheave3 = 0.2591; *)
+(* '<S1>:1:10' lengthMainArmToSheave4 = 1.158; *)
+(* '<S1>:1:11' offsetAngleSheave3deg = 49.7; *)
+(* '<S1>:1:12' offsetAngleSheave3rad = deg2rad(offsetAngleSheave3deg); *)
+(* '<S1>:1:13' offsetAngleSheave4deg = 90; *)
+(* '<S1>:1:14' offsetAngleSheave4rad = deg2rad(offsetAngleSheave4deg); *)
+(* '<S1>:1:16' lengthMainArm = 1.500; *)
+(* '<S1>:1:17' pitchRadiusWinch = 0.0716; *)
+(* '<S1>:1:18' pitchRadiusSheave = 0.034; *)
+(* '<S1>:1:20' Pwx = -lengthOrigoToWinch; *)
+(* '<S1>:1:21' Pwy = -heightOrigoToWinch; *)
+(* '<S1>:1:22' Ps1x = lengthOrigoToSheave1 * cos(theta3) - heightOrigoToSheave1 * sin(theta3); *)
+Ps1x_tmp := SIN(fTheta3);
+Ps1x_tmp_0 := COS(fTheta3);
+Ps1x := (0.2348 * Ps1x_tmp_0) - (0.06 * Ps1x_tmp);
+(* '<S1>:1:23' Ps1y = lengthOrigoToSheave1 * sin(theta3) + heightOrigoToSheave1 * cos(theta3); *)
+Ps1y := (0.2348 * Ps1x_tmp) + (0.06 * Ps1x_tmp_0);
+(* '<S1>:1:24' Ps2x = lengthOrigoToSheave2 * cos(theta3) - heigthOrigoToSheave2 * sin(theta3); *)
+Ps2x := (1.52 * Ps1x_tmp_0) - (0.095 * Ps1x_tmp);
+(* '<S1>:1:25' Ps2y = lengthOrigoToSheave2 * sin(theta3) + heigthOrigoToSheave2 * cos(theta3); *)
+Ps2y := (1.52 * Ps1x_tmp) + (0.095 * Ps1x_tmp_0);
+(* '<S1>:1:26' Ps3x = lengthMainArm * cos(theta3) + lengthMainArmToSheave3 * cos(theta3 + theta4 - offsetAngleSheave3rad); *)
+Ps3x_tmp_tmp := fTheta3 + fTheta4;
+Ps3x := (COS(Ps3x_tmp_tmp - 0.86742863824118188) * 0.2591) + (1.5 * Ps1x_tmp_0);
+(* '<S1>:1:27' Ps3y = lengthMainArm * sin(theta3) + lengthMainArmToSheave3 * sin(theta3 + theta4 - offsetAngleSheave3rad); *)
+Ps3y := (SIN(Ps3x_tmp_tmp - 0.86742863824118188) * 0.2591) + (1.5 * Ps1x_tmp);
+(* '<S1>:1:28' Ps4x = lengthMainArm * cos(theta3) + lengthMainArmToSheave4 * cos(theta3 + theta4 - offsetAngleSheave4rad); *)
+(* '<S1>:1:29' Ps4y = lengthMainArm * sin(theta3) + lengthMainArmToSheave4 * sin(theta3 + theta4 - offsetAngleSheave4rad); *)
+(* '<S1>:1:31' distanceWinchSheave1 =  sqrt((Ps1x - Pwx)^2 + (Ps1y - Pwy)^2); *)
+Ps1x_tmp := SQRT(((Ps1x - -0.2199) * (Ps1x - -0.2199)) + ((Ps1y - -0.0895) * (Ps1y - -0.0895)));
+(* distanceTwoPoints(Pwx, Pwy, Ps1x, Ps1y); *)
+(* '<S1>:1:32' distanceSheave1Sheave2 = sqrt((Ps2x - Ps1x)^2 + (Ps2y - Ps1y)^2); *)
+Ps1x_tmp_0 := Ps2x - Ps1x;
+b_a := Ps2y - Ps1y;
+Ps1x_tmp_0 := SQRT((Ps1x_tmp_0 * Ps1x_tmp_0) + (b_a * b_a));
+(* distanceTwoPoints(Ps2x, Ps2y, Ps1x, Ps1y); *)
+(* '<S1>:1:33' distanceSheave2Sheave3 = sqrt((Ps3x - Ps2x)^2 + (Ps3y - Ps2y)^2); *)
+b_a := Ps3x - Ps2x;
+d_a := Ps3y - Ps2y;
+b_a := SQRT((b_a * b_a) + (d_a * d_a));
+(* distanceTwoPoints(Ps2x, Ps2y, Ps3x, Ps3y); *)
+(* '<S1>:1:34' distanceSheave3Sheave4 = sqrt((Ps4x - Ps3x)^2 + (Ps4y - Ps3y)^2); *)
+d_a := ((COS(Ps3x_tmp_tmp - 1.5707963267948966) * 1.158) + (1.5 * COS(fTheta3))) - Ps3x;
+Ps3x_tmp_tmp := ((SIN(Ps3x_tmp_tmp - 1.5707963267948966) * 1.158) + (1.5 * SIN(fTheta3))) - Ps3y;
+d_a := SQRT((d_a * d_a) + (Ps3x_tmp_tmp * Ps3x_tmp_tmp));
+(* Outport: '<Root>/wireLengthOnCrane' incorporates:
+ *  MATLAB Function: '<Root>/wireLengthOnCraneFunction1' *)
+(* distanceTwoPoints(Ps4x, Ps4y, Ps3x, Ps3y); *)
+(* '<S1>:1:36' tangentLengthWinchSheave1 = sqrt(distanceWinchSheave1^2 -(pitchRadiusWinch -pitchRadiusSheave)^2); *)
+(* tangentLengthFunction(distanceWinchSheave1, pitchRadiusWinch, pitchRadiusSheave); *)
+(* '<S1>:1:37' tangentLengthSheave1Sheave2 = sqrt(distanceSheave1Sheave2^2 -(pitchRadiusSheave -pitchRadiusSheave)^2); *)
+(* tangentLengthFunction(distanceSheave1Sheave2, pitchRadiusSheave, pitchRadiusSheave); *)
+(* '<S1>:1:38' tangentLengthSheave2Sheave3 = sqrt(distanceSheave2Sheave3^2 -(pitchRadiusSheave -pitchRadiusSheave)^2); *)
+(* tangentLengthFunction(distanceSheave2Sheave3, pitchRadiusSheave, pitchRadiusSheave); *)
+(* '<S1>:1:39' tangentLengthSheave3Sheave4 = sqrt(distanceSheave3Sheave4^2 -(pitchRadiusSheave -pitchRadiusSheave)^2); *)
+(* tangentLengthFunction(distanceSheave3Sheave4, pitchRadiusSheave, pitchRadiusSheave); *)
+(* '<S1>:1:41' offsetAngleDeg = 113.6 + 9.9; *)
+(* '<S1>:1:42' offsetAngleRad = deg2rad(offsetAngleDeg); *)
+(* '<S1>:1:44' wrapAngle = offsetAngleRad - theta3 - theta4; *)
+(* '<S1>:1:45' wrapLength = wrapAngle * pitchRadiusSheave; *)
+(* '<S1>:1:47' wireLengthOnCrane = tangentLengthWinchSheave1 + tangentLengthSheave1Sheave2 + tangentLengthSheave2Sheave3 + tangentLengthSheave3Sheave4 + wrapLength; *)
+wireLengthOnCrane := (((SQRT((Ps1x_tmp * Ps1x_tmp) - 0.0014137599999999996) + SQRT(Ps1x_tmp_0 * Ps1x_tmp_0)) + SQRT(b_a * b_a)) + SQRT(d_a * d_a)) + (((2.155481626212997 - fTheta3) - fTheta4) * 0.034);
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="FB_wireLengthOnCraneFunction">
+      <LineId Id="3" Count="71" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
