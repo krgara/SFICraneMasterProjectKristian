@@ -78,10 +78,6 @@ stWM_ExtSetDis			: ST_MC_Status;
 stWM_ExtSetEnab			: ST_MC_Status;
 stWM_ExtSetFeed			: ST_MC_Status;
 
-//Safety
-bInAckSignal		AT %I*	:BOOL;
-
-
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>
