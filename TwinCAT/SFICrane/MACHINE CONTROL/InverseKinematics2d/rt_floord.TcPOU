@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="rt_floord" Id="{6b511f2b-646b-4e76-a867-b53887a8a7c0}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION rt_floord : LREAL
+VAR_INPUT
+	u: LREAL;
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+rt_floord := DINT_TO_LREAL(TRUNC(u));
+
+IF u = rt_floord THEN 
+    rt_floord := u;
+ELSIF u < 0.0 THEN 
+    rt_floord := rt_floord - 1.0;
+END_IF;
+
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="rt_floord">
+      <LineId Id="3" Count="9" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

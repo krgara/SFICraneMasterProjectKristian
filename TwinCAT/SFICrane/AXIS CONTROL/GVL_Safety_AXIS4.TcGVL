@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <GVL Name="GVL_Safety_AXIS4" Id="{79d917fe-8c93-4a67-8893-98b739af505d}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL
+	
+	bWinchMotor24vDisable AT %Q* : BOOL;
+	TwinSafeGroupComErrAck AT %Q* : BOOL; 
+	TwinSafeGroupRunStop AT %Q* : BOOL := TRUE; 
+	ChA_STO_Enable AT %Q* : BOOL;
+	ChA_STO_Active AT %I* : BOOL;  
+	EMGRestart AT %Q* : BOOL; 
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="P_MachineControl" Id="{a90e0789-57c0-407b-b2f1-afc96a165b42}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM P_MachineControl
+VAR
+	fbInverse					: FB_Inverse;
+	fbWinchHeight				: FB_WinchHeight;
+	fRefPosX					: LREAL := GVL_InverseKinematics.fTooltipXCoordGlobalIni;
+	fRefPosY					: LREAL := GVL_InverseKinematics.fTooltipYCoordGlobalIni;	
+	fRefPosPayload				: LREAL := GVL_WinchHeightControl.fPayloadHeightIni;
+	fThetaWinchMotorIni			: LREAL;
+	bStartWave					: BOOL;
+			
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+G_Work.bManualMode := G_Inputs.bManualModeSelector;
+G_Work.bAutoMode := G_Inputs.bAutoModeSelector;
+GVL_Safety_AXIS4.ChA_STO_Enable := G_Inputs.bManualModeSelector OR G_Inputs.bAutoModeSelector;
+
+IF G_Inputs.bAutoModeSelector THEN
+fRefPosX := fRefPosX + G_Sensors.fJoystickLeftNormalizedX*-0.0005;
+fRefPosY := fRefPosY + G_Sensors.fJoystickLeftNormalizedY*0.0005;
+fRefPosPayload := fRefPosPayload + G_Sensors.fJoystickRightNormalizedY*0.0002;
+END_IF
+
+bStartWave := NOT G_Inputs.bRedButton; //Red button is inverted, i.e. is active when not pushed
+
+//Wave function used for testing
+IF bStartWave THEN
+	//Clock
+	G_Work.fTimeSinceStart := G_Work.fTimeSinceStart + G_Work.fSampleTime;
+	GVL_InverseKinematics.fTheta1 := 0.012*SIN(2.5*G_Work.fTimeSinceStart);
+END_IF
+
+(*
+IF bStartWave THEN
+	//Clock
+	G_Work.fTimeSinceStart := G_Work.fTimeSinceStart + G_Work.fSampleTime;
+	GVL_InverseKinematics.fTheta1 := G_StablePlatformParameters.fPlatformAngle;
+END_IF
+*)
+
+fbInverse(
+	fPtXd := fRefPosX, 
+	fPtYd := fRefPosY, 
+	fTheta1 := GVL_InverseKinematics.fTheta1,
+	
+	fTheta3 => GVL_InverseKinematics.fAngleMainArmInverse, 
+	fTheta4 => GVL_InverseKinematics.fAngleKnuckleArmInverse,
+	fStrokeActuatorMain => GVL_InverseKinematics.fStrokeActuatorMainInverse,
+	fStrokeActuatorKnuckle => GVL_InverseKinematics.fStrokeActuatorKnuckleInverse,	
+);
+
+IF NOT (G_Inputs.bAutoModeSelector OR G_Inputs.bJoystickRightEnable) THEN
+	fThetaWinchMotorIni := G_Work.fWinchMotorAngle;
+END_IF
+
+
+fbWinchHeight(
+	fTheta1 := 0,
+	fStrokeActuatorMain := G_Work.fStrokeActuatorMain/1000,
+	fStrokeActuatorKnuckle := G_Work.fStrokeActuatorKnuckle/1000,
+	thetaWinchMotorIni := fThetaWinchMotorIni*PI/180, //Convert to radians
+	desiredHeightPayload := fRefPosPayload,
+	thetaWinchMotor => G_Work.fPosRefWinch //Radians
+);
+
+IF GVL_Safety_AXIS4.EMGRestart OR G_Inputs.bSafetyRelayRestartButton THEN
+	G_Work.bEMG_Restart := TRUE;
+	G_Outputs.bSafetyRelayReset := TRUE;
+ELSE
+	G_Work.bEMG_Restart := FALSE;
+	G_Outputs.bSafetyRelayReset := FALSE;
+END_IF
+]]></ST>
+    </Implementation>
+    <LineIds Name="P_MachineControl">
+      <LineId Id="325" Count="0" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="81" Count="0" />
+      <LineId Id="313" Count="0" />
+      <LineId Id="201" Count="0" />
+      <LineId Id="193" Count="0" />
+      <LineId Id="192" Count="0" />
+      <LineId Id="194" Count="0" />
+      <LineId Id="293" Count="0" />
+      <LineId Id="207" Count="0" />
+      <LineId Id="237" Count="0" />
+      <LineId Id="236" Count="0" />
+      <LineId Id="256" Count="0" />
+      <LineId Id="229" Count="0" />
+      <LineId Id="228" Count="0" />
+      <LineId Id="239" Count="0" />
+      <LineId Id="241" Count="0" />
+      <LineId Id="230" Count="1" />
+      <LineId Id="257" Count="0" />
+      <LineId Id="251" Count="4" />
+      <LineId Id="250" Count="0" />
+      <LineId Id="238" Count="0" />
+      <LineId Id="153" Count="0" />
+      <LineId Id="152" Count="0" />
+      <LineId Id="155" Count="1" />
+      <LineId Id="185" Count="0" />
+      <LineId Id="157" Count="0" />
+      <LineId Id="160" Count="1" />
+      <LineId Id="164" Count="0" />
+      <LineId Id="162" Count="0" />
+      <LineId Id="158" Count="0" />
+      <LineId Id="308" Count="0" />
+      <LineId Id="307" Count="0" />
+      <LineId Id="309" Count="1" />
+      <LineId Id="295" Count="0" />
+      <LineId Id="218" Count="0" />
+      <LineId Id="277" Count="6" />
+      <LineId Id="274" Count="0" />
+      <LineId Id="326" Count="0" />
+      <LineId Id="296" Count="0" />
+      <LineId Id="327" Count="0" />
+      <LineId Id="329" Count="3" />
+      <LineId Id="328" Count="0" />
+      <LineId Id="136" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

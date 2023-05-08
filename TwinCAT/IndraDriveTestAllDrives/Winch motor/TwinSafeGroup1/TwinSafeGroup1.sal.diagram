@@ -1,9 +1,0 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<safetyApplicationLanguageDiagram Crc="3985577790" dslVersion="1.4.0.0" Id="edd7f4ec-eef1-4d7e-9750-922445c0c577" absoluteBounds="0, 0, 12, 8.5" name="TwinSAFE">
-  <safetyApplicationMoniker name="/" />
-  <nestedChildShapes>
-    <networkSwimLane Id="e9f71804-c0f5-4206-ba76-544e60d80955" absoluteBounds="0, 0, 12, 7.075">
-      <networkMoniker name="//Network1" />
-    </networkSwimLane>
-  </nestedChildShapes>
-</safetyApplicationLanguageDiagram>

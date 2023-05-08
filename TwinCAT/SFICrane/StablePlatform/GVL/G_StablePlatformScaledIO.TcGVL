@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <GVL Name="G_StablePlatformScaledIO" Id="{558b2183-aa0a-4eba-891d-74c304b1d1cc}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL
+	bpA : LREAL; // 0..400bar
+	bpB : LREAL; // 0..400bar
+	bpS : LREAL; // 0..400bar
+	fSVFeedback : LREAL; // 4..20 mA  | 0 = fault/off
+	fJoystickNormalizedX : LREAL; // -1..0..1
+	fPistonPosition : LREAL; //Piston position in meters
+	fPistonVelocity : LREAL; //Piston velocity in meters/second
+
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

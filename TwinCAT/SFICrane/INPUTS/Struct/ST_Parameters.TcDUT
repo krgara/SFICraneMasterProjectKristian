@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <DUT Name="ST_Parameters" Id="{2181cba9-465d-4eb9-9268-5dd160c4a037}">
+    <Declaration><![CDATA[TYPE ST_Parameters :
+STRUCT
+	fCyclicTime 					: LREAL := 0.001; // [s]
+	
+	stJoystickInputScalingLeftX 		: ST_JoystickInputScaling := (fMaxInputValue := 20482.0, fMinInputValue := 11828.0, fNeutralInputValue := 16267, fNeutralDeadband := 100.0, fMaxOutputValue := 1.0, fMinOutputValue := -1.0, fNeutralOutputValue := 0.0);
+	stJoystickInputScalingLeftY 		: ST_JoystickInputScaling := (fMaxInputValue := 20720.0, fMinInputValue := 11950.0, fNeutralInputValue := 16475, fNeutralDeadband := 100.0, fMaxOutputValue := 1.0, fMinOutputValue := -1.0, fNeutralOutputValue := 0.0);
+	stJoystickInputScalingRightX 		: ST_JoystickInputScaling := (fMaxInputValue := 20550.0, fMinInputValue := 11800.0, fNeutralInputValue := 16297, fNeutralDeadband := 100.0, fMaxOutputValue := 1.0, fMinOutputValue := -1.0, fNeutralOutputValue := 0.0);
+	stJoystickInputScalingRightY 		: ST_JoystickInputScaling := (fMaxInputValue := 20500.0, fMinInputValue := 11800.0, fNeutralInputValue := 16225, fNeutralDeadband := 100.0, fMaxOutputValue := 1.0, fMinOutputValue := -1.0, fNeutralOutputValue := 0.0);
+
+		
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

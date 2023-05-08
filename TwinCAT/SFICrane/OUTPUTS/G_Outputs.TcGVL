@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <GVL Name="G_Outputs" Id="{8eab031c-095d-419c-826e-727929929d0a}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL
+	// PLC Rack
+	
+	// RIO Rack
+	// Digital Outputs
+	bGreenButtonLight 			AT %Q* : BOOL;
+	bRedButtonLight 			AT %Q* : BOOL;
+	// Analog Outputs
+	//stWinchValveOutput 		: ST_ValveOutput;
+	//stCylValveOutput 			: ST_ValveOutput;
+	bSafetyRelayReset		 	AT %Q* : BOOL;
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

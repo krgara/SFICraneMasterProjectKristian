@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="MAIN" Id="{540b8970-e57b-4c7b-a65e-22bf2965a9b1}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+
+VAR
+	(*
+bEnable: BOOL := FALSE;
+bMove: BOOL := FALSE;
+fAxis1VelocityPercent: LREAL := 0;	
+axis1: AXIS_REF;
+fbAxis1Power: MC_Power;
+fbAxis1MoveVelocity: MC_MoveVelocity;
+MCDirectionAxis1 : MC_Direction;
+fAxis1ReferenceVelocity: LREAL := 100;
+*)
+
+fbGetCurTaskIdx  : GETCURTASKINDEX;
+nCycleTime       : UDINT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[P_Inputs();
+P_MachineControl();
+P_AxisControl();
+P_Outputs();
+P_StablePlatform();
+
+fbGetCurTaskIdx();
+nCycleTime := _TaskInfo[fbGetCurTaskIdx.index].CycleTime;
+
+(*
+
+bEnable := G_Inputs.bJoystickLeftEnable;
+bMove := G_Inputs.bJoystickLeftEnable;
+fAxis1VelocityPercent := ABS(G_Sensors.fJoystickLeftNormalizedX)*100;
+MCDirectionAxis1 := G_Sensors.MCDirectionAxis1;
+
+axis1.ReadStatus();
+
+fbAxis1Power(
+Axis:= axis1,
+Enable:= bEnable,
+Enable_Positive:= bEnable,
+Enable_Negative:= bEnable,
+Override:= fAxis1VelocityPercent,
+BufferMode:= ,
+Options:= ,
+Status=> ,
+Busy=> ,
+Active=> ,
+Error=> ,
+ErrorID=> );
+
+fbAxis1MoveVelocity(
+Axis:= axis1,
+Execute:= bMove,
+Velocity:= fAxis1ReferenceVelocity,
+Acceleration:= ,
+Deceleration:= ,
+Jerk:= ,
+Direction:= G_Sensors.MCDirectionAxis1,
+BufferMode:= ,
+Options:= ,
+InVelocity=> ,
+Busy=> ,
+Active=> ,
+CommandAborted=> ,
+Error=> ,
+ErrorID=> );
+
+*)]]></ST>
+    </Implementation>
+    <LineIds Name="MAIN">
+      <LineId Id="8" Count="2" />
+      <LineId Id="133" Count="0" />
+      <LineId Id="173" Count="0" />
+      <LineId Id="154" Count="1" />
+      <LineId Id="153" Count="0" />
+      <LineId Id="134" Count="1" />
+      <LineId Id="117" Count="0" />
+      <LineId Id="113" Count="0" />
+      <LineId Id="118" Count="0" />
+      <LineId Id="112" Count="0" />
+      <LineId Id="120" Count="0" />
+      <LineId Id="80" Count="31" />
+      <LineId Id="42" Count="0" />
+      <LineId Id="137" Count="0" />
+      <LineId Id="136" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
