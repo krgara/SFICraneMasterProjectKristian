@@ -12,6 +12,7 @@ VAR_GLOBAL
 	// Analog Outputs
 	//stWinchValveOutput 		: ST_ValveOutput;
 	//stCylValveOutput 			: ST_ValveOutput;
+	bSafetyRelayReset		 	AT %Q* : BOOL;
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

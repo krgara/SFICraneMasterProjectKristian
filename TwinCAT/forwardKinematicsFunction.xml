@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+  <!--(*
+ *
+ * File: SFICraneModel_020523_WinchControlFunction.xml
+ *
+ * IEC 61131-3 Structured Text (ST) code generated for subsystem "SFICraneModel_020523_WinchControlFunction/Winch height control function/Forward kinematics actuator strokes"
+ *
+ * Model name                      : SFICraneModel_020523_WinchControlFunction
+ * Model version                   : 1.23
+ * Model creator                   : krgar
+ * Model last modified by          : krgar
+ * Model last modified on          : Fri May 05 12:25:21 2023
+ * Model sample time               : 0.002s
+ * Subsystem name                  : SFICraneModel_020523_WinchControlFunction/Winch height control function/Forward kinematics actuator strokes
+ * Subsystem sample time           : 0.002s
+ * Simulink PLC Coder version      : 3.7 (R2022b) 13-May-2022
+ * ST code generated on            : Sun May 07 08:17:51 2023
+ *
+ * Target IDE selection            : PLCopen XML
+ * Test Bench included             : No
+ *
+ *)
+-->
+  <fileHeader companyName="The Mathworks, Inc." companyURL="www.mathworks.com" contentDescription="" creationDateTime="2023-05-07T08:17:51" productName="Simulink PLC Coder" productRelease="(R2022b)" productVersion="3.7"/>
+  <contentHeader name="SFICraneModel_020523_WinchControlFunction">
+    <coordinateInfo>
+      <fbd>
+        <scaling x="0" y="0"/>
+      </fbd>
+      <ld>
+        <scaling x="0" y="0"/>
+      </ld>
+      <sfc>
+        <scaling x="0" y="0"/>
+      </sfc>
+    </coordinateInfo>
+  </contentHeader>
+  <types>
+    <dataTypes/>
+    <pous>
+      <pou name="Forward" pouType="functionBlock">
+        <interface>
+          <inputVars>
+            <variable name="fTheta1">
+              <type>
+                <LREAL/>
+              </type>
+            </variable>
+            <variable name="fStrokeActuatorMain">
+              <type>
+                <LREAL/>
+              </type>
+            </variable>
+            <variable name="fStrokeActuatorKnuckle">
+              <type>
+                <LREAL/>
+              </type>
+            </variable>
+          </inputVars>
+          <outputVars>
+            <variable name="x">
+              <type>
+                <LREAL/>
+              </type>
+            </variable>
+            <variable name="y">
+              <type>
+                <LREAL/>
+              </type>
+            </variable>
+            <variable name="fTheta3">
+              <type>
+                <LREAL/>
+              </type>
+            </variable>
+            <variable name="fTheta4">
+              <type>
+                <LREAL/>
+              </type>
+            </variable>
+          </outputVars>
+          <localVars>
+            <variable name="x_tmp">
+              <type>
+                <LREAL/>
+              </type>
+            </variable>
+            <variable name="x_tmp_0">
+              <type>
+                <LREAL/>
+              </type>
+            </variable>
+          </localVars>
+        </interface>
+        <body>
+          <ST>
+            <xhtml xmlns="http://www.w3.org/1999/xhtml"><![CDATA[
+(* MATLAB Function: '<Root>/Forward kinematics actuator strokes' *)
+(* Platform constants *)
+(* MATLAB Function 'Forward kinematics actuator strokes': '<S1>:1' *)
+(* '<S1>:1:4' fHeightPlatform = 1.402; *)
+(* '<S1>:1:5' fHeightPlatformKing = 0.09; *)
+(* '<S1>:1:6' fLengthPlatform = 1.30; *)
+(* Crane and platform dimensions *)
+(* Crane constant parameters *)
+(* '<S1>:1:11' fHeightKingSlew             = 0.623; *)
+(* '<S1>:1:12' fHeightSlewTop              = 0.711; *)
+(* '<S1>:1:13' fLengthMainArm			    = 1.5; *)
+(* '<S1>:1:14' fLengthKnuckleArm		    = 1.158; *)
+(* '<S1>:1:16' fLengthAMain				= 0.614; *)
+(* '<S1>:1:17' fLengthBMain				= 0.571; *)
+(* '<S1>:1:18' fMinLengthActuatorMain		= 0.692; *)
+(* '<S1>:1:19' fMaxStrokeActuatorMain		= 0.320; *)
+(* '<S1>:1:21' fOffsetAngleDegMainAct		= 62.1; *)
+(* '<S1>:1:22' fOffsetAngleRadMainAct		= deg2rad(fOffsetAngleDegMainAct); *)
+(* '<S1>:1:24' fLengthAKnuckle				= 0.767; *)
+(* '<S1>:1:25' fLengthBKnuckle				= 0.184; *)
+(* '<S1>:1:26' fMinLengthActuatorKnuckle	= 0.627; *)
+(* '<S1>:1:27' fMaxStrokeActuatorKnuckle	= 0.260; *)
+(* '<S1>:1:29' fOffsetAngleDegKnuckleAct	= 86.3; *)
+(* '<S1>:1:30' fOffsetAngleRadKnuckleAct	= deg2rad(fOffsetAngleDegKnuckleAct); *)
+(* Calculating angles for main arm *)
+(* '<S1>:1:33' fLengthActuatorMain = fStrokeActuatorMain + fMinLengthActuatorMain; *)
+(* '<S1>:1:35' fAngleMainArmAct = acos((fLengthBMain^2 + fLengthAMain^2 - fLengthActuatorMain^2) / (2 * fLengthBMain * fLengthAMain)); *)
+(* '<S1>:1:37' fTheta3 = fAngleMainArmAct - fOffsetAngleRadMainAct; *)
+fTheta3 := ACOS((0.70303699999999991 - ((fStrokeActuatorMain + 0.692) * (fStrokeActuatorMain + 0.692))) / 0.70118799999999992) - 1.0838494654884787;
+(* Calculating angles for knuckle arm *)
+(* '<S1>:1:40' fLengthActuatorKnuckle = fStrokeActuatorKnuckle + fMinLengthActuatorKnuckle; *)
+(* '<S1>:1:42' fAngleKnuckleArmAct = acos((fLengthBKnuckle^2 + fLengthAKnuckle^2 - fLengthActuatorKnuckle^2) / (2 * fLengthBKnuckle * fLengthAKnuckle)); *)
+(* '<S1>:1:44' fTheta4 = fAngleKnuckleArmAct - fOffsetAngleRadKnuckleAct; *)
+fTheta4 := ACOS((0.62214500000000006 - ((fStrokeActuatorKnuckle + 0.627) * (fStrokeActuatorKnuckle + 0.627))) / 0.282256) - 1.5062191444711064;
+
+(* fAngleMainArmAct			= fTheta3deg + fOffsetAngleDegMainAct; *)
+(* fAngleKnuckleArmAct         = fTheta4deg + fOffsetAngleDegKnuckleAct; *)
+
+(* fLengthActuatorMain         = sqrt(fLengthAMain^2 + fLengthBMain^2 -(2*fLengthAMain*fLengthBMain*cosd(fAngleMainArmAct))); *)
+(* fStrokeActuatorMain         = fLengthActuatorMain - fMinLengthActuatorMain; *)
+(* if fStrokeActuatorMain < 0 *)
+(* fStrokeActuatorMain = 0; *)
+(* elseif fStrokeActuatorMain > fMaxStrokeActuatorMain *)
+(* fMaxStrokeActuatorMain = fMaxStrokeActuatorMain; *)
+(* end *)
+
+(* fLengthActuatorKnuckle         = sqrt(fLengthAKnuckle^2 + fLengthBKnuckle^2 -(2*fLengthAKnuckle*fLengthBKnuckle*cosd(fAngleKnuckleArmAct))); *)
+(* fStrokeActuatorKnuckle         = fLengthActuatorKnuckle - fMinLengthActuatorKnuckle; *)
+
+(* if fStrokeActuatorKnuckle < 0 *)
+(* fStrokeActuatorKnuckle = 0; *)
+(* elseif fStrokeActuatorKnuckle > fMaxStrokeActuatorKnuckle *)
+(* fMaxStrokeActuatorKnuckle = fMaxStrokeActuatorKnuckle; *)
+(* end *)
+(* '<S1>:1:71' fHeightMain                 = fHeightPlatformKing + fHeightKingSlew + fHeightSlewTop; *)
+(* x = fLengthPlatform*cos(fTheta1) + fHeightMain*cos(fTheta1 + pi/2) + fLengthMainArm*cos(fTheta1 + fTheta3) + fLengthKnuckleArm * cos (fTheta1 + fTheta3 + fTheta4 - pi/2); *)
+(* y = fHeightPlatform + fLengthPlatform*sin(fTheta1) + fHeightMain * sin(fTheta1 + pi/2) + fLengthMainArm *sin(fTheta1 + fTheta3) + fLengthKnuckleArm*sin(fTheta1 + fTheta3 + fTheta4 - pi/2); *)
+(* '<S1>:1:76' x = fLengthPlatform*cos(fTheta1) + fHeightMain*cos(fTheta1 + pi/2) + fLengthMainArm*cos(fTheta1 + fTheta3) + fLengthKnuckleArm * cos (fTheta1 + fTheta3 + fTheta4 - pi/2); *)
+(* '<S1>:1:77' y = fHeightPlatform + fLengthPlatform*sin(fTheta1) + fHeightMain * sin(fTheta1 + pi/2) + fLengthMainArm *sin(fTheta1 + fTheta3) + fLengthKnuckleArm*sin(fTheta1 + fTheta3 + fTheta4 - pi/2); *)
+x_tmp := fTheta1 + fTheta3;
+x_tmp_0 := (x_tmp + fTheta4) - 1.5707963267948966;
+(* Outport: '<Root>/x' incorporates:
+ *  MATLAB Function: '<Root>/Forward kinematics actuator strokes' *)
+x := (((COS(fTheta1 + 1.5707963267948966) * 1.424) + (1.3 * COS(fTheta1))) + (COS(x_tmp) * 1.5)) + (COS(x_tmp_0) * 1.158);
+(* Outport: '<Root>/y' incorporates:
+ *  MATLAB Function: '<Root>/Forward kinematics actuator strokes' *)
+y := ((((1.3 * SIN(fTheta1)) + 1.402) + (SIN(fTheta1 + 1.5707963267948966) * 1.424)) + (SIN(x_tmp) * 1.5)) + (SIN(x_tmp_0) * 1.158);
+
+]]></xhtml>
+          </ST>
+        </body>
+      </pou>
+    </pous>
+  </types>
+  <instances>
+    <configurations/>
+  </instances>
+</project>

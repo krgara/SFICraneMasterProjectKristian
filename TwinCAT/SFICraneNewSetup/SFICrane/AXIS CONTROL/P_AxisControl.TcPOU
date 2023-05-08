@@ -39,6 +39,7 @@ GVL_AXIS1.lrBC_PowerOverride := 100;
 
 GVL_AXIS1.bBC_ResetExe := G_Inputs.bJoystickLeftEnable OR G_Inputs.bGreenButton OR GVL_AXIS1.bBC_MoveAbsDone;
 
+//Power Enable
 GVL_AXIS1.bBC_PowerEnCmd := G_Inputs.bAutoModeSelector;
 GVL_AXIS1.bBC_PowerEnNegative := G_Inputs.bAutoModeSelector;
 GVL_AXIS1.bBC_PowerEnPositive := G_Inputs.bAutoModeSelector;
@@ -71,6 +72,7 @@ GVL_AXIS3.lrTC_PowerOverride := 100;
 
 GVL_AXIS3.bTC_ResetExe := G_Inputs.bJoystickLeftEnable OR G_Inputs.bGreenButton OR GVL_AXIS3.bTC_MoveAbsDone;
 
+//Power Enable
 GVL_AXIS3.bTC_PowerEnCmd := G_Inputs.bAutoModeSelector;
 GVL_AXIS3.bTC_PowerEnNegative := G_Inputs.bAutoModeSelector;
 GVL_AXIS3.bTC_PowerEnPositive := G_Inputs.bAutoModeSelector;
@@ -101,20 +103,21 @@ AXIS3_LD_Auto();
 
 GVL_AXIS4.lrWM_PowerOverride := 100;
 
-GVL_AXIS4.bWM_ResetExe := G_Inputs.bJoystickRightEnable;
+GVL_AXIS4.bWM_ResetExe := G_Inputs.bJoystickRightEnable OR G_Inputs.bGreenButton OR GVL_AXIS1.bBC_MoveAbsDone;
 
+//Power Enable
 GVL_AXIS4.bWM_PowerEnCmd := G_Inputs.bAutoModeSelector;
 GVL_AXIS4.bWM_PowerEnNegative := G_Inputs.bAutoModeSelector;
 GVL_AXIS4.bWM_PowerEnPositive := G_Inputs.bAutoModeSelector;
 
-(*
-GVL_AXIS4.lrWM_MoveAbsPosition := GVL_InverseKinematics.fStrokeActuatorKnuckleInverse*1000;
-GVL_AXIS4.lrWM_MoveAbsVelocity := 30;
+
+GVL_AXIS4.lrWM_MoveAbsPosition := G_MachineControl.fWinchMotorAngleRef;
+GVL_AXIS4.lrWM_MoveAbsVelocity := 10;
 GVL_AXIS4.bWM_MoveAbsExe := G_Inputs.bGreenButton;
-*)
+
 
 //Position control
-IF G_Inputs.bJoystickRightEnable THEN
+IF G_Inputs.bJoystickRightEnable AND GVL_AXIS4.bWM_MoveAbsDone  THEN
 	GVL_AXIS4.bWM_ExtSetGenDisExe := FALSE;
 	GVL_AXIS4.bWM_ExtSetGenEnaExe := TRUE;
 ELSE
@@ -133,7 +136,7 @@ ELSE
 END_IF
 *)
 
-GVL_AXIS4.lrWM_MoveAddPos := G_Work.fPosRefWinch*180/PI; //Convert to degrees
+GVL_AXIS4.lrWM_MoveAddPos := G_MachineControl.fPosRefWinch*180/PI; //Convert to degrees
 
 
 //Update axis
@@ -12692,7 +12695,7 @@ END_VAR
                     <v n="Comment">""</v>
                     <v n="Title">""</v>
                     <v n="Label">""</v>
-                    <v n="OutCommented">true</v>
+                    <v n="OutCommented">false</v>
                     <l2 n="NetworkItems" cet="BoxTreeAssign">
                       <o>
                         <o n="OutputItems" t="OutputItemList">
@@ -12889,8 +12892,8 @@ END_VAR
                             </o>
                             <o>
                               <o n="Operand" t="Operand">
-                                <v n="Operand">"0"</v>
-                                <v n="Type">"INT"</v>
+                                <v n="Operand">"GVL_AXIS4.lrWM_MoveAbsVelocity"</v>
+                                <v n="Type">"LREAL"</v>
                                 <v n="Comment">""</v>
                                 <v n="SymbolComment">""</v>
                                 <v n="Address">""</v>
@@ -13818,42 +13821,13 @@ GVL_AXIS4.bWM_ResetExe := TRUE;
       <LineId Id="206" Count="0" />
     </LineIds>
     <LineIds Name="P_AxisControl.Auto_mode">
-      <LineId Id="31" Count="0" />
-      <LineId Id="85" Count="0" />
-      <LineId Id="84" Count="0" />
-      <LineId Id="86" Count="0" />
-      <LineId Id="32" Count="0" />
-      <LineId Id="35" Count="0" />
-      <LineId Id="38" Count="2" />
-      <LineId Id="82" Count="0" />
-      <LineId Id="81" Count="0" />
-      <LineId Id="150" Count="0" />
-      <LineId Id="83" Count="0" />
-      <LineId Id="117" Count="0" />
-      <LineId Id="107" Count="0" />
-      <LineId Id="7" Count="7" />
-      <LineId Id="88" Count="1" />
-      <LineId Id="52" Count="0" />
-      <LineId Id="54" Count="0" />
-      <LineId Id="53" Count="0" />
-      <LineId Id="15" Count="0" />
-      <LineId Id="50" Count="0" />
-      <LineId Id="145" Count="1" />
-      <LineId Id="144" Count="0" />
-      <LineId Id="101" Count="0" />
-      <LineId Id="118" Count="8" />
-      <LineId Id="154" Count="0" />
-      <LineId Id="127" Count="16" />
-      <LineId Id="25" Count="0" />
-      <LineId Id="189" Count="0" />
-      <LineId Id="159" Count="9" />
-      <LineId Id="190" Count="0" />
-      <LineId Id="169" Count="13" />
-      <LineId Id="200" Count="0" />
-      <LineId Id="192" Count="7" />
-      <LineId Id="191" Count="0" />
-      <LineId Id="183" Count="5" />
-      <LineId Id="158" Count="0" />
+      <LineId Id="204" Count="4" />
+      <LineId Id="310" Count="0" />
+      <LineId Id="209" Count="31" />
+      <LineId Id="311" Count="0" />
+      <LineId Id="241" Count="31" />
+      <LineId Id="309" Count="0" />
+      <LineId Id="273" Count="35" />
       <LineId Id="5" Count="0" />
     </LineIds>
     <LineIds Name="P_AxisControl.Manual_mode">

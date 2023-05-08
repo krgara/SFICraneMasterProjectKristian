@@ -95,38 +95,37 @@
     <Compile Include="INPUTS\Struct\ST_Parameters.TcDUT">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MACHINE CONTROL\G_Work.TcGVL">
+    <Compile Include="MACHINE CONTROL\G_MachineControl.TcGVL">
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
     </Compile>
-    <Compile Include="MACHINE CONTROL\InverseKinematics2d\cosd.TcPOU">
+    <Compile Include="MACHINE CONTROL\KinematicFunctions2d\cosd.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MACHINE CONTROL\InverseKinematics2d\GVL_InverseKinematics.TcGVL">
+    <Compile Include="MACHINE CONTROL\KinematicFunctions2d\FB_Forward.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MACHINE CONTROL\KinematicFunctions2d\GVL_InverseKinematics.TcGVL">
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
     </Compile>
-    <Compile Include="MACHINE CONTROL\InverseKinematics2d\FB_Inverse.TcPOU">
+    <Compile Include="MACHINE CONTROL\KinematicFunctions2d\FB_Inverse.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MACHINE CONTROL\InverseKinematics2d\rt_ceild.TcPOU">
+    <Compile Include="MACHINE CONTROL\KinematicFunctions2d\rt_ceild.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MACHINE CONTROL\InverseKinematics2d\rt_floord.TcPOU">
+    <Compile Include="MACHINE CONTROL\KinematicFunctions2d\rt_floord.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MACHINE CONTROL\InverseKinematics2d\rt_remd.TcPOU">
+    <Compile Include="MACHINE CONTROL\KinematicFunctions2d\rt_remd.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MACHINE CONTROL\KinematicFunctions2d\FB_WireLengthOnCraneFunction.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="MACHINE CONTROL\P_MachineControl.TcPOU">
       <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="MACHINE CONTROL\WinchHeightControl\FB_WinchHeight.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="MACHINE CONTROL\WinchHeightControl\GVL_WinchHeightControl.TcGVL">
-      <SubType>Code</SubType>
-      <LinkAlways>true</LinkAlways>
     </Compile>
     <Compile Include="MAIN.TcPOU">
       <SubType>Code</SubType>
@@ -262,8 +261,7 @@
     <Folder Include="INPUTS\Functions" />
     <Folder Include="INPUTS\Struct" />
     <Folder Include="MACHINE CONTROL" />
-    <Folder Include="MACHINE CONTROL\InverseKinematics2d" />
-    <Folder Include="MACHINE CONTROL\WinchHeightControl" />
+    <Folder Include="MACHINE CONTROL\KinematicFunctions2d" />
     <Folder Include="MACHINE CONTROL\Struct" />
     <Folder Include="HMI" />
     <Folder Include="StablePlatform" />

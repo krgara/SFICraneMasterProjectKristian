@@ -9,6 +9,7 @@ VAR_GLOBAL
 	bGreenButton				AT %I* : BOOL;
 	bJoystickLeftEnable			AT %I* : BOOL;
 	bJoystickRightEnable		AT %I* : BOOL;
+	bSafetyRelayRestartButton   AT %I* : BOOL;
 	
 	// Analog Inputs
 	stJoyLX 					: ST_AnalogInput;

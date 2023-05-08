@@ -4,18 +4,30 @@
     <Declaration><![CDATA[PROGRAM P_MachineControl
 VAR
 	fbInverse					: FB_Inverse;
-	fbWinchHeight				: FB_WinchHeight;
+	fbForward					: FB_Forward;
+	fbWireLengthOnCrane			: FB_WireLengthOnCraneFunction;
 	fRefPosX					: LREAL := GVL_InverseKinematics.fTooltipXCoordGlobalIni;
 	fRefPosY					: LREAL := GVL_InverseKinematics.fTooltipYCoordGlobalIni;	
-	fRefPosPayload				: LREAL := GVL_WinchHeightControl.fPayloadHeightIni;
+	fRefPosPayload				: LREAL := G_MachineControl.fPayloadHeightIni;
 	fThetaWinchMotorIni			: LREAL;
+	fWireLengthOut				: LREAL;
+	fWinchPitchRadius			: LREAL;
+	fThetaWinch					: LREAL;
 	bStartWave					: BOOL;
 			
+	
+	
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[G_Work.bManualMode := G_Inputs.bManualModeSelector;
+<<<<<<< HEAD
+      <ST><![CDATA[
+G_Work.bManualMode := G_Inputs.bManualModeSelector;
 G_Work.bAutoMode := G_Inputs.bAutoModeSelector;
+=======
+      <ST><![CDATA[G_MachineControl.bManualMode := G_Inputs.bManualModeSelector;
+G_MachineControl.bAutoMode := G_Inputs.bAutoModeSelector;
+>>>>>>> edf6f2e068e7575cdf7fdcbf34452a62e6a1fd5d
 GVL_Safety_AXIS4.ChA_STO_Enable := G_Inputs.bManualModeSelector OR G_Inputs.bAutoModeSelector;
 
 IF G_Inputs.bAutoModeSelector THEN
@@ -29,8 +41,8 @@ bStartWave := NOT G_Inputs.bRedButton; //Red button is inverted, i.e. is active 
 //Wave function used for testing
 IF bStartWave THEN
 	//Clock
-	G_Work.fTimeSinceStart := G_Work.fTimeSinceStart + G_Work.fSampleTime;
-	GVL_InverseKinematics.fTheta1 := 0.012*SIN(2.5*G_Work.fTimeSinceStart);
+	G_MachineControl.fTimeSinceStart := G_MachineControl.fTimeSinceStart + G_MachineControl.fSampleTime;
+	GVL_InverseKinematics.fTheta1 := 0.012*SIN(2.5*G_MachineControl.fTimeSinceStart);
 END_IF
 
 (*
@@ -53,22 +65,50 @@ fbInverse(
 );
 
 IF NOT (G_Inputs.bAutoModeSelector OR G_Inputs.bJoystickRightEnable) THEN
-	fThetaWinchMotorIni := G_Work.fWinchMotorAngle;
+	fThetaWinchMotorIni := G_MachineControl.fWinchMotorAngle;
 END_IF
 
 
-fbWinchHeight(
-	fTheta1 := 0,
-	fStrokeActuatorMain := G_Work.fStrokeActuatorMain/1000,
-	fStrokeActuatorKnuckle := G_Work.fStrokeActuatorKnuckle/1000,
-	thetaWinchMotorIni := fThetaWinchMotorIni*PI/180, //Convert to radians
-	desiredHeightPayload := fRefPosPayload,
-	thetaWinchMotor => G_Work.fPosRefWinch //Radians
+fbForward(
+	fTheta1 := G_StablePlatformParameters.fPlatformAngle,
+	fStrokeActuatorMain := G_MachineControl.fStrokeActuatorMain,
+	fStrokeActuatorKnuckle := G_MachineControl.fStrokeActuatorKnuckle,
+	y => G_MachineControl.fCraneForwardY, 
+	fTheta3 => G_MachineControl.fTheta3Forward,
+	fTheta4 => G_MachineControl.fTheta4Forward,
 );
 
+<<<<<<< HEAD
+IF GVL_Safety_AXIS4.EMGRestart OR G_Inputs.bSafetyRelayRestartButton THEN
+	G_Work.bEMG_Restart := TRUE;
+	G_Outputs.bSafetyRelayReset := TRUE;
+ELSE
+	G_Work.bEMG_Restart := FALSE;
+	G_Outputs.bSafetyRelayReset := FALSE;
+END_IF
+=======
+fbWireLengthOnCrane(
+	fTheta3 := G_MachineControl.fTheta3Forward,
+	fTheta4 := G_MachineControl.fTheta4Forward,
+	wireLengthOnCrane => G_MachineControl.fWireLengthOnCrane,
+);
+	
+fWireLengthOut := G_MachineControl.fWireLengthOnCrane + (G_MachineControl.fCraneForwardY - fRefPosPayload);
+
+IF G_MachineControl.fWinchMotorAngle > G_MachineControl.fEncoderValueLayer2 THEN
+	fWinchPitchRadius := G_MachineControl.fWinchPitchRadiusLayer2;
+ELSE
+	fWinchPitchRadius := G_MachineControl.fWinchPitchRadiusLayer1;
+END_IF
+
+fThetaWinch := (fWireLengthOut / fWinchPitchRadius);
+G_MachineControl.fWinchMotorAngleRef := fThetaWinch*G_MachineControl.fWinchGearRatio + G_MachineControl.fEncoderValuePayload0;
+
+>>>>>>> edf6f2e068e7575cdf7fdcbf34452a62e6a1fd5d
 ]]></ST>
     </Implementation>
     <LineIds Name="P_MachineControl">
+      <LineId Id="325" Count="0" />
       <LineId Id="5" Count="0" />
       <LineId Id="81" Count="0" />
       <LineId Id="313" Count="0" />
@@ -104,10 +144,33 @@ fbWinchHeight(
       <LineId Id="309" Count="1" />
       <LineId Id="295" Count="0" />
       <LineId Id="218" Count="0" />
+<<<<<<< HEAD
       <LineId Id="277" Count="6" />
       <LineId Id="274" Count="0" />
+      <LineId Id="326" Count="0" />
       <LineId Id="296" Count="0" />
+      <LineId Id="327" Count="0" />
+      <LineId Id="329" Count="3" />
+      <LineId Id="328" Count="0" />
+=======
+      <LineId Id="296" Count="0" />
+      <LineId Id="326" Count="4" />
+      <LineId Id="334" Count="1" />
+      <LineId Id="337" Count="0" />
+      <LineId Id="336" Count="0" />
+      <LineId Id="338" Count="3" />
+      <LineId Id="332" Count="0" />
+      <LineId Id="342" Count="0" />
+      <LineId Id="345" Count="0" />
+      <LineId Id="344" Count="0" />
+      <LineId Id="347" Count="0" />
+      <LineId Id="351" Count="1" />
+      <LineId Id="348" Count="0" />
+      <LineId Id="353" Count="0" />
+>>>>>>> edf6f2e068e7575cdf7fdcbf34452a62e6a1fd5d
       <LineId Id="136" Count="0" />
+      <LineId Id="357" Count="1" />
+      <LineId Id="355" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

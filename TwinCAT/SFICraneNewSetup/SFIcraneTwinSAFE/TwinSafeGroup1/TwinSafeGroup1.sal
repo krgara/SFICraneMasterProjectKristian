@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<safetyApplication Crc="2980922716" xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.4.0.0" Id="db6f0c08-c0db-462a-b609-714223bed027" name="" mapState="false" mapDiag="false" groupOrderId="0" passificationAllowed="false" temporaryDeactivationAllowed="false" permamentDeactivationAllowed="false" xmlid="0" analogFBOutputReplacementValues="Zero" verifyAnalogFBInputsIfStart="false" userFbId="00000000-0000-0000-0000-000000000000" xmlns="http://schemas.microsoft.com/dsltools/SafetyApplicationLanguage">
+<safetyApplication Crc="3968541240" xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.4.0.0" Id="db6f0c08-c0db-462a-b609-714223bed027" name="" mapState="false" mapDiag="false" groupOrderId="0" passificationAllowed="false" temporaryDeactivationAllowed="false" permamentDeactivationAllowed="false" xmlid="0" analogFBOutputReplacementValues="Zero" verifyAnalogFBInputsIfStart="false" userFbId="00000000-0000-0000-0000-000000000000" xmlns="http://schemas.microsoft.com/dsltools/SafetyApplicationLanguage">
   <networks>
     <safetyApplicationHasNetworks Id="500a0691-1e49-4772-bee6-26f6c504ee43">
       <Network Id="8f259898-9e3e-4d45-ac43-7dcc9a0e4971" name="Network1" networkName="Network1" intId="1" networkOrderId="0">
@@ -402,8 +402,8 @@
           <variableHasTargetUsages Id="00baba7c-6c02-43b0-b1a7-d97a457d97a5">
             <variableUsages Id="bb8acdd4-b241-476b-8bd6-1fc51fbd5f58">
               <usages>
-                <variableUsagesHasUsages Id="a24d35cf-bec0-493c-b02c-728ec40dd032">
-                  <aliasDeviceIoUsage Id="35602ba3-dde4-4c5e-84ac-2e6d98e97866" sdsId="5" channelId="1" functionId="1879113985" />
+                <variableUsagesHasUsages Id="602f68a8-0b2d-4c1c-9df4-455754f83153">
+                  <aliasDeviceIoUsage Id="0ed6fd67-6fd8-45e8-9616-f31aeb97b406" sdsId="12" channelId="1" functionId="1131179972" />
                 </variableUsagesHasUsages>
               </usages>
             </variableUsages>
@@ -468,6 +468,38 @@
               <usages>
                 <variableUsagesHasUsages Id="3203353b-ff8d-48c6-9350-4141f2f7e76f">
                   <aliasDeviceIoUsage Id="82d819d3-4b3d-435b-8199-5e7b69898a89" sdsId="5" channelId="2" functionId="1879114241" />
+                </variableUsagesHasUsages>
+              </usages>
+            </variableUsages>
+          </variableHasTargetUsages>
+        </targetUsages>
+      </variable>
+    </safetyApplicationHasVariables>
+    <safetyApplicationHasVariables Id="0c7e2ef7-26a4-4917-b480-7b2ec2ad716b">
+      <variable Id="17348558-40dd-4d97-9cbf-42a26872660a" name="SafetyRelayRestart" isLocal="false">
+        <sourceUsages>
+          <variableHasSourceUsages Id="f938609b-c1d8-48ba-9a29-561ab3be398f">
+            <variableUsages Id="44bb6664-ddcb-495f-9224-7f735ee17707">
+              <usages>
+                <variableUsagesHasUsages Id="e470a975-dbaa-421f-85db-0f6d6e376e03">
+                  <fbPortUsage Id="d5ce5235-a31b-485f-839a-25698c902318">
+                    <functionBlockPort>
+                      <fbPortUsageReferencesFunctionBlockPort Id="1d069811-0ba9-4e6d-b637-35283807dad3">
+                        <outPortMoniker name="//Network1/FBEstop1/EStopOut" />
+                      </fbPortUsageReferencesFunctionBlockPort>
+                    </functionBlockPort>
+                  </fbPortUsage>
+                </variableUsagesHasUsages>
+              </usages>
+            </variableUsages>
+          </variableHasSourceUsages>
+        </sourceUsages>
+        <targetUsages>
+          <variableHasTargetUsages Id="68f2fe63-283f-4ffc-bfe7-b7bbd835f586">
+            <variableUsages Id="96cb3a2f-2218-4058-9ec5-607e234e703b">
+              <usages>
+                <variableUsagesHasUsages Id="0b7f098a-bc3c-4eb8-bfd8-f5985c96aaa3">
+                  <aliasDeviceIoUsage Id="763e0dbe-bd1a-4014-b126-29aa40a80419" sdsId="5" channelId="1" functionId="1879113985" />
                 </variableUsagesHasUsages>
               </usages>
             </variableUsages>
