@@ -10,15 +10,15 @@ TCAxis : AXIS_REF;
 //Motion Control Function Block Instant Variable 
 fbTC_Reset				: MC_Reset;
 fbTC_Power				: MC_Power;
-fbTC_Home				: MC_Home;
-fbTC_Jog				: MC_Jog;
+//fbTC_Home				: MC_Home;
+//fbTC_Jog				: MC_Jog;
 fbTC_MoveVelocity		: MC_MoveVelocity;
 fbTC_Stop				: MC_Stop;
 fbTC_MoveAbs			: MC_MoveAbsolute;
 fbTC_ExtSetDis			: MC_ExtSetPointGenDisable;
 fbTC_ExtSetEnab			: MC_ExtSetPointGenEnable;
-fbTC_Rtrig				: R_TRIG;
-fbTC_SetReset			: SR;
+//fbTC_Rtrig				: R_TRIG;
+//fbTC_SetReset			: SR;
 fbTC_ResetSet			: RS;
 
 //Input: Command
@@ -28,13 +28,13 @@ bTC_PowerEnCmd			: BOOL;
 bTC_PowerEnPositive		: BOOL;
 bTC_PowerEnNegative 	: BOOL;
 
-bTC_HomeExe				: BOOL;
-bTC_HomeCamInput		: BOOL;
+//bTC_HomeExe				: BOOL;
+//bTC_HomeCamInput		: BOOL;
 
-bTC_JogFwd				: BOOL;
-bTC_JogRev				: BOOL;	
+//bTC_JogFwd				: BOOL;
+//bTC_JogRev				: BOOL;	
 
-bTC_MoveVelExe			: BOOL;
+//bTC_MoveVelExe			: BOOL;
 	
 bTC_StopExe				: BOOL;
 
@@ -45,32 +45,32 @@ bTC_ExtSetGenEnaExe		: BOOL;
 
 bTC_MoveAbsDone			: BOOL;
 
-fTC_ExtSetFeedDirection	: DINT;
+//fTC_ExtSetFeedDirection	: DINT;
 
-fTC_MoveContAbsExeTrig	: UINT;
+//fTC_MoveContAbsExeTrig	: UINT;
 
 stTC_VelCmd				: ST_MC_CMD := (bExe := FALSE, lrVelocity := 100, EnuDirection := MC_Positive_Direction); 
 //stTC_VelCmd				: ST_MC_CMD := (bExe := FALSE, lrVelocity := 100, lrAcceleration := 0, lrDeceleration := 0, lrJerk := 0, lrDistance := 0, lrPosition := 0, EnuDirection := MC_Positive_Direction, EnuBufferMode := 0, EnuOptions := 0 ); 
 
 //Variables/Parameters
 lrTC_PowerOverride		: LREAL;
-lrTC_HomePosition		: LREAL;
-lrTC_SetPosition		: LREAL;
-lrTC_JogVelocity		: LREAL;
-lrTC_MoveVelVelocity	: LREAL;
+//lrTC_HomePosition		: LREAL;
+//lrTC_SetPosition		: LREAL;
+//lrTC_JogVelocity		: LREAL;
+//lrTC_MoveVelVelocity	: LREAL;
 lrTC_MoveAbsPosition	: LREAL;
 lrTC_MoveAbsVelocity	: LREAL;
 lrTC_MoveAddPos			: LREAL;
 
 //Direction
-EnuMoveVelDirection		: MC_Direction;
+//EnuMoveVelDirection		: MC_Direction;
 
 // Status
 stTC_Reset				: ST_MC_Status;
 stTC_Power				: ST_MC_Status;
-stTC_Home				: ST_MC_Status;
-stTC_SetPosition		: ST_MC_Status;
-stTC_Jog				: ST_MC_Status;
+//stTC_Home				: ST_MC_Status;
+//stTC_SetPosition		: ST_MC_Status;
+//stTC_Jog				: ST_MC_Status;
 stTC_MoveVelocity		: ST_MC_Status;
 stTC_Stop				: ST_MC_Status;
 stTC_MoveAbs			: ST_MC_Status;

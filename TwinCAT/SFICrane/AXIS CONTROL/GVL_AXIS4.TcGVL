@@ -10,15 +10,15 @@ WMAxis : AXIS_REF;
 //Motion Control Function Block Instant Variable 
 fbWM_Reset				: MC_Reset;
 fbWM_Power				: MC_Power;
-fbWM_Home				: MC_Home;
-fbWM_Jog				: MC_Jog;
+//fbWM_Home				: MC_Home;
+//fbWM_Jog				: MC_Jog;
 fbWM_MoveVelocity		: MC_MoveVelocity;
 fbWM_Stop				: MC_Stop;
 fbWM_MoveAbs			: MC_MoveAbsolute;
 fbWM_ExtSetDis			: MC_ExtSetPointGenDisable;
 fbWM_ExtSetEnab			: MC_ExtSetPointGenEnable;
-fbWM_Rtrig				: R_TRIG;
-fbWM_SetReset			: SR;
+//fbWM_Rtrig				: R_TRIG;
+//fbWM_SetReset			: SR;
 fbWM_ResetSet			: RS;
 
 //Input: Command
@@ -28,13 +28,13 @@ bWM_PowerEnCmd			: BOOL;
 bWM_PowerEnPositive		: BOOL;
 bWM_PowerEnNegative 	: BOOL;
 
-bWM_HomeExe				: BOOL;
-bWM_HomeCamInput		: BOOL;
+//bWM_HomeExe				: BOOL;
+//bWM_HomeCamInput		: BOOL;
 
-bWM_JogFwd				: BOOL;
-bWM_JogRev				: BOOL;	
+//bWM_JogFwd				: BOOL;
+//bWM_JogRev				: BOOL;	
 
-bWM_MoveVelExe			: BOOL;
+//bWM_MoveVelExe			: BOOL;
 	
 bWM_StopExe				: BOOL;
 
@@ -45,22 +45,23 @@ bWM_ExtSetGenEnaExe		: BOOL;
 
 bWM_MoveAbsDone			: BOOL;
 
-fWM_ExtSetFeedDirection	: DINT;
+//fWM_ExtSetFeedDirection	: DINT;
 
-fWM_MoveContAbsExeTrig	: UINT;
+//fWM_MoveContAbsExeTrig	: UINT;
 
 stWM_VelCmd				: ST_MC_CMD := (bExe := FALSE, lrVelocity := 100, EnuDirection := MC_Positive_Direction); 
 //stWM_VelCmd				: ST_MC_CMD := (bExe := FALSE, lrVelocity := 100, lrAcceleration := 0, lrDeceleration := 0, lrJerk := 0, lrDistance := 0, lrPosition := 0, EnuDirection := MC_Positive_Direction, EnuBufferMode := 0, EnuOptions := 0 ); 
 
 //Variables/Parameters
 lrWM_PowerOverride		: LREAL;
-lrWM_HomePosition		: LREAL;
-lrWM_SetPosition		: LREAL;
-lrWM_JogVelocity		: LREAL;
-lrWM_MoveVelVelocity	: LREAL;
+//lrWM_HomePosition		: LREAL;
+//lrWM_SetPosition		: LREAL;
+//lrWM_JogVelocity		: LREAL;
+//lrWM_MoveVelVelocity	: LREAL;
 lrWM_MoveAbsPosition	: LREAL;
 lrWM_MoveAbsVelocity	: LREAL;
 lrWM_MoveAddPos			: LREAL;
+lrWM_MoveSetPointVel	: LREAL;
 
 //Direction
 EnuMoveVelDirection		: MC_Direction;
@@ -68,9 +69,9 @@ EnuMoveVelDirection		: MC_Direction;
 // Status
 stWM_Reset				: ST_MC_Status;
 stWM_Power				: ST_MC_Status;
-stWM_Home				: ST_MC_Status;
-stWM_SetPosition		: ST_MC_Status;
-stWM_Jog				: ST_MC_Status;
+//stWM_Home				: ST_MC_Status;
+//stWM_SetPosition		: ST_MC_Status;
+//stWM_Jog				: ST_MC_Status;
 stWM_MoveVelocity		: ST_MC_Status;
 stWM_Stop				: ST_MC_Status;
 stWM_MoveAbs			: ST_MC_Status;

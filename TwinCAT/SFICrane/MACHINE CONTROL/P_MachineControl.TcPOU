@@ -87,7 +87,7 @@ ELSE
 END_IF
 
 fThetaWinch := (fWireLengthOut / fWinchPitchRadius);
-G_MachineControl.fWinchMotorAngleRef := fThetaWinch*G_MachineControl.fWinchGearRatio + G_MachineControl.fEncoderValuePayload0;
+G_MachineControl.fWinchMotorAngleRef := fThetaWinch*G_MachineControl.fWinchGearRatio - G_MachineControl.fEncoderValuePayload0;
 
 ]]></ST>
     </Implementation>

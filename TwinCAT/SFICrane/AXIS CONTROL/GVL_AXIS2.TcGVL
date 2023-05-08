@@ -10,11 +10,11 @@ SJAxis : AXIS_REF;
 //Motion Control Function Block Instant Variable 
 fbSJ_Reset				: MC_Reset;
 fbSJ_Power				: MC_Power;
-fbSJ_Home				: MC_Home;
-fbSJ_Jog				: MC_Jog;
+//fbSJ_Home				: MC_Home;
+//fbSJ_Jog				: MC_Jog;
 fbSJ_MoveVelocity		: MC_MoveVelocity;
 fbSJ_Stop				: MC_Stop;
-fbSJ_MoveAbs			: MC_MoveAbsolute;
+//fbSJ_MoveAbs			: MC_MoveAbsolute;
 
 //Input: Command
 bSJ_ResetExe			: BOOL;
@@ -23,41 +23,41 @@ bSJ_PowerEnCmd			: BOOL;
 bSJ_PowerEnPositive		: BOOL;
 bSJ_PowerEnNegative 	: BOOL;
 
-bSJ_HomeExe				: BOOL;
-bSJ_HomeCamInput		: BOOL;
+//bSJ_HomeExe				: BOOL;
+//bSJ_HomeCamInput		: BOOL;
 
-bSJ_JogFwd				: BOOL;
-bSJ_JogRev				: BOOL;	
+//bSJ_JogFwd				: BOOL;
+//bSJ_JogRev				: BOOL;	
 
-bSJ_MoveVelExe			: BOOL;
+//bSJ_MoveVelExe			: BOOL;
 	
 bSJ_StopExe				: BOOL;
 
-bSJ_MoveAbsExe			: BOOL;
+//bSJ_MoveAbsExe			: BOOL;
 
 stSJ_VelCmd				: ST_MC_CMD := (bExe := FALSE, lrVelocity := 500, EnuDirection := MC_Positive_Direction); 
 //stSJ_VelCmd				: ST_MC_CMD := (bExe := FALSE, lrVelocity := 100, lrAcceleration := 0, lrDeceleration := 0, lrJerk := 0, lrDistance := 0, lrPosition := 0, EnuDirection := MC_Positive_Direction, EnuBufferMode := 0, EnuOptions := 0 ); 
 
 //Variables/Parameters
 lrSJ_PowerOverride		: LREAL;
-lrSJ_HomePosition		: LREAL;
-lrSJ_SetPosition		: LREAL;
-lrSJ_JogVelocity		: LREAL;
-lrSJ_MoveVelVelocity	: LREAL;
-lrSJ_MoveAbsPosition	: LREAL;
+//lrSJ_HomePosition		: LREAL;
+//lrSJ_SetPosition		: LREAL;
+//lrSJ_JogVelocity		: LREAL;
+//lrSJ_MoveVelVelocity	: LREAL;
+//lrSJ_MoveAbsPosition	: LREAL;
 
 //Direction
-EnuMoveVelDirection		: MC_Direction;
+//EnuMoveVelDirection		: MC_Direction;
 
 // Status
 stSJ_Reset				: ST_MC_Status;
 stSJ_Power				: ST_MC_Status;
-stSJ_Home				: ST_MC_Status;
-stSJ_SetPosition		: ST_MC_Status;
-stSJ_Jog				: ST_MC_Status;
+//stSJ_Home				: ST_MC_Status;
+//stSJ_SetPosition		: ST_MC_Status;
+//stSJ_Jog				: ST_MC_Status;
 stSJ_MoveVelocity		: ST_MC_Status;
 stSJ_Stop				: ST_MC_Status;
-stSJ_MoveAbs			: ST_MC_Status;
+//stSJ_MoveAbs			: ST_MC_Status;
 
 END_VAR]]></Declaration>
   </GVL>

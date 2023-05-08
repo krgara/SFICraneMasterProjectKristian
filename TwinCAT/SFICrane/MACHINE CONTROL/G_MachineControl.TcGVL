@@ -3,43 +3,42 @@
   <GVL Name="G_MachineControl" Id="{81b36d32-4934-4a29-831b-336ae7ff3ebd}">
     <Declaration><![CDATA[{attribute 'qualified_only'}
 VAR_GLOBAL
+	//Mode selector booleans
 	bManualMode 			: BOOL;
 	bAutoMode 				: BOOL;
-	bWinchEnable 			: BOOL;
-	bCylEnable 				: BOOL;
-	fWinchControlInput 		: LREAL;
-	fWinchTime				: LREAL;
-	fCylControlInput 		: LREAL;
-	fCylTime				: LREAL;
-	fVelRefWinch 			: LREAL;
-	fPosRefWinch 			: LREAL;
-	fControlSignWinch		: LREAL;
-	fVelRefCyl 				: LREAL;
-	fPosRefCyl 				: LREAL;
-	fControlSignCyl			: LREAL;
-	fPositionErrorWinch_mm 	: LREAL;
-	fPositionErrorCylinder_mm : LREAL;
+	
+	//Time variables
 	fSampleTime				: LREAL := 0.002;
 	fTimeSinceStart			: LREAL := 0.0;
+	
+	//Actuator position data
 	fStrokeActuatorMain 	AT %I* : LREAL;
 	fStrokeActuatorKnuckle 	AT %I* : LREAL;
 	fSlewMotorAngle			AT %I* : LREAL;
 	fWinchMotorAngle		AT %I* : LREAL;	
 	fWinchAngle				: LREAL;
 	
+	//Positions from forward kinematics
 	fCraneForwardY 			: LREAL;
 	fTheta3Forward			: LREAL;
 	fTheta4Forward			: LREAL;
+	
+	//Working parameters crane
 	fWireLengthOnCrane		: LREAL;
-	fEncoderValue0Turns		: LREAL := 0.0;
-	fEncoderValue5Turns		: LREAL := 0.0;
-	fEncoderValueLayer2		: LREAL := 0.0;
-	fEncoderValuePayload0	: LREAL := 0.0;
-	fPayloadHeightIni		: LREAL := 1.0;
+	fPayloadHeightIni		: LREAL := 0.0;
 	fWinchPitchRadiusLayer1 : LREAL := 0.0716;
 	fWinchPitchRadiusLayer2 : LREAL := 0.0731;
 	fWinchGearRatio 		: LREAL := 32;
-	fWinchMotorAngleRef			: LREAL;
+	fWinchMotorAngleRef		: LREAL;
+	
+	//Encoder values 
+	fEncoderValue0Turns		: LREAL := 0.0;
+	fEncoderValue5Turns		: LREAL := 0.0;
+	fEncoderValueLayer2		: LREAL := 0.0;
+	fEncoderValuePayload0	: LREAL := 2100.0;
+	
+	
+
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>
