@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <GVL Name="G_AXIS2" Id="{f89a4fca-8647-4119-a196-16bbc2cd39f4}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL
+
+//Axis2 Slew Joint 'SJ'
+SJAxis : AXIS_REF;
+
+//Motion Control Function Block Instant Variable 
+fbSJ_Reset				: MC_Reset;
+fbSJ_Power				: MC_Power;
+fbSJ_MoveVelocity		: MC_MoveVelocity;
+fbSJ_Stop				: MC_Stop;
+
+//Input: Command
+bSJ_ResetExe			: BOOL;
+bSJ_PowerEnCmd			: BOOL;
+bSJ_PowerEnPositive		: BOOL;
+bSJ_PowerEnNegative 	: BOOL;
+bSJ_StopExe				: BOOL;
+
+//Velocity commands structure
+stSJ_VelCmd				: ST_MC_CMD := (bExe := FALSE, lrVelocity := 500, EnuDirection := MC_Positive_Direction); 
+
+//Variables/Parameters
+lrSJ_PowerOverride		: LREAL;
+
+// Status
+stSJ_Reset				: ST_MC_Status;
+stSJ_Power				: ST_MC_Status;
+stSJ_MoveVelocity		: ST_MC_Status;
+stSJ_Stop				: ST_MC_Status;
+
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

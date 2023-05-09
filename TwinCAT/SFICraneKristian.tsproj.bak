@@ -2312,30 +2312,81 @@ External Setpoint Generation:
 		</Motion>
 		<Plc>
 			<Project GUID="{64FB78BA-5775-4793-83DB-E4463DEFB246}" Name="SFICrane" PrjFilePath="SFICrane\SFICrane.plcproj" TmcFilePath="SFICrane\SFICrane.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="SFICrane\SFICrane.tmc" TmcHash="{AECD5734-6C6C-96FC-130E-4343BAB8A4A6}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="SFICrane\SFICrane.tmc" TmcHash="{6B8665B9-EEB1-3C65-5C40-064636DFE726}">
 					<Name>SFICrane Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
 						<Name>PlcTask Inputs</Name>
 						<Var>
-							<Name>GVL_AXIS4.WMAxis.NcToPlc</Name>
-							<Type GUID="{25521FAA-EA5F-4C7F-8864-BBCCDACD2E98}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
-						</Var>
-						<Var>
-							<Name>GVL_Safety_AXIS4.ChA_STO_Active</Name>
+							<Name>G_StablePlatformIO.bModeSwitchOff</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>GVL_AXIS1.BCAxis.NcToPlc</Name>
+							<Name>G_MachineControl.fStrokeActuatorMain</Name>
+							<Comment><![CDATA[Actuator position data]]></Comment>
+							<Type>LREAL</Type>
+						</Var>
+						<Var>
+							<Name>G_MachineControl.fStrokeActuatorKnuckle</Name>
+							<Type>LREAL</Type>
+						</Var>
+						<Var>
+							<Name>G_MachineControl.fSlewMotorAngle</Name>
+							<Type>LREAL</Type>
+						</Var>
+						<Var>
+							<Name>G_MachineControl.fWinchMotorAngle</Name>
+							<Type>LREAL</Type>
+						</Var>
+						<Var>
+							<Name>G_StablePlatformIO.npA</Name>
+							<Comment><![CDATA[fJoyLeftX AT %I* : INT; 
+bJoyLeftPushButton AT %I* : BOOL; ]]></Comment>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>G_StablePlatformIO.npB</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>G_StablePlatformIO.npS</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>G_StablePlatformIO.nSVFeedback</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>G_StablePlatformIO.nPistonPosition</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>G_StablePlatformIO.nPistonVelocity</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>G_StablePlatformIO.bEMG_OK</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>G_AXIS1.BCAxis.NcToPlc</Name>
 							<Type GUID="{25521FAA-EA5F-4C7F-8864-BBCCDACD2E98}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 						</Var>
 						<Var>
-							<Name>GVL_AXIS2.SJAxis.NcToPlc</Name>
+							<Name>G_AXIS2.SJAxis.NcToPlc</Name>
 							<Type GUID="{25521FAA-EA5F-4C7F-8864-BBCCDACD2E98}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 						</Var>
 						<Var>
-							<Name>GVL_AXIS3.TCAxis.NcToPlc</Name>
+							<Name>G_AXIS3.TCAxis.NcToPlc</Name>
 							<Type GUID="{25521FAA-EA5F-4C7F-8864-BBCCDACD2E98}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+						</Var>
+						<Var>
+							<Name>G_AXIS4.WMAxis.NcToPlc</Name>
+							<Type GUID="{25521FAA-EA5F-4C7F-8864-BBCCDACD2E98}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+						</Var>
+						<Var>
+							<Name>G_Safety_AXIS4.ChA_STO_Active</Name>
+							<Type>BOOL</Type>
 						</Var>
 						<Var>
 							<Name>G_Inputs.bManualModeSelector</Name>
@@ -2397,95 +2448,9 @@ External Setpoint Generation:
 							<Name>G_Inputs.stJoyRY.nValue</Name>
 							<Type>INT</Type>
 						</Var>
-						<Var>
-							<Name>G_StablePlatformIO.npA</Name>
-							<Comment><![CDATA[fJoyLeftX AT %I* : INT; 
-bJoyLeftPushButton AT %I* : BOOL; ]]></Comment>
-							<Type>INT</Type>
-						</Var>
-						<Var>
-							<Name>G_StablePlatformIO.npB</Name>
-							<Type>INT</Type>
-						</Var>
-						<Var>
-							<Name>G_StablePlatformIO.npS</Name>
-							<Type>INT</Type>
-						</Var>
-						<Var>
-							<Name>G_StablePlatformIO.nSVFeedback</Name>
-							<Type>INT</Type>
-						</Var>
-						<Var>
-							<Name>G_StablePlatformIO.bModeSwitchOff</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>G_StablePlatformIO.bEMG_OK</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>G_StablePlatformIO.nPistonPosition</Name>
-							<Type>INT</Type>
-						</Var>
-						<Var>
-							<Name>G_StablePlatformIO.nPistonVelocity</Name>
-							<Type>INT</Type>
-						</Var>
-						<Var>
-							<Name>G_MachineControl.fStrokeActuatorMain</Name>
-							<Type>LREAL</Type>
-						</Var>
-						<Var>
-							<Name>G_MachineControl.fStrokeActuatorKnuckle</Name>
-							<Type>LREAL</Type>
-						</Var>
-						<Var>
-							<Name>G_MachineControl.fSlewMotorAngle</Name>
-							<Type>LREAL</Type>
-						</Var>
-						<Var>
-							<Name>G_MachineControl.fWinchMotorAngle</Name>
-							<Type>LREAL</Type>
-						</Var>
 					</Vars>
 					<Vars VarGrpType="2" AreaNo="1">
 						<Name>PlcTask Outputs</Name>
-						<Var>
-							<Name>GVL_AXIS4.WMAxis.PlcToNc</Name>
-							<Type GUID="{96B75FEB-2D84-43BE-A3EC-D9A681F27D52}" Namespace="MC">PLCTONC_AXIS_REF</Type>
-						</Var>
-						<Var>
-							<Name>GVL_Safety_AXIS4.bWinchMotor24vDisable</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>GVL_Safety_AXIS4.TwinSafeGroupComErrAck</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>GVL_Safety_AXIS4.TwinSafeGroupRunStop</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>GVL_Safety_AXIS4.ChA_STO_Enable</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>GVL_Safety_AXIS4.EMGRestart</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>GVL_AXIS1.BCAxis.PlcToNc</Name>
-							<Type GUID="{96B75FEB-2D84-43BE-A3EC-D9A681F27D52}" Namespace="MC">PLCTONC_AXIS_REF</Type>
-						</Var>
-						<Var>
-							<Name>GVL_AXIS2.SJAxis.PlcToNc</Name>
-							<Type GUID="{96B75FEB-2D84-43BE-A3EC-D9A681F27D52}" Namespace="MC">PLCTONC_AXIS_REF</Type>
-						</Var>
-						<Var>
-							<Name>GVL_AXIS3.TCAxis.PlcToNc</Name>
-							<Type GUID="{96B75FEB-2D84-43BE-A3EC-D9A681F27D52}" Namespace="MC">PLCTONC_AXIS_REF</Type>
-						</Var>
 						<Var>
 							<Name>G_Outputs.bGreenButtonLight</Name>
 							<Comment><![CDATA[ PLC Rack
@@ -2511,6 +2476,42 @@ stCylValveOutput 			: ST_ValveOutput;]]></Comment>
 						<Var>
 							<Name>G_StablePlatformIO.nSVControlSignal</Name>
 							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>G_AXIS1.BCAxis.PlcToNc</Name>
+							<Type GUID="{96B75FEB-2D84-43BE-A3EC-D9A681F27D52}" Namespace="MC">PLCTONC_AXIS_REF</Type>
+						</Var>
+						<Var>
+							<Name>G_AXIS2.SJAxis.PlcToNc</Name>
+							<Type GUID="{96B75FEB-2D84-43BE-A3EC-D9A681F27D52}" Namespace="MC">PLCTONC_AXIS_REF</Type>
+						</Var>
+						<Var>
+							<Name>G_AXIS3.TCAxis.PlcToNc</Name>
+							<Type GUID="{96B75FEB-2D84-43BE-A3EC-D9A681F27D52}" Namespace="MC">PLCTONC_AXIS_REF</Type>
+						</Var>
+						<Var>
+							<Name>G_AXIS4.WMAxis.PlcToNc</Name>
+							<Type GUID="{96B75FEB-2D84-43BE-A3EC-D9A681F27D52}" Namespace="MC">PLCTONC_AXIS_REF</Type>
+						</Var>
+						<Var>
+							<Name>G_Safety_AXIS4.bWinchMotor24vDisable</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>G_Safety_AXIS4.TwinSafeGroupComErrAck</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>G_Safety_AXIS4.TwinSafeGroupRunStop</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>G_Safety_AXIS4.ChA_STO_Enable</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>G_Safety_AXIS4.EMGRestart</Name>
+							<Type>BOOL</Type>
 						</Var>
 					</Vars>
 					<UnrestoredVarLinks ImportTime="2023-04-28T11:48:01">
@@ -5596,14 +5597,14 @@ Bit1: Value bigger/equal Limit2]]></Comment>
 				<Link VarA="PlcTask Outputs^G_StablePlatformIO.bSVEnable" VarB="Channel 14^Output"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 18 (EK1200)^Term 20 (EL6910)">
-				<Link VarA="PlcTask Inputs^GVL_Safety_AXIS4.ChA_STO_Active" VarB="StandardInputs^Standard Out Var 10"/>
+				<Link VarA="PlcTask Inputs^G_Safety_AXIS4.ChA_STO_Active" VarB="StandardInputs^Standard Out Var 10"/>
 				<Link VarA="PlcTask Inputs^G_StablePlatformIO.bEMG_OK" VarB="StandardInputs^Standard Out Var 12"/>
-				<Link VarA="PlcTask Outputs^GVL_Safety_AXIS4.EMGRestart" VarB="StandardOutputs^Standard In Var 8"/>
-				<Link VarA="PlcTask Outputs^GVL_Safety_AXIS4.TwinSafeGroupComErrAck" VarB="StandardOutputs^Standard In Var 1"/>
-				<Link VarA="PlcTask Outputs^GVL_Safety_AXIS4.TwinSafeGroupRunStop" VarB="StandardOutputs^Standard In Var 2"/>
+				<Link VarA="PlcTask Outputs^G_Safety_AXIS4.EMGRestart" VarB="StandardOutputs^Standard In Var 8"/>
+				<Link VarA="PlcTask Outputs^G_Safety_AXIS4.TwinSafeGroupComErrAck" VarB="StandardOutputs^Standard In Var 1"/>
+				<Link VarA="PlcTask Outputs^G_Safety_AXIS4.TwinSafeGroupRunStop" VarB="StandardOutputs^Standard In Var 2"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 18 (EK1200)^Term 25 (EL2008-0015)">
-				<Link VarA="PlcTask Outputs^GVL_Safety_AXIS4.bWinchMotor24vDisable" VarB="Channel 1^Output"/>
+				<Link VarA="PlcTask Outputs^G_Safety_AXIS4.bWinchMotor24vDisable" VarB="Channel 1^Output"/>
 			</OwnerB>
 			<OwnerB Name="TIID^Device 1 (EtherCAT)^Term 27 (EK1818)">
 				<Link VarA="PlcTask Inputs^G_Inputs.bAutoModeSelector" VarB="Channel 4^Input"/>
@@ -5631,24 +5632,24 @@ Bit1: Value bigger/equal Limit2]]></Comment>
 				<Link VarA="PlcTask Outputs^G_Outputs.bSafetyRelayReset" VarB="Module 2 (DIO)^DIO Outputs^Output 0"/>
 			</OwnerB>
 			<OwnerB Name="TINC^NC-Task 1 SAF^Axes^Axis 1 - Main boom Cylinder">
-				<Link VarA="PlcTask Inputs^GVL_AXIS1.BCAxis.NcToPlc" VarB="Outputs^ToPlc"/>
+				<Link VarA="PlcTask Inputs^G_AXIS1.BCAxis.NcToPlc" VarB="Outputs^ToPlc"/>
 				<Link VarA="PlcTask Inputs^G_MachineControl.fStrokeActuatorMain" VarB="Outputs^ToPlc^ActPos"/>
-				<Link VarA="PlcTask Outputs^GVL_AXIS1.BCAxis.PlcToNc" VarB="Inputs^FromPlc"/>
+				<Link VarA="PlcTask Outputs^G_AXIS1.BCAxis.PlcToNc" VarB="Inputs^FromPlc"/>
 			</OwnerB>
 			<OwnerB Name="TINC^NC-Task 1 SAF^Axes^Axis 2 - Slew Motor">
-				<Link VarA="PlcTask Inputs^GVL_AXIS2.SJAxis.NcToPlc" VarB="Outputs^ToPlc"/>
+				<Link VarA="PlcTask Inputs^G_AXIS2.SJAxis.NcToPlc" VarB="Outputs^ToPlc"/>
 				<Link VarA="PlcTask Inputs^G_MachineControl.fSlewMotorAngle" VarB="Outputs^ToPlc^ActPos"/>
-				<Link VarA="PlcTask Outputs^GVL_AXIS2.SJAxis.PlcToNc" VarB="Inputs^FromPlc"/>
+				<Link VarA="PlcTask Outputs^G_AXIS2.SJAxis.PlcToNc" VarB="Inputs^FromPlc"/>
 			</OwnerB>
 			<OwnerB Name="TINC^NC-Task 1 SAF^Axes^Axis 3 - Knuckle boom Cylinder">
-				<Link VarA="PlcTask Inputs^GVL_AXIS3.TCAxis.NcToPlc" VarB="Outputs^ToPlc"/>
+				<Link VarA="PlcTask Inputs^G_AXIS3.TCAxis.NcToPlc" VarB="Outputs^ToPlc"/>
 				<Link VarA="PlcTask Inputs^G_MachineControl.fStrokeActuatorKnuckle" VarB="Outputs^ToPlc^ActPos"/>
-				<Link VarA="PlcTask Outputs^GVL_AXIS3.TCAxis.PlcToNc" VarB="Inputs^FromPlc"/>
+				<Link VarA="PlcTask Outputs^G_AXIS3.TCAxis.PlcToNc" VarB="Inputs^FromPlc"/>
 			</OwnerB>
 			<OwnerB Name="TINC^NC-Task 1 SAF^Axes^Axis 4 - Winch Motor">
-				<Link VarA="PlcTask Inputs^GVL_AXIS4.WMAxis.NcToPlc" VarB="Outputs^ToPlc"/>
+				<Link VarA="PlcTask Inputs^G_AXIS4.WMAxis.NcToPlc" VarB="Outputs^ToPlc"/>
 				<Link VarA="PlcTask Inputs^G_MachineControl.fWinchMotorAngle" VarB="Outputs^ToPlc^ActPos"/>
-				<Link VarA="PlcTask Outputs^GVL_AXIS4.WMAxis.PlcToNc" VarB="Inputs^FromPlc"/>
+				<Link VarA="PlcTask Outputs^G_AXIS4.WMAxis.PlcToNc" VarB="Inputs^FromPlc"/>
 			</OwnerB>
 		</OwnerA>
 	</Mappings>

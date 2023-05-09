@@ -489,7 +489,7 @@
                             </o>
                             <o>
                               <v n="Id">743958181L</v>
-                              <v n="Value">"GVL_Safety_AXIS4.TwinSafeGroupRunStop"</v>
+                              <v n="Value">"G_Safety_AXIS4.TwinSafeGroupRunStop"</v>
                             </o>
                           </l>
                         </o>
@@ -587,7 +587,7 @@
                             </o>
                             <o>
                               <v n="Id">743958181L</v>
-                              <v n="Value">"GVL_Safety_AXIS4.TwinSafeGroupComErrAck"</v>
+                              <v n="Value">"G_Safety_AXIS4.TwinSafeGroupComErrAck"</v>
                             </o>
                             <o>
                               <v n="Id">2597686782L</v>
@@ -862,7 +862,7 @@
                         </o>
                         <o>
                           <v n="Id">743958181L</v>
-                          <v n="Value">"GVL_Safety_AXIS4.ChA_STO_Active"</v>
+                          <v n="Value">"G_Safety_AXIS4.ChA_STO_Active"</v>
                         </o>
                       </l>
                     </o>
@@ -1057,7 +1057,7 @@
                             </o>
                             <o>
                               <v n="Id">743958181L</v>
-                              <v n="Value">"GVL_Safety_AXIS4.ChA_STO_Active"</v>
+                              <v n="Value">"G_Safety_AXIS4.ChA_STO_Active"</v>
                             </o>
                             <o>
                               <v n="Id">2597686782L</v>
@@ -1163,7 +1163,7 @@
                             </o>
                             <o>
                               <v n="Id">743958181L</v>
-                              <v n="Value">"GVL_Safety_AXIS4.bWinchMotor24vDisable"</v>
+                              <v n="Value">"G_Safety_AXIS4.bWinchMotor24vDisable"</v>
                             </o>
                           </l>
                         </o>
@@ -2378,7 +2378,7 @@
                         </o>
                         <o>
                           <v n="Id">743958181L</v>
-                          <v n="Value">"GVL_Safety_AXIS4.EMGRestart"</v>
+                          <v n="Value">"G_Safety_AXIS4.EMGRestart"</v>
                         </o>
                         <o>
                           <v n="Id">2597686782L</v>

@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <GVL Name="G_AXIS4" Id="{8782cd13-a394-42dd-a95e-adf285bdbf46}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL
+
+//Axis4 Winch Motor 'WM'
+WMAxis : AXIS_REF;
+
+//Motion Control Function Block Instant Variable 
+fbWM_Reset				: MC_Reset;
+fbWM_Power				: MC_Power;
+fbWM_MoveVelocity		: MC_MoveVelocity;
+fbWM_Stop				: MC_Stop;
+fbWM_MoveAbs			: MC_MoveAbsolute;
+fbWM_ExtSetDis			: MC_ExtSetPointGenDisable;
+fbWM_ExtSetEnab			: MC_ExtSetPointGenEnable;
+fbWM_ResetSet			: RS;
+
+//Input: Command
+bWM_ResetExe			: BOOL;
+bWM_PowerEnCmd			: BOOL;
+bWM_PowerEnPositive		: BOOL;
+bWM_PowerEnNegative 	: BOOL;
+bWM_StopExe				: BOOL;
+bWM_MoveAbsExe			: BOOL;
+bWM_ExtSetGenDisExe		: BOOL;
+bWM_ExtSetGenEnaExe		: BOOL;
+bWM_MoveAbsDone			: BOOL;
+
+//Velocity commands structure
+stWM_VelCmd				: ST_MC_CMD := (bExe := FALSE, lrVelocity := 100, EnuDirection := MC_Positive_Direction); 
+
+//Variables/Parameters
+lrWM_PowerOverride		: LREAL;
+lrWM_MoveAbsPosition	: LREAL;
+lrWM_MoveAbsVelocity	: LREAL;
+lrWM_MoveAddPos			: LREAL;
+lrWM_MoveSetPointVel	: LREAL;
+
+//Direction
+EnuMoveVelDirection		: MC_Direction;
+
+// Status
+stWM_Reset				: ST_MC_Status;
+stWM_Power				: ST_MC_Status;
+stWM_MoveVelocity		: ST_MC_Status;
+stWM_Stop				: ST_MC_Status;
+stWM_MoveAbs			: ST_MC_Status;
+stWM_ExtSetDis			: ST_MC_Status;
+stWM_ExtSetEnab			: ST_MC_Status;
+stWM_ExtSetFeed			: ST_MC_Status;
+
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

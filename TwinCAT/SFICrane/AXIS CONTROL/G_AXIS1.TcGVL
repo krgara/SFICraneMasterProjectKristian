@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <GVL Name="G_AXIS1" Id="{c9e74500-d705-445d-8959-f6dadce0bc8a}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL
+
+//Axis1 Bottom Cylinder 'BC'
+BCAxis : AXIS_REF;
+
+//Motion Control Function Block Instant Variable 
+fbBC_Reset				: MC_Reset;
+fbBC_Power				: MC_Power;
+fbBC_MoveVelocity		: MC_MoveVelocity;
+fbBC_MoveAbs			: MC_MoveAbsolute;
+fbBC_ExtSetDis			: MC_ExtSetPointGenDisable;
+fbBC_ExtSetEnab			: MC_ExtSetPointGenEnable;
+fbBC_ResetSet			: RS;
+
+//Input: Command
+bBC_ResetExe			: BOOL;
+bBC_PowerEnCmd			: BOOL;
+bBC_PowerEnPositive		: BOOL;
+bBC_PowerEnNegative 	: BOOL;
+bBC_StopExe				: BOOL;
+bBC_MoveAbsExe			: BOOL;
+bBC_ExtSetGenDisExe		: BOOL;
+bBC_ExtSetGenEnaExe		: BOOL;
+bBC_MoveAbsDone			: BOOL;
+
+//Velocity commands structure
+stBC_VelCmd				: ST_MC_CMD := (bExe := FALSE, lrVelocity := 100);//, EnuDirection := MC_Positive_Direction); 
+
+//Variables/Parameters
+lrBC_PowerOverride		: LREAL;
+lrBC_MoveAbsPosition	: LREAL;
+lrBC_MoveAbsVelocity	: LREAL;
+lrBC_MoveAddPos			: LREAL;
+
+// Status
+stBC_Reset				: ST_MC_Status;
+stBC_Power				: ST_MC_Status;
+stBC_MoveVelocity		: ST_MC_Status;
+stBC_MoveAbs			: ST_MC_Status;
+stBC_ExtSetDis			: ST_MC_Status;
+stBC_ExtSetEnab			: ST_MC_Status;
+stBC_ExtSetFeed			: ST_MC_Status;
+
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

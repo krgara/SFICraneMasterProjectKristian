@@ -17,23 +17,23 @@
     <LibraryReferences>{6d69b91d-aee0-44e7-b316-e6a190a3a681}</LibraryReferences>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="AXIS CONTROL\GVL_AXIS1.TcGVL">
+    <Compile Include="AXIS CONTROL\G_AXIS1.TcGVL">
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
     </Compile>
-    <Compile Include="AXIS CONTROL\GVL_AXIS2.TcGVL">
+    <Compile Include="AXIS CONTROL\G_AXIS2.TcGVL">
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
     </Compile>
-    <Compile Include="AXIS CONTROL\GVL_AXIS3.TcGVL">
+    <Compile Include="AXIS CONTROL\G_AXIS3.TcGVL">
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
     </Compile>
-    <Compile Include="AXIS CONTROL\GVL_AXIS4.TcGVL">
+    <Compile Include="AXIS CONTROL\G_AXIS4.TcGVL">
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
     </Compile>
-    <Compile Include="AXIS CONTROL\GVL_Safety_AXIS4.TcGVL">
+    <Compile Include="AXIS CONTROL\G_Safety_AXIS4.TcGVL">
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
     </Compile>
@@ -62,15 +62,15 @@
     <Compile Include="INPUTS\Function Blocks\FB_JoystickInputScaling.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="INPUTS\G_Inputs.TcGVL">
+    <Compile Include="INPUTS\GVL\G_Inputs.TcGVL">
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
     </Compile>
-    <Compile Include="INPUTS\G_ScalingParameters.TcGVL">
+    <Compile Include="INPUTS\GVL\G_ScalingParameters.TcGVL">
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
     </Compile>
-    <Compile Include="INPUTS\G_Sensors.TcGVL">
+    <Compile Include="INPUTS\GVL\G_Sensors.TcGVL">
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
     </Compile>
@@ -108,7 +108,7 @@
     <Compile Include="MACHINE CONTROL\KinematicFunctions2d\FB_WireLengthOnCraneFunction.TcPOU">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MACHINE CONTROL\KinematicFunctions2d\GVL_InverseKinematics.TcGVL">
+    <Compile Include="MACHINE CONTROL\KinematicFunctions2d\G_InverseKinematics.TcGVL">
       <SubType>Code</SubType>
       <LinkAlways>true</LinkAlways>
     </Compile>
@@ -255,16 +255,13 @@
     <Folder Include="AXIS CONTROL" />
     <Folder Include="INPUTS" />
     <Folder Include="INPUTS\Function Blocks" />
-    <Folder Include="INPUTS\Functions" />
+    <Folder Include="INPUTS\GVL" />
     <Folder Include="INPUTS\Struct" />
     <Folder Include="HMI" />
     <Folder Include="MACHINE CONTROL" />
     <Folder Include="MACHINE CONTROL\KinematicFunctions2d" />
-    <Folder Include="MACHINE CONTROL\Struct" />
     <Folder Include="StablePlatform" />
     <Folder Include="OUTPUTS" />
-    <Folder Include="OUTPUTS\Function blocks" />
-    <Folder Include="OUTPUTS\Struct" />
     <Folder Include="StablePlatform\GVL" />
     <Folder Include="StablePlatform\Function Blocks" />
     <Folder Include="StablePlatform\Struct" />

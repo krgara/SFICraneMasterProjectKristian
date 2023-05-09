@@ -6,8 +6,8 @@ VAR
 	fbInverse					: FB_Inverse;
 	fbForward					: FB_Forward;
 	fbWireLengthOnCrane			: FB_WireLengthOnCraneFunction;
-	fRefPosX					: LREAL := GVL_InverseKinematics.fTooltipXCoordGlobalIni;
-	fRefPosY					: LREAL := GVL_InverseKinematics.fTooltipYCoordGlobalIni;	
+	fRefPosX					: LREAL := G_InverseKinematics.fTooltipXCoordGlobalIni;
+	fRefPosY					: LREAL := G_InverseKinematics.fTooltipYCoordGlobalIni;	
 	fRefPosPayload				: LREAL := G_MachineControl.fPayloadHeightIni;
 	fThetaWinchMotorIni			: LREAL;
 	fWireLengthOut				: LREAL;
@@ -22,7 +22,7 @@ END_VAR
     <Implementation>
       <ST><![CDATA[G_MachineControl.bManualMode := G_Inputs.bManualModeSelector;
 G_MachineControl.bAutoMode := G_Inputs.bAutoModeSelector;
-GVL_Safety_AXIS4.ChA_STO_Enable := G_Inputs.bManualModeSelector OR G_Inputs.bAutoModeSelector;
+G_Safety_AXIS4.ChA_STO_Enable := G_Inputs.bManualModeSelector OR G_Inputs.bAutoModeSelector;
 
 IF G_Inputs.bAutoModeSelector THEN
 fRefPosX := fRefPosX + G_Sensors.fJoystickLeftNormalizedX*-0.0005;
@@ -36,7 +36,7 @@ bStartWave := NOT G_Inputs.bRedButton; //Red button is inverted, i.e. is active 
 IF bStartWave THEN
 	//Clock
 	G_MachineControl.fTimeSinceStart := G_MachineControl.fTimeSinceStart + G_MachineControl.fSampleTime;
-	GVL_InverseKinematics.fTheta1 := 0.012*SIN(2.5*G_MachineControl.fTimeSinceStart);
+	G_InverseKinematics.fTheta1 := 0.012*SIN(2.5*G_MachineControl.fTimeSinceStart);
 END_IF
 
 (*
@@ -50,12 +50,12 @@ END_IF
 fbInverse(
 	fPtXd := fRefPosX, 
 	fPtYd := fRefPosY, 
-	fTheta1 := GVL_InverseKinematics.fTheta1,
+	fTheta1 := G_InverseKinematics.fTheta1,
 	
-	fTheta3 => GVL_InverseKinematics.fAngleMainArmInverse, 
-	fTheta4 => GVL_InverseKinematics.fAngleKnuckleArmInverse,
-	fStrokeActuatorMain => GVL_InverseKinematics.fStrokeActuatorMainInverse,
-	fStrokeActuatorKnuckle => GVL_InverseKinematics.fStrokeActuatorKnuckleInverse,	
+	fTheta3 => G_InverseKinematics.fAngleMainArmInverse, 
+	fTheta4 => G_InverseKinematics.fAngleKnuckleArmInverse,
+	fStrokeActuatorMain => G_InverseKinematics.fStrokeActuatorMainInverse,
+	fStrokeActuatorKnuckle => G_InverseKinematics.fStrokeActuatorKnuckleInverse,	
 );
 
 IF NOT (G_Inputs.bAutoModeSelector OR G_Inputs.bJoystickRightEnable) THEN
