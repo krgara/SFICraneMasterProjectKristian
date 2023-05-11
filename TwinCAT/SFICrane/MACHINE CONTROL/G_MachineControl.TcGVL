@@ -17,6 +17,7 @@ VAR_GLOBAL
 	fSlewMotorAngle			AT %I* : LREAL;
 	fWinchMotorAngle		AT %I* : LREAL;	
 	fWinchAngle				: LREAL;
+	fWinchMotorAngleRefDeg	: LREAL;
 	
 	//Positions from forward kinematics
 	fCraneForwardX 			: LREAL;
@@ -30,13 +31,15 @@ VAR_GLOBAL
 	fWinchPitchRadiusLayer1 : LREAL := 0.0716;
 	fWinchPitchRadiusLayer2 : LREAL := 0.0731;
 	fWinchGearRatio 		: LREAL := 32;
-	fWinchMotorAngleRef		: LREAL;
+	fWinchMotorAngleAbsRef	: LREAL;
 	
 	//Encoder values 
 	fEncoderValue0Turns		: LREAL := 0.0;
 	fEncoderValue5Turns		: LREAL := 0.0;
 	fEncoderValueLayer2		: LREAL := 0.0;
 	fEncoderValuePayload0	: LREAL := 2100.0;
+	fEncoderValueStartAuto	: LREAL;
+	fWinchMotorAngleRelRef	: LREAL;
 	
 	
 

@@ -13,14 +13,7 @@ IF G_Inputs.bManualModeSelector THEN
 ELSIF G_Inputs.bAutoModeSelector THEN
 	Auto_mode();
 ELSE
-	G_AXIS1.lrBC_PowerOverride := 0;
-	G_AXIS1.bBC_StopExe := TRUE;
-	G_AXIS2.lrSJ_PowerOverride := 0;
-	G_AXIS2.bSJ_StopExe := TRUE;
-	G_AXIS3.lrTC_PowerOverride := 0;
-	G_AXIS3.bTC_StopExe := TRUE;
-	G_AXIS4.lrWM_PowerOverride := 0;
-	G_AXIS4.bWM_StopExe := TRUE;
+	Stop_mode();
 END_IF
 
 
@@ -45,7 +38,7 @@ G_AXIS1.bBC_PowerEnNegative := G_Inputs.bAutoModeSelector;
 G_AXIS1.bBC_PowerEnPositive := G_Inputs.bAutoModeSelector;
 
 G_AXIS1.lrBC_MoveAbsPosition := G_InverseKinematics.fStrokeActuatorMainInverse*1000;
-G_AXIS1.lrBC_MoveAbsVelocity := 30;
+G_AXIS1.lrBC_MoveAbsVelocity := 20;
 G_AXIS1.bBC_MoveAbsExe := G_Inputs.bGreenButton;
 
 
@@ -78,7 +71,7 @@ G_AXIS3.bTC_PowerEnNegative := G_Inputs.bAutoModeSelector;
 G_AXIS3.bTC_PowerEnPositive := G_Inputs.bAutoModeSelector;
 
 G_AXIS3.lrTC_MoveAbsPosition := G_InverseKinematics.fStrokeActuatorKnuckleInverse*1000;
-G_AXIS3.lrTC_MoveAbsVelocity := 30;
+G_AXIS3.lrTC_MoveAbsVelocity := 20;
 G_AXIS3.bTC_MoveAbsExe := G_Inputs.bGreenButton;
 
 
@@ -111,12 +104,12 @@ G_AXIS4.bWM_PowerEnCmd := G_Inputs.bAutoModeSelector;
 G_AXIS4.bWM_PowerEnNegative := G_Inputs.bAutoModeSelector;
 G_AXIS4.bWM_PowerEnPositive := G_Inputs.bAutoModeSelector;
 
-G_AXIS4.lrWM_MoveAbsPosition := G_MachineControl.fWinchMotorAngleRef*180/PI;
-G_AXIS4.lrWM_MoveAbsVelocity := 100;
-G_AXIS4.bWM_MoveAbsExe := G_Inputs.bGreenButton;
+//G_AXIS4.lrWM_MoveAbsPosition := G_MachineControl.fWinchMotorAngleRef*180/PI;
+//G_AXIS4.lrWM_MoveAbsVelocity := 50;
+//G_AXIS4.bWM_MoveAbsExe := G_Inputs.bGreenButton;
 
 //Position control
-IF G_Inputs.bJoystickRightEnable AND G_AXIS4.bWM_MoveAbsDone  THEN
+IF G_Inputs.bJoystickLeftEnable AND G_AXIS1.bBC_MoveAbsDone AND G_AXIS3.bTC_MoveAbsDone THEN
 	G_AXIS4.bWM_ExtSetGenDisExe := FALSE;
 	G_AXIS4.bWM_ExtSetGenEnaExe := TRUE;
 ELSE
@@ -124,8 +117,8 @@ ELSE
 	G_AXIS4.bWM_ExtSetGenEnaExe := FALSE;
 END_IF
 
-G_AXIS4.lrWM_MoveSetPointVel := 50;
-G_AXIS4.lrWM_MoveAddPos := 0; //G_MachineControl.fWinchMotorAngleRef*180/PI; //Convert to degrees
+G_AXIS4.lrWM_MoveSetPointVel := 500;
+G_AXIS4.lrWM_MoveAddPos := G_MachineControl.fWinchMotorAngleAbsRef; //G_MachineControl.fWinchMotorAngleRef*180/PI; //Convert to degrees
 
 
 //Update axis
@@ -10259,19 +10252,6 @@ END_VAR
                     <l2 n="Connectors" />
                     <v n="Id">312L</v>
                   </o>
-                  <o>
-                    <v n="ILActive">false</v>
-                    <v n="FBDValid">false</v>
-                    <v n="ILValid">false</v>
-                    <l2 n="ILLines" />
-                    <v n="Comment">""</v>
-                    <v n="Title">""</v>
-                    <v n="Label">""</v>
-                    <v n="OutCommented">false</v>
-                    <l2 n="NetworkItems" />
-                    <l2 n="Connectors" />
-                    <v n="Id">142L</v>
-                  </o>
                 </l2>
                 <v n="BranchCounter">0</v>
                 <v n="ValidIds">true</v>
@@ -11716,13 +11696,49 @@ G_AXIS4.bWM_ResetExe := TRUE;
 ]]></ST>
       </Implementation>
     </Method>
+    <Method Name="Stop_mode" Id="{3259567f-99d7-4bb9-8bb0-5bdc3da29b5d}">
+      <Declaration><![CDATA[METHOD Stop_mode : BOOL
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[//AXIS 1 Main arm actuator
+
+	G_AXIS1.lrBC_PowerOverride := 0;
+	G_AXIS1.bBC_StopExe := TRUE;
+	G_AXIS1.bBC_PowerEnCmd := FALSE;
+	
+	AXIS1_LD_Auto();
+	AXIS1_LD_Manual();
+	
+	G_AXIS2.lrSJ_PowerOverride := 0;	
+	G_AXIS2.bSJ_StopExe := TRUE;	
+	G_AXIS2.bSJ_PowerEnCmd := FALSE;
+	
+	//AXIS2_LD_Auto();
+	AXIS2_LD_Manual();
+	
+	G_AXIS3.lrTC_PowerOverride := 0;	
+	G_AXIS3.bTC_StopExe := TRUE;
+	G_AXIS3.bTC_PowerEnCmd := FALSE;
+	
+	AXIS3_LD_Auto();
+	AXIS3_LD_Manual();
+	
+	G_AXIS4.lrWM_PowerOverride := 0;
+	G_AXIS4.bWM_StopExe := TRUE;
+	G_AXIS4.bWM_PowerEnCmd := FALSE;
+	
+	AXIS4_LD_Auto();
+	AXIS4_LD_Manual();]]></ST>
+      </Implementation>
+    </Method>
     <LineIds Name="P_AxisControl">
       <LineId Id="5" Count="0" />
       <LineId Id="366" Count="2" />
       <LineId Id="370" Count="0" />
-      <LineId Id="372" Count="2" />
-      <LineId Id="371" Count="0" />
-      <LineId Id="382" Count="5" />
+      <LineId Id="372" Count="1" />
+      <LineId Id="394" Count="0" />
       <LineId Id="377" Count="0" />
       <LineId Id="7" Count="0" />
       <LineId Id="60" Count="0" />
@@ -11787,6 +11803,23 @@ G_AXIS4.bWM_ResetExe := TRUE;
       <LineId Id="247" Count="27" />
       <LineId Id="246" Count="0" />
       <LineId Id="57" Count="0" />
+    </LineIds>
+    <LineIds Name="P_AxisControl.Stop_mode">
+      <LineId Id="323" Count="1" />
+      <LineId Id="423" Count="2" />
+      <LineId Id="442" Count="0" />
+      <LineId Id="441" Count="0" />
+      <LineId Id="443" Count="0" />
+      <LineId Id="438" Count="0" />
+      <LineId Id="426" Count="2" />
+      <LineId Id="444" Count="2" />
+      <LineId Id="439" Count="0" />
+      <LineId Id="429" Count="2" />
+      <LineId Id="447" Count="2" />
+      <LineId Id="440" Count="0" />
+      <LineId Id="432" Count="1" />
+      <LineId Id="5" Count="0" />
+      <LineId Id="450" Count="2" />
     </LineIds>
   </POU>
 </TcPlcObject>

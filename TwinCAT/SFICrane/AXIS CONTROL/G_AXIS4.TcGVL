@@ -29,7 +29,7 @@ bWM_ExtSetGenEnaExe		: BOOL;
 bWM_MoveAbsDone			: BOOL;
 
 //Velocity commands structure
-stWM_VelCmd				: ST_MC_CMD := (bExe := FALSE, lrVelocity := 100, EnuDirection := MC_Positive_Direction); 
+stWM_VelCmd				: ST_MC_CMD := (bExe := FALSE, lrVelocity := 1000, EnuDirection := MC_Positive_Direction); 
 
 //Variables/Parameters
 lrWM_PowerOverride		: LREAL;
