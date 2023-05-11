@@ -15,7 +15,7 @@ VAR_GLOBAL
 	fStrokeActuatorMain 	AT %I* : LREAL;
 	fStrokeActuatorKnuckle 	AT %I* : LREAL;
 	fSlewMotorAngle			AT %I* : LREAL;
-	fWinchMotorAngle		AT %I* : LREAL;	
+	fWinchMotorAngleEncoder		AT %I* : LREAL;	
 	fWinchAngle				: LREAL;
 	fWinchMotorAngleRefDeg	: LREAL;
 	
@@ -39,6 +39,8 @@ VAR_GLOBAL
 	fEncoderValueLayer2		: LREAL := 0.0;
 	fEncoderValuePayload0	: LREAL := 2100.0;
 	fEncoderValueStartAuto	: LREAL;
+	fTooltipYAutoStart		: LREAL;
+	fRefPosPayloadAutoStart	: LREAL;
 	fWinchMotorAngleRelRef	: LREAL;
 	
 	

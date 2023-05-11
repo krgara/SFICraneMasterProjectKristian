@@ -2312,7 +2312,7 @@ External Setpoint Generation:
 		</Motion>
 		<Plc>
 			<Project GUID="{64FB78BA-5775-4793-83DB-E4463DEFB246}" Name="SFICrane" PrjFilePath="SFICrane\SFICrane.plcproj" TmcFilePath="SFICrane\SFICrane.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="SFICrane\SFICrane.tmc" TmcHash="{29A41FB0-BD18-865A-7322-B24CB435C8A7}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="SFICrane\SFICrane.tmc" TmcHash="{E69899B5-4E2D-6F23-1C5B-0CFB06B63A15}">
 					<Name>SFICrane Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
@@ -2347,7 +2347,7 @@ External Setpoint Generation:
 							<Type>LREAL</Type>
 						</Var>
 						<Var>
-							<Name>G_MachineControl.fWinchMotorAngle</Name>
+							<Name>G_MachineControl.fWinchMotorAngleEncoder</Name>
 							<Type>LREAL</Type>
 						</Var>
 						<Var>
@@ -5648,7 +5648,7 @@ Bit1: Value bigger/equal Limit2]]></Comment>
 			</OwnerB>
 			<OwnerB Name="TINC^NC-Task 1 SAF^Axes^Axis 4 - Winch Motor">
 				<Link VarA="PlcTask Inputs^G_AXIS4.WMAxis.NcToPlc" VarB="Outputs^ToPlc"/>
-				<Link VarA="PlcTask Inputs^G_MachineControl.fWinchMotorAngle" VarB="Outputs^ToPlc^ActPos"/>
+				<Link VarA="PlcTask Inputs^G_MachineControl.fWinchMotorAngleEncoder" VarB="Outputs^ToPlc^ActPos"/>
 				<Link VarA="PlcTask Outputs^G_AXIS4.WMAxis.PlcToNc" VarB="Inputs^FromPlc"/>
 			</OwnerB>
 		</OwnerA>

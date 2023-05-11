@@ -11702,7 +11702,7 @@ VAR_INPUT
 END_VAR
 ]]></Declaration>
       <Implementation>
-        <ST><![CDATA[//AXIS 1 Main arm actuator
+        <ST><![CDATA[//Stop mode
 
 	G_AXIS1.lrBC_PowerOverride := 0;
 	G_AXIS1.bBC_StopExe := TRUE;
