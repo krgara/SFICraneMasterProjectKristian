@@ -65,8 +65,9 @@ END_IF
 
 fbForward(
 	fTheta1 := G_StablePlatformParameters.fPlatformAngle,
-	fStrokeActuatorMain := G_MachineControl.fStrokeActuatorMain,
-	fStrokeActuatorKnuckle := G_MachineControl.fStrokeActuatorKnuckle,
+	fStrokeActuatorMain := (G_MachineControl.fStrokeActuatorMain+11),
+	fStrokeActuatorKnuckle := (G_MachineControl.fStrokeActuatorKnuckle-7),
+	x => G_MachineControl.fCraneForwardX,
 	y => G_MachineControl.fCraneForwardY, 
 	fTheta3 => G_MachineControl.fTheta3Forward,
 	fTheta4 => G_MachineControl.fTheta4Forward,
@@ -128,7 +129,9 @@ G_MachineControl.fWinchMotorAngleRef := fThetaWinch*G_MachineControl.fWinchGearR
       <LineId Id="295" Count="0" />
       <LineId Id="218" Count="0" />
       <LineId Id="296" Count="0" />
-      <LineId Id="326" Count="4" />
+      <LineId Id="326" Count="2" />
+      <LineId Id="376" Count="0" />
+      <LineId Id="329" Count="1" />
       <LineId Id="334" Count="1" />
       <LineId Id="337" Count="0" />
       <LineId Id="336" Count="0" />

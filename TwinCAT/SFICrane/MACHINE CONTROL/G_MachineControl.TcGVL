@@ -19,6 +19,7 @@ VAR_GLOBAL
 	fWinchAngle				: LREAL;
 	
 	//Positions from forward kinematics
+	fCraneForwardX 			: LREAL;
 	fCraneForwardY 			: LREAL;
 	fTheta3Forward			: LREAL;
 	fTheta4Forward			: LREAL;

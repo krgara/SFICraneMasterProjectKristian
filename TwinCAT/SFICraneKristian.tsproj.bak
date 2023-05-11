@@ -1741,8 +1741,8 @@ External Setpoint Generation:
 					</AxisPara>
 					<Encoder Name="Enc" EncType="8">
 						<EncPara MaxCount="#x0036ee7f">
-							<SoftEndMinControl Enable="true" Range="22"/>
-							<SoftEndMaxControl Enable="true" Range="298"/>
+							<SoftEndMinControl Enable="true" Range="12"/>
+							<SoftEndMaxControl Enable="true" Range="200"/>
 						</EncPara>
 						<Vars VarGrpType="1">
 							<Name>Inputs</Name>
@@ -2030,8 +2030,8 @@ External Setpoint Generation:
 					</AxisPara>
 					<Encoder Name="Enc" EncType="8">
 						<EncPara MaxCount="#x0036ee7f">
-							<SoftEndMinControl Enable="true" Range="5"/>
-							<SoftEndMaxControl Enable="true" Range="249"/>
+							<SoftEndMinControl Enable="true" Range="12"/>
+							<SoftEndMaxControl Enable="true" Range="248"/>
 						</EncPara>
 						<Vars VarGrpType="1">
 							<Name>Inputs</Name>
@@ -2312,62 +2312,11 @@ External Setpoint Generation:
 		</Motion>
 		<Plc>
 			<Project GUID="{64FB78BA-5775-4793-83DB-E4463DEFB246}" Name="SFICrane" PrjFilePath="SFICrane\SFICrane.plcproj" TmcFilePath="SFICrane\SFICrane.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="SFICrane\SFICrane.tmc" TmcHash="{6B8665B9-EEB1-3C65-5C40-064636DFE726}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="SFICrane\SFICrane.tmc" TmcHash="{F9FD7892-B557-DB17-AD88-1AB888053140}">
 					<Name>SFICrane Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
 						<Name>PlcTask Inputs</Name>
-						<Var>
-							<Name>G_StablePlatformIO.bModeSwitchOff</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>G_MachineControl.fStrokeActuatorMain</Name>
-							<Comment><![CDATA[Actuator position data]]></Comment>
-							<Type>LREAL</Type>
-						</Var>
-						<Var>
-							<Name>G_MachineControl.fStrokeActuatorKnuckle</Name>
-							<Type>LREAL</Type>
-						</Var>
-						<Var>
-							<Name>G_MachineControl.fSlewMotorAngle</Name>
-							<Type>LREAL</Type>
-						</Var>
-						<Var>
-							<Name>G_MachineControl.fWinchMotorAngle</Name>
-							<Type>LREAL</Type>
-						</Var>
-						<Var>
-							<Name>G_StablePlatformIO.npA</Name>
-							<Comment><![CDATA[fJoyLeftX AT %I* : INT; 
-bJoyLeftPushButton AT %I* : BOOL; ]]></Comment>
-							<Type>INT</Type>
-						</Var>
-						<Var>
-							<Name>G_StablePlatformIO.npB</Name>
-							<Type>INT</Type>
-						</Var>
-						<Var>
-							<Name>G_StablePlatformIO.npS</Name>
-							<Type>INT</Type>
-						</Var>
-						<Var>
-							<Name>G_StablePlatformIO.nSVFeedback</Name>
-							<Type>INT</Type>
-						</Var>
-						<Var>
-							<Name>G_StablePlatformIO.nPistonPosition</Name>
-							<Type>INT</Type>
-						</Var>
-						<Var>
-							<Name>G_StablePlatformIO.nPistonVelocity</Name>
-							<Type>INT</Type>
-						</Var>
-						<Var>
-							<Name>G_StablePlatformIO.bEMG_OK</Name>
-							<Type>BOOL</Type>
-						</Var>
 						<Var>
 							<Name>G_AXIS1.BCAxis.NcToPlc</Name>
 							<Type GUID="{25521FAA-EA5F-4C7F-8864-BBCCDACD2E98}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
@@ -2387,6 +2336,23 @@ bJoyLeftPushButton AT %I* : BOOL; ]]></Comment>
 						<Var>
 							<Name>G_Safety_AXIS4.ChA_STO_Active</Name>
 							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>G_MachineControl.fStrokeActuatorMain</Name>
+							<Comment><![CDATA[Actuator position data]]></Comment>
+							<Type>LREAL</Type>
+						</Var>
+						<Var>
+							<Name>G_MachineControl.fStrokeActuatorKnuckle</Name>
+							<Type>LREAL</Type>
+						</Var>
+						<Var>
+							<Name>G_MachineControl.fSlewMotorAngle</Name>
+							<Type>LREAL</Type>
+						</Var>
+						<Var>
+							<Name>G_MachineControl.fWinchMotorAngle</Name>
+							<Type>LREAL</Type>
 						</Var>
 						<Var>
 							<Name>G_Inputs.bManualModeSelector</Name>
@@ -2448,35 +2414,43 @@ bJoyLeftPushButton AT %I* : BOOL; ]]></Comment>
 							<Name>G_Inputs.stJoyRY.nValue</Name>
 							<Type>INT</Type>
 						</Var>
+						<Var>
+							<Name>G_StablePlatformIO.npA</Name>
+							<Comment><![CDATA[fJoyLeftX AT %I* : INT; 
+bJoyLeftPushButton AT %I* : BOOL; ]]></Comment>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>G_StablePlatformIO.npB</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>G_StablePlatformIO.npS</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>G_StablePlatformIO.nSVFeedback</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>G_StablePlatformIO.bModeSwitchOff</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>G_StablePlatformIO.bEMG_OK</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>G_StablePlatformIO.nPistonPosition</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>G_StablePlatformIO.nPistonVelocity</Name>
+							<Type>INT</Type>
+						</Var>
 					</Vars>
 					<Vars VarGrpType="2" AreaNo="1">
 						<Name>PlcTask Outputs</Name>
-						<Var>
-							<Name>G_Outputs.bGreenButtonLight</Name>
-							<Comment><![CDATA[ PLC Rack
- RIO Rack
- Digital Outputs]]></Comment>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>G_Outputs.bRedButtonLight</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>G_Outputs.bSafetyRelayReset</Name>
-							<Comment><![CDATA[ Analog Outputs
-stWinchValveOutput 		: ST_ValveOutput;
-stCylValveOutput 			: ST_ValveOutput;]]></Comment>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>G_StablePlatformIO.bSVEnable</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>G_StablePlatformIO.nSVControlSignal</Name>
-							<Type>INT</Type>
-						</Var>
 						<Var>
 							<Name>G_AXIS1.BCAxis.PlcToNc</Name>
 							<Type GUID="{96B75FEB-2D84-43BE-A3EC-D9A681F27D52}" Namespace="MC">PLCTONC_AXIS_REF</Type>
@@ -2512,6 +2486,32 @@ stCylValveOutput 			: ST_ValveOutput;]]></Comment>
 						<Var>
 							<Name>G_Safety_AXIS4.EMGRestart</Name>
 							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>G_Outputs.bGreenButtonLight</Name>
+							<Comment><![CDATA[ PLC Rack
+ RIO Rack
+ Digital Outputs]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>G_Outputs.bRedButtonLight</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>G_Outputs.bSafetyRelayReset</Name>
+							<Comment><![CDATA[ Analog Outputs
+stWinchValveOutput 		: ST_ValveOutput;
+stCylValveOutput 			: ST_ValveOutput;]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>G_StablePlatformIO.bSVEnable</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>G_StablePlatformIO.nSVControlSignal</Name>
+							<Type>INT</Type>
 						</Var>
 					</Vars>
 					<UnrestoredVarLinks ImportTime="2023-04-28T11:48:01">
