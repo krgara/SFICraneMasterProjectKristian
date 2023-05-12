@@ -2312,27 +2312,11 @@ External Setpoint Generation:
 		</Motion>
 		<Plc>
 			<Project GUID="{64FB78BA-5775-4793-83DB-E4463DEFB246}" Name="SFICrane" PrjFilePath="SFICrane\SFICrane.plcproj" TmcFilePath="SFICrane\SFICrane.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="SFICrane\SFICrane.tmc" TmcHash="{E69899B5-4E2D-6F23-1C5B-0CFB06B63A15}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="SFICrane\SFICrane.tmc" TmcHash="{B2872509-38BE-C44E-E192-66DFAD47C48F}">
 					<Name>SFICrane Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
 						<Name>PlcTask Inputs</Name>
-						<Var>
-							<Name>G_AXIS4.WMAxis.NcToPlc</Name>
-							<Type GUID="{25521FAA-EA5F-4C7F-8864-BBCCDACD2E98}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
-						</Var>
-						<Var>
-							<Name>G_AXIS3.TCAxis.NcToPlc</Name>
-							<Type GUID="{25521FAA-EA5F-4C7F-8864-BBCCDACD2E98}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
-						</Var>
-						<Var>
-							<Name>G_AXIS2.SJAxis.NcToPlc</Name>
-							<Type GUID="{25521FAA-EA5F-4C7F-8864-BBCCDACD2E98}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
-						</Var>
-						<Var>
-							<Name>G_AXIS1.BCAxis.NcToPlc</Name>
-							<Type GUID="{25521FAA-EA5F-4C7F-8864-BBCCDACD2E98}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
-						</Var>
 						<Var>
 							<Name>G_MachineControl.fStrokeActuatorMain</Name>
 							<Comment><![CDATA[Actuator position data]]></Comment>
@@ -2351,8 +2335,24 @@ External Setpoint Generation:
 							<Type>LREAL</Type>
 						</Var>
 						<Var>
+							<Name>G_AXIS1.BCAxis.NcToPlc</Name>
+							<Type GUID="{25521FAA-EA5F-4C7F-8864-BBCCDACD2E98}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+						</Var>
+						<Var>
+							<Name>G_AXIS4.WMAxis.NcToPlc</Name>
+							<Type GUID="{25521FAA-EA5F-4C7F-8864-BBCCDACD2E98}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+						</Var>
+						<Var>
 							<Name>G_Safety_AXIS4.ChA_STO_Active</Name>
 							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>G_AXIS2.SJAxis.NcToPlc</Name>
+							<Type GUID="{25521FAA-EA5F-4C7F-8864-BBCCDACD2E98}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+						</Var>
+						<Var>
+							<Name>G_AXIS3.TCAxis.NcToPlc</Name>
+							<Type GUID="{25521FAA-EA5F-4C7F-8864-BBCCDACD2E98}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 						</Var>
 						<Var>
 							<Name>G_Inputs.bManualModeSelector</Name>
@@ -2452,19 +2452,11 @@ bJoyLeftPushButton AT %I* : BOOL; ]]></Comment>
 					<Vars VarGrpType="2" AreaNo="1">
 						<Name>PlcTask Outputs</Name>
 						<Var>
-							<Name>G_AXIS4.WMAxis.PlcToNc</Name>
-							<Type GUID="{96B75FEB-2D84-43BE-A3EC-D9A681F27D52}" Namespace="MC">PLCTONC_AXIS_REF</Type>
-						</Var>
-						<Var>
-							<Name>G_AXIS3.TCAxis.PlcToNc</Name>
-							<Type GUID="{96B75FEB-2D84-43BE-A3EC-D9A681F27D52}" Namespace="MC">PLCTONC_AXIS_REF</Type>
-						</Var>
-						<Var>
-							<Name>G_AXIS2.SJAxis.PlcToNc</Name>
-							<Type GUID="{96B75FEB-2D84-43BE-A3EC-D9A681F27D52}" Namespace="MC">PLCTONC_AXIS_REF</Type>
-						</Var>
-						<Var>
 							<Name>G_AXIS1.BCAxis.PlcToNc</Name>
+							<Type GUID="{96B75FEB-2D84-43BE-A3EC-D9A681F27D52}" Namespace="MC">PLCTONC_AXIS_REF</Type>
+						</Var>
+						<Var>
+							<Name>G_AXIS4.WMAxis.PlcToNc</Name>
 							<Type GUID="{96B75FEB-2D84-43BE-A3EC-D9A681F27D52}" Namespace="MC">PLCTONC_AXIS_REF</Type>
 						</Var>
 						<Var>
@@ -2486,6 +2478,14 @@ bJoyLeftPushButton AT %I* : BOOL; ]]></Comment>
 						<Var>
 							<Name>G_Safety_AXIS4.EMGRestart</Name>
 							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>G_AXIS2.SJAxis.PlcToNc</Name>
+							<Type GUID="{96B75FEB-2D84-43BE-A3EC-D9A681F27D52}" Namespace="MC">PLCTONC_AXIS_REF</Type>
+						</Var>
+						<Var>
+							<Name>G_AXIS3.TCAxis.PlcToNc</Name>
+							<Type GUID="{96B75FEB-2D84-43BE-A3EC-D9A681F27D52}" Namespace="MC">PLCTONC_AXIS_REF</Type>
 						</Var>
 						<Var>
 							<Name>G_Outputs.bGreenButtonLight</Name>
