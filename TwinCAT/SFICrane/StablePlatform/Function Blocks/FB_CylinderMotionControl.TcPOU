@@ -1,0 +1,202 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_CylinderMotionControl" Id="{8f9ff54e-3d29-4d94-b3a0-e9e15b58d996}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_CylinderMotionControl
+VAR_INPUT
+	ssMethodType: SINT;
+	bEnableFeedForward: BOOL;
+	fMaxValveFlow_lmin: LREAL;
+	bEnableFeedBackControl: BOOL;
+	bEnableIntegralControl: BOOL;
+	fProportionalGain: LREAL;
+	fIntegralGain: LREAL;
+	fMaxPosError_mm: LREAL;
+	fCylVelRef_ms: LREAL;
+	fCylPosRef_m: LREAL;
+	fCylPos_m: LREAL;
+END_VAR
+VAR_OUTPUT
+	fSvSignal: LREAL;
+	fCylPosError_mm: LREAL;
+END_VAR
+VAR
+	rtb_Switch1: LREAL;
+	rtb_Reset: LREAL;
+	rtb_u_FB: LREAL;
+	rtb_Saturation1: LREAL;
+	rtb_w_ref: LREAL;
+	c_DiscreteTimeIntegrator_DS: LREAL;
+	Delay_DSTATE: ARRAY[0..1] OF LREAL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+
+CASE ssMethodType OF
+    0: 
+        (* SystemInitialize for Atomic SubSystem: '<Root>/CylinderMotionControl' *)
+        (* InitializeConditions for Delay: '<S1>/Delay' *)
+        Delay_DSTATE[0] := 0.0;
+        Delay_DSTATE[1] := 0.0;
+        (* SystemInitialize for Atomic SubSystem: '<S1>/FB_ClosedLoopControl' *)
+        (* InitializeConditions for DiscreteIntegrator: '<S2>/Discrete-Time Integrator' *)
+        c_DiscreteTimeIntegrator_DS := 0.0;
+        (* End of SystemInitialize for SubSystem: '<S1>/FB_ClosedLoopControl' *)
+        (* End of SystemInitialize for SubSystem: '<Root>/CylinderMotionControl' *)
+    1: 
+        (* Outputs for Atomic SubSystem: '<Root>/CylinderMotionControl' *)
+        (* Outputs for Atomic SubSystem: '<S1>/FB_OpenLoopControl' *)
+        (* Switch: '<S3>/Switch1' incorporates:
+         *  Constant: '<S3>/Constant'
+         *  Gain: '<S3>/Gain1'
+         *  Product: '<S3>/Divide2' *)
+
+        IF bEnableFeedForward THEN 
+            (* Switch: '<S3>/Switch2' incorporates:
+             *  Constant: '<S3>/Annnulus_Area'
+             *  Constant: '<S3>/Bore_Area'
+             *  Product: '<S3>/Product1'
+             *  Product: '<S3>/Product3' *)
+
+            IF fCylVelRef_ms >= 0.0 THEN 
+                rtb_Switch1 := 0.003117 * fCylVelRef_ms;
+            ELSE 
+                rtb_Switch1 := fCylVelRef_ms * 0.002099;
+            END_IF;
+
+            (* End of Switch: '<S3>/Switch2' *)
+            rtb_Switch1 := (60000.0 * rtb_Switch1) / fMaxValveFlow_lmin;
+        ELSE 
+            rtb_Switch1 := 0.0;
+        END_IF;
+
+        (* End of Switch: '<S3>/Switch1' *)
+        (* End of Outputs for SubSystem: '<S1>/FB_OpenLoopControl' *)
+        
+
+        (* Outputs for Atomic SubSystem: '<S1>/FB_ResetIntegralController' *)
+        (* MATLAB Function: '<S4>/ResetIntegralController' *)
+        (* MATLAB Function 'CylinderMotionControl/FB_ResetIntegralController/ResetIntegralController': '<S5>:1' *)
+        (* '<S5>:1:3' if abs(vRef) > 0 || abs(exCyl) > exCylMax *)
+
+        IF ABS(fCylVelRef_ms) > 0.0 THEN 
+            ;
+            ;
+        ELSIF ABS(Delay_DSTATE[0]) > (0.001 * fMaxPosError_mm) THEN 
+            ;
+            ;
+        ELSE 
+            (* Outputs for Atomic SubSystem: '<S1>/FB_ClosedLoopControl' *)
+            (* DiscreteIntegrator: '<S2>/Discrete-Time Integrator' *)
+            (* '<S5>:1:5' else *)
+            (* '<S5>:1:6' Reset = 1; *)
+            c_DiscreteTimeIntegrator_DS := 0.0;
+            (* End of Outputs for SubSystem: '<S1>/FB_ClosedLoopControl' *)
+        END_IF;
+
+        (* End of MATLAB Function: '<S4>/ResetIntegralController' *)
+        (* End of Outputs for SubSystem: '<S1>/FB_ResetIntegralController' *)
+        
+
+        (* Outputs for Atomic SubSystem: '<S1>/FB_ClosedLoopControl' *)
+        (* DiscreteIntegrator: '<S2>/Discrete-Time Integrator' *)
+
+        IF c_DiscreteTimeIntegrator_DS >= 1.0 THEN 
+            c_DiscreteTimeIntegrator_DS := 1.0;
+        ELSIF c_DiscreteTimeIntegrator_DS <= -1.0 THEN 
+            c_DiscreteTimeIntegrator_DS := -1.0;
+        END_IF;
+
+        (* Sum: '<S2>/Sum1' *)
+        rtb_Reset := fCylPosRef_m - fCylPos_m;
+        (* Switch: '<S2>/Switch' incorporates:
+         *  Constant: '<S2>/Constant'
+         *  DiscreteIntegrator: '<S2>/Discrete-Time Integrator' *)
+
+        IF bEnableIntegralControl THEN 
+            rtb_u_FB := c_DiscreteTimeIntegrator_DS;
+        ELSE 
+            rtb_u_FB := 0.0;
+        END_IF;
+
+        (* End of Switch: '<S2>/Switch' *)
+        
+
+        (* Sum: '<S2>/Sum5' incorporates:
+         *  Product: '<S2>/Product' *)
+        rtb_u_FB := (fProportionalGain * rtb_Reset) + rtb_u_FB;
+        (* Saturate: '<S2>/Saturation1' *)
+
+        IF rtb_u_FB > 1.0 THEN 
+            rtb_Saturation1 := 1.0;
+        ELSIF rtb_u_FB >= -1.0 THEN 
+            rtb_Saturation1 := rtb_u_FB;
+        ELSE 
+            rtb_Saturation1 := -1.0;
+        END_IF;
+
+        (* End of Saturate: '<S2>/Saturation1' *)
+        
+
+        (* Switch: '<S2>/Switch1' incorporates:
+         *  Constant: '<S2>/Constant1' *)
+
+        IF bEnableFeedBackControl THEN 
+            rtb_w_ref := rtb_Saturation1;
+        ELSE 
+            rtb_w_ref := 0.0;
+        END_IF;
+
+        (* End of Switch: '<S2>/Switch1' *)
+        
+
+        (* Update for DiscreteIntegrator: '<S2>/Discrete-Time Integrator' incorporates:
+         *  Product: '<S2>/Divide'
+         *  Product: '<S2>/Product2'
+         *  Sum: '<S2>/Sum2'
+         *  Sum: '<S2>/Sum3' *)
+        c_DiscreteTimeIntegrator_DS := (((((rtb_Saturation1 - rtb_u_FB) / fProportionalGain) + rtb_Reset) * fIntegralGain) * 0.002) + c_DiscreteTimeIntegrator_DS;
+
+        IF c_DiscreteTimeIntegrator_DS >= 1.0 THEN 
+            c_DiscreteTimeIntegrator_DS := 1.0;
+        ELSIF c_DiscreteTimeIntegrator_DS <= -1.0 THEN 
+            c_DiscreteTimeIntegrator_DS := -1.0;
+        END_IF;
+
+        (* End of Update for DiscreteIntegrator: '<S2>/Discrete-Time Integrator' *)
+        (* End of Outputs for SubSystem: '<S1>/FB_ClosedLoopControl' *)
+        
+
+        (* Sum: '<S1>/Add' *)
+        fSvSignal := rtb_Switch1 + rtb_w_ref;
+        (* Saturate: '<S1>/Saturation' *)
+
+        IF fSvSignal > 1.0 THEN 
+            (* Outport: '<Root>/fSvSignal' *)
+            fSvSignal := 1.0;
+        ELSIF fSvSignal < -1.0 THEN 
+            (* Outport: '<Root>/fSvSignal' *)
+            fSvSignal := -1.0;
+        END_IF;
+
+        (* End of Saturate: '<S1>/Saturation' *)
+        
+
+        (* Update for Delay: '<S1>/Delay' *)
+        Delay_DSTATE[0] := Delay_DSTATE[1];
+        Delay_DSTATE[1] := rtb_Reset;
+        (* Outport: '<Root>/fCylPosError_mm' incorporates:
+         *  Gain: '<S1>/Gain' *)
+        fCylPosError_mm := 1000.0 * rtb_Reset;
+        (* End of Outputs for SubSystem: '<Root>/CylinderMotionControl' *)
+END_CASE;
+
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="FB_CylinderMotionControl">
+      <LineId Id="3" Count="161" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

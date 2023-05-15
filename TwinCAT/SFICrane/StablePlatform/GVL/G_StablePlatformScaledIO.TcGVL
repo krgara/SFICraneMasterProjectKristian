@@ -10,7 +10,8 @@ VAR_GLOBAL
 	fJoystickNormalizedX : LREAL; // -1..0..1
 	fPistonPosition : LREAL; //Piston position in meters
 	fPistonVelocity : LREAL; //Piston velocity in meters/second
-
+	fPlatformAngle	: LREAL; //Platform angle theta1 in radians
+	fPlatformAngleDeg : LREAL;
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

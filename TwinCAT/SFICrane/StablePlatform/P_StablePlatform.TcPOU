@@ -11,11 +11,32 @@ VAR
 	fbPistonVel	: FB_AnalogInputScaling_1;
 	fbJoystick  : FB_JoystickInputScaling;
 	fbSVOutput 	: FB_ValveOutput;
-	bManualMode : BOOL;
+	fbAutoModeControl : FB_AutoModeControl; 
 END_VAR
 ]]></Declaration>
     <Implementation>
-      <ST><![CDATA[// Inputs
+      <ST><![CDATA[// Enable
+IF G_StablePlatformIO.bEnable AND G_StablePlatformIO.bEMG_OK THEN
+	G_StablePlatformIO.bActivated := TRUE;
+ELSE	
+	G_StablePlatformIO.bActivated := FALSE;
+END_IF
+// Mode
+IF G_StablePlatformIO.bActivated AND G_StablePlatformIO.bModeSelector AND  G_Inputs.bAutoModeSelector THEN
+	G_StablePlatformIO.bAutoMode := TRUE;
+	G_StablePlatformIO.bManualMode := FALSE;
+	G_StablePlatformIO.fControlSignal :=  G_StablePlatformIO.fAutoModeControlSignal;
+ELSIF G_StablePlatformIO.bActivated AND NOT(G_StablePlatformIO.bModeSelector) AND G_Inputs.bManualModeSelector THEN
+	G_StablePlatformIO.bAutoMode := FALSE;
+	G_StablePlatformIO.bManualMode := TRUE; 
+	G_StablePlatformIO.fControlSignal := -G_StablePlatformScaledIO.fJoystickNormalizedX; 	
+ELSE
+	G_StablePlatformIO.bAutoMode := FALSE;
+	G_StablePlatformIO.bManualMode := FALSE; 
+	G_StablePlatformIO.fControlSignal := 0.0;
+END_IF
+
+// Inputs
 fbpA(
 	nRawInput := G_StablePlatformIO.npA,
 	stAnalogInputScaling := G_StablePlatformParameters.stPressureSensorScaling400bar,
@@ -40,24 +61,38 @@ fSVFeedback(
 	fOutput => G_StablePlatformScaledIO.fSVFeedback
 );
 
+G_StablePlatformScaledIO.fPlatformAngleDeg := F_rad2deg(G_StablePlatformScaledIO.fPlatformAngle);
+
+// Manual Control
 
 fbJoystick(
-	bEnable := bManualMode,
+	bEnable := G_StablePlatformIO.bManualMode,
 	nRawInput := G_Inputs.stJoyLX.nValue,
 	stJoystickInputScaling := G_StablePlatformParameters.stJoystickInputScalingX,
 	fNormalizedOutput => G_StablePlatformScaledIO.fJoystickNormalizedX
 );
 
+// Automode Control
+fbAutoModeControl(
+	bEnable := G_StablePlatformIO.bAutoMode,
+	bModeSelector := G_StablePlatformIO.bMotionModeSelector,
+	fSampleTime := G_MachineControl.fSampleTime,
+	fPistonPosition := G_StablePlatformScaledIO.fPistonPosition,
+	fControlSignal => G_StablePlatformIO.fAutoModeControlSignal
+);
+
+
+
 // Outputs
 fbSVOutput(
-	bEnable := G_Inputs.bJoystickLeftEnable AND bManualMode,
+	bEnable := NOT(G_Inputs.bRedButton) AND G_StablePlatformIO.bActivated,
 	bDeadBandCompOn := FALSE,
 	stValveDeadBand := G_StablePlatformParameters.stSVValveDeadBand,
-	fNormalizedInput := -G_StablePlatformScaledIO.fJoystickNormalizedX,
+	fNormalizedInput := G_StablePlatformIO.fControlSignal,
 	nOutput => G_StablePlatformIO.nSVControlSignal
 );
 
-G_StablePlatformIO.bSVEnable := bManualMode AND G_StablePlatformIO.bEMG_OK;
+G_StablePlatformIO.bSVEnable := G_StablePlatformIO.bActivated;
 
 fbPistonPos(
 	nRawInput := G_StablePlatformIO.nPistonPosition,
@@ -73,19 +108,51 @@ fbPistonVel(
 );
 
 
-G_StablePlatformParameters.fPlatformAngle := fPlatformAngleTheta1(fStroke:=G_StablePlatformScaledIO.fPistonPosition);]]></ST>
+G_StablePlatformScaledIO.fPlatformAngle := fPlatformAngleTheta1(fStroke:=G_StablePlatformScaledIO.fPistonPosition) + F_deg2rad(G_StablePlatformParameters.fAngleOffsetDeg);
+
+
+]]></ST>
     </Implementation>
     <LineIds Name="P_StablePlatform">
+      <LineId Id="121" Count="0" />
+      <LineId Id="126" Count="1" />
+      <LineId Id="131" Count="0" />
+      <LineId Id="128" Count="1" />
+      <LineId Id="133" Count="2" />
+      <LineId Id="139" Count="0" />
+      <LineId Id="192" Count="0" />
+      <LineId Id="141" Count="0" />
+      <LineId Id="143" Count="0" />
+      <LineId Id="142" Count="0" />
+      <LineId Id="191" Count="0" />
+      <LineId Id="137" Count="1" />
+      <LineId Id="140" Count="0" />
+      <LineId Id="193" Count="0" />
+      <LineId Id="136" Count="0" />
+      <LineId Id="122" Count="0" />
       <LineId Id="5" Count="0" />
       <LineId Id="13" Count="22" />
       <LineId Id="54" Count="0" />
-      <LineId Id="36" Count="7" />
+      <LineId Id="183" Count="0" />
+      <LineId Id="146" Count="1" />
+      <LineId Id="36" Count="6" />
+      <LineId Id="149" Count="0" />
+      <LineId Id="148" Count="0" />
+      <LineId Id="150" Count="0" />
+      <LineId Id="168" Count="2" />
+      <LineId Id="167" Count="0" />
+      <LineId Id="188" Count="0" />
+      <LineId Id="166" Count="0" />
+      <LineId Id="189" Count="1" />
+      <LineId Id="43" Count="0" />
       <LineId Id="12" Count="0" />
       <LineId Id="45" Count="6" />
       <LineId Id="65" Count="1" />
       <LineId Id="70" Count="0" />
       <LineId Id="95" Count="13" />
       <LineId Id="81" Count="0" />
+      <LineId Id="185" Count="1" />
+      <LineId Id="184" Count="0" />
     </LineIds>
   </POU>
 </TcPlcObject>

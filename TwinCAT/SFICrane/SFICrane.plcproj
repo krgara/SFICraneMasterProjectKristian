@@ -137,19 +137,49 @@
     <Compile Include="PlcTask.TcTTO">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="StablePlatform\FB_AnalogInputScalingPlusMinus.TcPOU">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="StablePlatform\fPlatformAngleTheta1.TcPOU">
+    <Compile Include="StablePlatform\Function Blocks\FB_AnalogInputScalingPlusMinus.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="StablePlatform\Function Blocks\FB_AnalogInputScaling_1.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="StablePlatform\Function Blocks\FB_AutoModeControl.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="StablePlatform\Function Blocks\FB_Clock.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="StablePlatform\Function Blocks\FB_CylinderMotionControl.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="StablePlatform\Function Blocks\FB_JoystickInputScaling_1.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="StablePlatform\Function Blocks\FB_RampMotionGenerator.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="StablePlatform\Function Blocks\FB_ValveOutput.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="StablePlatform\Function Blocks\FB_WaveMotionGenerator.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="StablePlatform\Function Blocks\FB_WaveMotionGenerator_1.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="StablePlatform\Functions\fPlatformAngleTheta1.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="StablePlatform\Functions\F_deg2rad.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="StablePlatform\Functions\F_rad2deg.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="StablePlatform\Functions\F_PlatformAnglePos2CylPos.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="StablePlatform\Functions\F_PlatformAngleVel2CylVel.TcPOU">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="StablePlatform\GVL\G_StablePlatformIO.TcGVL">
@@ -166,6 +196,10 @@
     </Compile>
     <Compile Include="StablePlatform\P_StablePlatform.TcPOU">
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="StablePlatform\StablePlatform.TcVIS">
+      <SubType>Code</SubType>
+      <DependentUpon>Visualization Manager.TcVMO</DependentUpon>
     </Compile>
     <Compile Include="StablePlatform\Struct\ST_AnalogInputScaling_1.TcDUT">
       <SubType>Code</SubType>
@@ -250,6 +284,10 @@
       <DefaultResolution>Tc3_Module, * (Beckhoff Automation GmbH)</DefaultResolution>
       <Namespace>Tc3_Module</Namespace>
     </PlaceholderReference>
+    <PlaceholderReference Include="VisuDialogs">
+      <DefaultResolution>VisuDialogs, * (System)</DefaultResolution>
+      <Namespace>VisuDialogs</Namespace>
+    </PlaceholderReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AXIS CONTROL" />
@@ -262,6 +300,7 @@
     <Folder Include="MACHINE CONTROL\KinematicFunctions2d" />
     <Folder Include="StablePlatform" />
     <Folder Include="OUTPUTS" />
+    <Folder Include="StablePlatform\Functions" />
     <Folder Include="StablePlatform\GVL" />
     <Folder Include="StablePlatform\Function Blocks" />
     <Folder Include="StablePlatform\Struct" />

@@ -13,7 +13,7 @@ VAR
 		
 END_VAR]]></Declaration>
     <Implementation>
-      <ST><![CDATA[bEnableJoystick := NOT(P_StablePlatform.bManualMode);
+      <ST><![CDATA[bEnableJoystick := NOT(G_StablePlatformIO.bManualMode);
 
 fbJoystickLeftVert(
 	bEnable := bEnableJoystick,

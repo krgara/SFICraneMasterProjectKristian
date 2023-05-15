@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="F_deg2rad" Id="{f03115d6-0cc3-427c-baf0-660c1dc69a12}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION F_deg2rad : LREAL
+VAR_INPUT
+	fInputRad : LREAL;
+END_VAR
+VAR
+	pi : LREAL := 3.14159265;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[F_deg2rad := (pi/180)*fInputRad;]]></ST>
+    </Implementation>
+    <LineIds Name="F_deg2rad">
+      <LineId Id="7" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

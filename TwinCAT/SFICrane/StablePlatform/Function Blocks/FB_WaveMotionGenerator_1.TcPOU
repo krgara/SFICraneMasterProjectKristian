@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_WaveMotionGenerator_1" Id="{8bf1ac56-addb-492d-aec7-273b045a0ece}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_WaveMotionGenerator_1
+VAR_INPUT
+	bEnable: BOOL;
+	fBias_deg: LREAL;
+	fTheta0_deg: LREAL;
+	fFreq_rads: LREAL;
+	Fphase_rad: LREAL;
+	fCyclicTime_s: LREAL;
+END_VAR
+VAR_OUTPUT
+	fOmega_degs: LREAL;
+	fTheta_deg: LREAL;
+END_VAR
+VAR
+	fTheta_deg_tmp: LREAL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+(* Outputs for Atomic SubSystem: '<Root>/FB_WaveMotionGenerator' *)
+(* Switch: '<S1>/Switch1' incorporates:
+ *  Switch: '<S1>/Switch2' *)
+(* y=amplitude×sin(frequency×time+phase)+bias *)
+(* if t>=t0 && t<tFinal *)
+(* x = x0+A*sin(w*(t-t0)); *)
+(* xDot = w*A*cos(w*(t-t0)); *)
+(* MATLAB Function 'FB_WaveMotionGenerator/WaveSignal': '<S2>:1' *)
+(* '<S2>:1:6' x = A*cos(w*t+phase) + x0; *)
+(* '<S2>:1:7' xDot = -w*A*sin(w*t+phase); *)
+(* else  *)
+(* x = x0;  *)
+(* xDot = 0; *)
+(* end *)
+
+IF bEnable THEN 
+    (* MATLAB Function: '<S1>/WaveSignal' *)
+    fTheta_deg_tmp := (fFreq_rads * fCyclicTime_s) + Fphase_rad;
+    (* Outport: '<Root>/fTheta_deg' incorporates:
+     *  MATLAB Function: '<S1>/WaveSignal' *)
+    fTheta_deg := (COS(fTheta_deg_tmp) * fTheta0_deg) + fBias_deg;
+    (* Outport: '<Root>/fOmega_degs' incorporates:
+     *  MATLAB Function: '<S1>/WaveSignal' *)
+    fOmega_degs := SIN(fTheta_deg_tmp) * (( -fFreq_rads) * fTheta0_deg);
+ELSE 
+    (* Outport: '<Root>/fTheta_deg' *)
+    fTheta_deg := fTheta0_deg;
+    (* Outport: '<Root>/fOmega_degs' incorporates:
+     *  Constant: '<S1>/Constant' *)
+    fOmega_degs := 0.0;
+END_IF;
+
+(* End of Switch: '<S1>/Switch1' *)
+(* End of Outputs for SubSystem: '<Root>/FB_WaveMotionGenerator' *)
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="FB_WaveMotionGenerator_1">
+      <LineId Id="3" Count="35" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

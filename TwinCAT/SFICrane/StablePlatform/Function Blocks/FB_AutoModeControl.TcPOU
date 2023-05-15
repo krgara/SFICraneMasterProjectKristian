@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_AutoModeControl" Id="{dec66a23-663e-4991-9103-8d713fb24447}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_AutoModeControl
+VAR_INPUT
+	bEnable : BOOL; 
+	bModeSelector : BOOL; 
+	fSampleTime : LREAL; 
+	fPistonPosition : LREAL;
+END_VAR
+VAR_OUTPUT
+	fControlSignal : LREAL;
+END_VAR
+VAR
+	fbCylinderMotionCtonrol : FB_CylinderMotionControl;
+	fbClock : FB_Clock;	
+	fbRampMotionGenerator : FB_RampMotionGenerator;
+	fbWaveMotionGenerator : FB_WaveMotionGenerator;
+	bEnableRampMotionGenerator : BOOL;
+	bEnableWaveMotionGenerator : BOOL; 
+	bRampMotionPlatformCylPos0_m : LREAL; 
+	bRampMotionPlatformPositionSP_m : LREAL;
+
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[// Enable Motion Mode
+IF bEnable AND G_StablePlatformIO.bMotionModeSelector THEN 
+	bEnableWaveMotionGenerator := TRUE;
+	bEnableRampMotionGenerator := FALSE;
+ELSIF bEnable AND NOT(G_StablePlatformIO.bMotionModeSelector) THEN 	
+	bEnableWaveMotionGenerator := FALSE;
+	bEnableRampMotionGenerator := TRUE;
+ELSE
+	bEnableWaveMotionGenerator := FALSE;
+	bEnableRampMotionGenerator := FALSE;
+END_IF
+
+fbClock(
+	bEnable := bEnable,
+	bStart := G_StablePlatformIO.bStartMotionGenerator,
+	bStop := NOT(G_Inputs.bAutoModeSelector OR G_Inputs.bManualModeSelector),
+	fCycleTime := fSampleTime,
+	fTime => G_StablePlatformIO.fTime
+);
+
+// Ramp Motion Generator
+bRampMotionPlatformCylPos0_m := F_PlatformAnglePos2CylPos(F_deg2rad(G_StablePlatformIO.bRampMotionPos0_deg));
+bRampMotionPlatformPositionSP_m := F_PlatformAnglePos2CylPos(F_deg2rad(G_StablePlatformIO.bRampMotionPositionSP_deg));
+
+fbRampMotionGenerator(
+	bEnable := bEnableRampMotionGenerator, 
+	bFullPeriode := G_StablePlatformIO.bRampMotionFullPeriode,
+	fCylPos0_m := bRampMotionPlatformCylPos0_m,
+	fCylVel0_ms := G_StablePlatformIO.bRampMotionCylVel0_ms,
+	fPositionSP_m := bRampMotionPlatformPositionSP_m,
+	fVelocitySP_ms := G_StablePlatformIO.bRampMotionVelocitySP_ms,
+	ft0_s := G_StablePlatformIO.bRampMotiont0_s,
+	ftRamp_s := G_StablePlatformIO.bRampMotiontRamp_s,
+	ftHoldPos_s := G_StablePlatformIO.bRampMotiontHoldPos_s,
+	fSimulationTime_s := fbClock.fTime
+);
+
+
+// Wave Motion Generator
+fbWaveMotionGenerator(
+	bEnable := bEnableWaveMotionGenerator,
+	fBias_deg := 0.0,
+	fTheta0_deg := G_StablePlatformIO.fWaveMotionAplitudeTheta0_deg,
+	fFreq_rads := G_StablePlatformIO.WaveMotionFreq_rads,
+	Fphase_rad := 0.0,
+	fCyclicTime_s := fbClock.fTime
+);
+
+G_StablePlatformIO.fWaveMotionOmega_degs := fbWaveMotionGenerator.fOmega_degs;
+G_StablePlatformIO.fWaveMotionTheta_deg := fbWaveMotionGenerator.fTheta_deg;
+
+IF bEnableRampMotionGenerator THEN
+	G_StablePlatformIO.fCylVelRef_ms := fbRampMotionGenerator.VelocityRef_ms;
+	G_StablePlatformIO.fCylPosRef_m := fbRampMotionGenerator.PositionRef_m; 
+ELSIF bEnableWaveMotionGenerator THEN
+	G_StablePlatformIO.fCylVelRef_ms := F_PlatformAngleVel2CylVel(F_deg2rad(G_StablePlatformIO.fWaveMotionTheta_deg),F_deg2rad(G_StablePlatformIO.fWaveMotionOmega_degs));
+	G_StablePlatformIO.fCylPosRef_m := F_PlatformAnglePos2CylPos(F_deg2rad(G_StablePlatformIO.fWaveMotionTheta_deg));
+ELSE
+	G_StablePlatformIO.fCylVelRef_ms := 0.0;
+	G_StablePlatformIO.fCylPosRef_m := 0.0;
+END_IF
+
+fbCylinderMotionCtonrol(
+	ssMethodType :=  BOOL_TO_SINT(bEnable),
+	bEnableFeedForward  := G_StablePlatformIO.bEnableFeedForward,
+	fMaxValveFlow_lmin := G_StablePlatformIO.fMaxValveFlow_lmin,
+	bEnableFeedBackControl := G_StablePlatformIO.bEnableFeedBackControl,
+	bEnableIntegralControl := G_StablePlatformIO.bEnableIntegralControl,
+	fProportionalGain := G_StablePlatformIO.fProportionalGain,
+	fIntegralGain := G_StablePlatformIO.fIntegralGain,
+	fMaxPosError_mm := G_StablePlatformIO.fMaxPosError_mm,
+	fCylVelRef_ms := G_StablePlatformIO.fCylVelRef_ms,
+	fCylPosRef_m := G_StablePlatformIO.fCylPosRef_m,
+	fCylPos_m := fPistonPosition
+);
+
+IF fbClock.fTime > 0 THEN
+	fControlSignal := LIMIT(-G_StablePlatformParameters.fMaxControlSignal, fbCylinderMotionCtonrol.fSvSignal, G_StablePlatformParameters.fMaxControlSignal);
+ELSE
+	fControlSignal := 0.0;	
+END_IF]]></ST>
+    </Implementation>
+    <LineIds Name="FB_AutoModeControl">
+      <LineId Id="103" Count="16" />
+      <LineId Id="182" Count="0" />
+      <LineId Id="120" Count="17" />
+      <LineId Id="178" Count="0" />
+      <LineId Id="138" Count="18" />
+      <LineId Id="171" Count="3" />
+      <LineId Id="157" Count="13" />
+      <LineId Id="34" Count="0" />
+      <LineId Id="207" Count="0" />
+      <LineId Id="205" Count="0" />
+      <LineId Id="204" Count="0" />
+      <LineId Id="208" Count="2" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

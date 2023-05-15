@@ -52,6 +52,7 @@ fbInverse(
 	fPtXd := fRefPosX, 
 	fPtYd := fRefPosY, 
 	fTheta1 := G_InverseKinematics.fTheta1,
+	//fTheta1 := G_StablePlatformScaledIO.fPlatformAngleDeg*(PI/180),
 	
 	fTheta3 => G_InverseKinematics.fAngleMainArmInverse, 
 	fTheta4 => G_InverseKinematics.fAngleKnuckleArmInverse,
@@ -60,7 +61,7 @@ fbInverse(
 );
 
 fbForward(
-	fTheta1 := G_StablePlatformParameters.fPlatformAngle,
+	fTheta1 := G_StablePlatformScaledIO.fPlatformAngle,
 	fStrokeActuatorMain := (G_MachineControl.fStrokeActuatorMain+11),
 	fStrokeActuatorKnuckle := (G_MachineControl.fStrokeActuatorKnuckle-7),
 	x => G_MachineControl.fCraneForwardX,
@@ -107,7 +108,9 @@ G_MachineControl.fWinchMotorAngleAbsRef := G_MachineControl.fEncoderValueStartAu
 ]]></ST>
     </Implementation>
     <LineIds Name="P_MachineControl">
-      <LineId Id="426" Count="36" />
+      <LineId Id="426" Count="30" />
+      <LineId Id="545" Count="0" />
+      <LineId Id="457" Count="5" />
       <LineId Id="468" Count="15" />
       <LineId Id="516" Count="3" />
       <LineId Id="521" Count="0" />

@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="F_PlatformAngleVel2CylVel" Id="{7f45fc9b-6fcd-4fd4-9eff-a2f0d18ec798}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION F_PlatformAngleVel2CylVel : LREAL
+VAR_INPUT
+	fPlatformAngleTheta1Ref : LREAL;
+	fPlatformAngleOmega1Ref : LREAL;
+END_VAR
+VAR
+	pi : LREAL := 3.14159265;
+	fMinLengthPlatformCylinder : LREAL := 0.878;
+	fOffsetAngleDeg : LREAL := 55.4;
+	fOffsetAngleRad : LREAL	:= fOffsetAngleDeg*pi/180;
+	fLengthA : LREAL	:= 0.513; 
+	fLengthC : LREAL	:= 1.353; 
+	fAngleBeta : LREAL;
+	fCylinderLength : LREAL; 
+	K : LREAL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[fAngleBeta := fPlatformAngleTheta1Ref - fOffsetAngleRad;
+
+fCylinderLength := SQRT(fLengthA*fLengthA + fLengthC*fLengthC - 2*fLengthA*fLengthC*COS(fAngleBeta));
+
+K := fLengthA*fLengthA + fLengthC*fLengthC - 2 * fLengthA * fLengthC * COS(fAngleBeta);
+
+F_PlatformAngleVel2CylVel := (fLengthA * fLengthC * SIN(fAngleBeta)) / SQRT(K)*fPlatformAngleOmega1Ref;]]></ST>
+    </Implementation>
+    <LineIds Name="F_PlatformAngleVel2CylVel">
+      <LineId Id="14" Count="2" />
+      <LineId Id="37" Count="0" />
+      <LineId Id="36" Count="0" />
+      <LineId Id="19" Count="0" />
+      <LineId Id="7" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

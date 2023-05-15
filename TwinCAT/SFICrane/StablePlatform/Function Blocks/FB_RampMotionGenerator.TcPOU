@@ -1,0 +1,242 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="FB_RampMotionGenerator" Id="{7c2aea2a-9970-4f2d-a454-30018ab66b7a}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_RampMotionGenerator
+VAR_INPUT
+	bEnable: BOOL;
+	bFullPeriode: BOOL;
+	fCylPos0_m: LREAL;
+	fCylVel0_ms: LREAL;
+	fPositionSP_m: LREAL;
+	fVelocitySP_ms: LREAL;
+	ft0_s: LREAL;
+	ftRamp_s: LREAL;
+	ftHoldPos_s: LREAL;
+	fSimulationTime_s: LREAL;
+END_VAR
+VAR_OUTPUT
+	VelocityRef_ms: LREAL;
+	PositionRef_m: LREAL;
+END_VAR
+VAR
+	Error: DINT;
+	slopeExt: LREAL;
+	slopeRetr: LREAL;
+	tHold: LREAL;
+	x1: LREAL;
+	x2: LREAL;
+	x4: LREAL;
+	x2_tmp: LREAL;
+	x2_tmp_tmp: LREAL;
+	x4_tmp: LREAL;
+	x4_tmp_tmp: LREAL;
+	x1_tmp_tmp: LREAL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[
+(* Outputs for Atomic SubSystem: '<Root>/FB_RampMotionGenerator' *)
+(* MATLAB Function: '<S1>/RampSignal' *)
+(* MATLAB Function 'FB_RampMotionGenerator/RampSignal': '<S2>:1' *)
+(* '<S2>:1:2' x_SP = x_ref - x0; *)
+(* '<S2>:1:3' vs=v_ref; *)
+(* '<S2>:1:4' slopeExt=v0-vs; *)
+slopeExt := fCylVel0_ms - fVelocitySP_ms;
+(* '<S2>:1:5' slopeRetr=-vs-v0; *)
+slopeRetr := ( -fVelocitySP_ms) - fCylVel0_ms;
+(* '<S2>:1:7' as = vs/tRamp; *)
+(* '<S2>:1:8' s_acc=(vs^2-v0^2)/as; *)
+(* '<S2>:1:10' tHold=(x_SP-s_acc)/vs; *)
+tHold := ((fPositionSP_m - fCylPos0_m) - (((fVelocitySP_ms * fVelocitySP_ms) - (fCylVel0_ms * fCylVel0_ms)) / (fVelocitySP_ms / ftRamp_s))) / fVelocitySP_ms;
+(* '<S2>:1:12' if tHold < 0 *)
+
+//IF (ABS(tHold)) < ftRamp_s THEN 
+    (* '<S2>:1:13' Error = 1; *)
+//    Error := 1;
+//ELSE 
+    (* '<S2>:1:14' else *)
+    (* '<S2>:1:15' Error = 0; *)
+//    Error := 0;
+//END_IF;
+
+Error := 0;
+
+(* '<S2>:1:18' t1=tRamp; *)
+(* '<S2>:1:19' t2=tHold; *)
+(* '<S2>:1:20' t3=tRamp; *)
+(* '<S2>:1:21' t4=tWait; *)
+(* '<S2>:1:22' t5=t1; *)
+(* '<S2>:1:23' t6=t2; *)
+(* '<S2>:1:24' t7=t3; *)
+(* '<S2>:1:26' x1 = x0 + v0*((t0+t1)-t0)-(slopeExt/t1)*((t0+t1)-t0)^2/2; *)
+x2_tmp_tmp := ft0_s + ftRamp_s;
+x2_tmp := x2_tmp_tmp - ft0_s;
+x1_tmp_tmp := slopeExt / ftRamp_s;
+x1 := ((x2_tmp * fCylVel0_ms) + fCylPos0_m) - ((x1_tmp_tmp * (x2_tmp * x2_tmp)) / 2.0);
+(* '<S2>:1:27' x2 = x1 + vs*((t0+t1+t2)-(t0+t1)); *)
+x2_tmp := x2_tmp_tmp + tHold;
+x2 := ((x2_tmp - x2_tmp_tmp) * fVelocitySP_ms) + x1;
+(* '<S2>:1:28' x4 = x_ref - v0*((t0+t1+t2+t3+t4+t5)-(t0+t1+t2+t3+t4))+(slopeRetr/t5)*((t0+t1+t2+t3+t4+t5)-(t0+t1+t2+t3+t4))^2/2; *)
+x4_tmp_tmp := x2_tmp + ftRamp_s;
+x4_tmp := x4_tmp_tmp + ftHoldPos_s;
+x4 := (x4_tmp + ftRamp_s) - x4_tmp;
+x4 := (fPositionSP_m - (x4 * fCylVel0_ms)) + (((slopeRetr / ftRamp_s) * (x4 * x4)) / 2.0);
+(* '<S2>:1:29' x5 = x4-vs*((t0+t1+t2+t3+t4+t5+t6)-(t0+t1+t2+t3+t4+t5)); *)
+(* '<S2>:1:31' if FullPeriode == 1 *)
+
+IF bFullPeriode THEN 
+    (* '<S2>:1:32' if Error == 1 *)
+
+    IF Error = 1 THEN 
+        (* '<S2>:1:33' x = x0; *)
+        PositionRef_m := fCylPos0_m;
+        (* '<S2>:1:34' v = v0; *)
+        VelocityRef_ms := fCylVel0_ms;
+    ELSIF (fSimulationTime_s >= 0.0) AND (fSimulationTime_s < ft0_s) THEN 
+        (* '<S2>:1:35' elseif t>=0 && t<t0 *)
+        (* '<S2>:1:36' x = x0; *)
+        PositionRef_m := fCylPos0_m;
+        (* '<S2>:1:37' v = v0; *)
+        VelocityRef_ms := fCylVel0_ms;
+    ELSIF (fSimulationTime_s >= ft0_s) AND (fSimulationTime_s < x2_tmp_tmp) THEN 
+        (* '<S2>:1:38' elseif t>=t0 && t<(t0+t1) *)
+        (* '<S2>:1:39' x = x0 + v0*(t-t0)-(slopeExt/t1)*(t-t0)^2/2; *)
+        slopeRetr := fSimulationTime_s - ft0_s;
+        PositionRef_m := ((slopeRetr * fCylVel0_ms) + fCylPos0_m) - ((x1_tmp_tmp * (slopeRetr * slopeRetr)) / 2.0);
+        (* '<S2>:1:40' v = v0-(slopeExt/t1)*(t-t0); *)
+        VelocityRef_ms := fCylVel0_ms - (x1_tmp_tmp * slopeRetr);
+    ELSIF (fSimulationTime_s >= x2_tmp_tmp) AND (fSimulationTime_s < x2_tmp) THEN 
+        (* '<S2>:1:41' elseif t>=(t0+t1) && t<(t0+t1+t2) *)
+        (* '<S2>:1:42' x = x1 + vs*(t-(t0+t1)); *)
+        PositionRef_m := ((fSimulationTime_s - x2_tmp_tmp) * fVelocitySP_ms) + x1;
+        (* '<S2>:1:43' v = vs; *)
+        VelocityRef_ms := fVelocitySP_ms;
+    ELSIF (fSimulationTime_s >= x2_tmp) AND (fSimulationTime_s < x4_tmp_tmp) THEN 
+        (* '<S2>:1:44' elseif t>=(t0+t1+t2) && t<(t0+t1+t2+t3) *)
+        (* '<S2>:1:45' x = x2+vs*(t-(t0+t1+t2))+(slopeExt/t3)*(t-(t0+t1+t2))^2/2; *)
+        slopeRetr := fSimulationTime_s - ((ft0_s + ftRamp_s) + tHold);
+        PositionRef_m := ((slopeRetr * fVelocitySP_ms) + x2) + ((x1_tmp_tmp * (slopeRetr * slopeRetr)) / 2.0);
+        (* '<S2>:1:46' v = vs+(slopeExt/t3)*(t-(t0+t1+t2)); *)
+        VelocityRef_ms := (slopeRetr * (slopeExt / ftRamp_s)) + fVelocitySP_ms;
+    ELSIF (fSimulationTime_s >= x4_tmp_tmp) AND (fSimulationTime_s < x4_tmp) THEN 
+        (* '<S2>:1:47' elseif t>=(t0+t1+t2+t3) && t<(t0+t1+t2+t3+t4) *)
+        (* '<S2>:1:48' x = x_ref; *)
+        PositionRef_m := fPositionSP_m;
+        (* '<S2>:1:49' v = v0; *)
+        VelocityRef_ms := fCylVel0_ms;
+    ELSE 
+        x1_tmp_tmp := ((x2_tmp_tmp + tHold) + ftRamp_s) + ftHoldPos_s;
+        slopeExt := x1_tmp_tmp + ftRamp_s;
+
+        IF (fSimulationTime_s >= x1_tmp_tmp) AND (fSimulationTime_s < slopeExt) THEN 
+            (* '<S2>:1:50' elseif t>=(t0+t1+t2+t3+t4) && t<(t0+t1+t2+t3+t4+t5) *)
+            (* '<S2>:1:51' x = x_ref - v0*(t-(t0+t1+t2+t3+t4))+(slopeRetr/t5)*(t-(t0+t1+t2+t3+t4))^2/2; *)
+            tHold := fSimulationTime_s - x1_tmp_tmp;
+            slopeRetr := slopeRetr / ftRamp_s;
+            PositionRef_m := (fPositionSP_m - (tHold * fCylVel0_ms)) + ((slopeRetr * (tHold * tHold)) / 2.0);
+            (* '<S2>:1:52' v = v0+(slopeRetr/t5)*(t-(t0+t1+t2+t3+t4)); *)
+            VelocityRef_ms := (tHold * slopeRetr) + fCylVel0_ms;
+        ELSE 
+            x1_tmp_tmp := slopeExt + tHold;
+
+            IF (fSimulationTime_s >= slopeExt) AND (fSimulationTime_s < x1_tmp_tmp) THEN 
+                (* '<S2>:1:53' elseif t>=(t0+t1+t2+t3+t4+t5) && t<(t0+t1+t2+t3+t4+t5+t6) *)
+                (* '<S2>:1:54' x = x4-vs*(t-(t0+t1+t2+t3+t4+t5)); *)
+                PositionRef_m := x4 - ((fSimulationTime_s - slopeExt) * fVelocitySP_ms);
+                (* '<S2>:1:55' v = -vs; *)
+                VelocityRef_ms :=  -fVelocitySP_ms;
+            ELSIF (fSimulationTime_s >= x1_tmp_tmp) AND (fSimulationTime_s < (x1_tmp_tmp + ftRamp_s)) THEN 
+                (* '<S2>:1:56' elseif t>=(t0+t1+t2+t3+t4+t5+t6) && t<(t0+t1+t2+t3+t4+t5+t6+t7) *)
+                (* '<S2>:1:57' x = x5-vs*(t-(t0+t1+t2+t3+t4+t5+t6))-(slopeRetr/t3)*(t-(t0+t1+t2+t3+t4+t5+t6))^2/2; *)
+                tHold := fSimulationTime_s - x1_tmp_tmp;
+                slopeRetr := slopeRetr / ftRamp_s;
+                PositionRef_m := ((x4 - ((x1_tmp_tmp - slopeExt) * fVelocitySP_ms)) - (tHold * fVelocitySP_ms)) - ((slopeRetr * (tHold * tHold)) / 2.0);
+                (* '<S2>:1:58' v = -vs-(slopeRetr/t3)*(t-(t0+t1+t2+t3+t4+t5+t6)); *)
+                VelocityRef_ms := ( -fVelocitySP_ms) - (tHold * slopeRetr);
+            ELSE 
+                (* '<S2>:1:59' else *)
+                (* '<S2>:1:60' x = x0; *)
+                PositionRef_m := fCylPos0_m;
+                (* '<S2>:1:61' v = v0; *)
+                VelocityRef_ms := fCylVel0_ms;
+            END_IF;
+
+        END_IF;
+
+    END_IF;
+
+    (* '<S2>:1:63' T = t0+t1+t2+t3+t4+t5+t6+t7; *)
+ELSE 
+    (* '<S2>:1:64' else *)
+    (* '<S2>:1:65' if Error == 1 *)
+
+    IF Error = 1 THEN 
+        (* '<S2>:1:66' x = x0; *)
+        PositionRef_m := fCylPos0_m;
+        (* '<S2>:1:67' v = v0; *)
+        VelocityRef_ms := fCylVel0_ms;
+    ELSIF (fSimulationTime_s >= 0.0) AND (fSimulationTime_s < ft0_s) THEN 
+        (* '<S2>:1:68' elseif t>=0 && t<t0 *)
+        (* '<S2>:1:69' x = x0; *)
+        PositionRef_m := fCylPos0_m;
+        (* '<S2>:1:70' v = v0; *)
+        VelocityRef_ms := fCylVel0_ms;
+    ELSIF (fSimulationTime_s >= ft0_s) AND (fSimulationTime_s < x2_tmp_tmp) THEN 
+        (* '<S2>:1:71' elseif t>=t0 && t<(t0+t1) *)
+        (* '<S2>:1:72' x = x0 + v0*(t-t0)-(slopeExt/t1)*(t-t0)^2/2; *)
+        slopeRetr := fSimulationTime_s - ft0_s;
+        PositionRef_m := (((fSimulationTime_s - ft0_s) * fCylVel0_ms) + fCylPos0_m) - ((x1_tmp_tmp * (slopeRetr * slopeRetr)) / 2.0);
+        (* '<S2>:1:73' v = v0-(slopeExt/t1)*(t-t0); *)
+        VelocityRef_ms := fCylVel0_ms - ((slopeExt / ftRamp_s) * slopeRetr);
+    ELSIF (fSimulationTime_s >= x2_tmp_tmp) AND (fSimulationTime_s < x2_tmp) THEN 
+        (* '<S2>:1:74' elseif t>=(t0+t1) && t<(t0+t1+t2) *)
+        (* '<S2>:1:75' x = x1 + vs*(t-(t0+t1)); *)
+        PositionRef_m := ((fSimulationTime_s - (ft0_s + ftRamp_s)) * fVelocitySP_ms) + x1;
+        (* '<S2>:1:76' v = vs; *)
+        VelocityRef_ms := fVelocitySP_ms;
+    ELSIF (fSimulationTime_s >= x2_tmp) AND (fSimulationTime_s < x4_tmp_tmp) THEN 
+        (* '<S2>:1:77' elseif t>=(t0+t1+t2) && t<(t0+t1+t2+t3) *)
+        (* '<S2>:1:78' x = x2+vs*(t-(t0+t1+t2))+(slopeExt/t3)*(t-(t0+t1+t2))^2/2; *)
+        slopeRetr := fSimulationTime_s - ((ft0_s + ftRamp_s) + tHold);
+        slopeExt := slopeExt / ftRamp_s;
+        PositionRef_m := ((slopeRetr * fVelocitySP_ms) + x2) + ((slopeExt * (slopeRetr * slopeRetr)) / 2.0);
+        (* '<S2>:1:79' v = vs+(slopeExt/t3)*(t-(t0+t1+t2)); *)
+        VelocityRef_ms := (slopeRetr * slopeExt) + fVelocitySP_ms;
+    ELSE 
+        (* '<S2>:1:80' else *)
+        (* '<S2>:1:81' x = x_ref; *)
+        PositionRef_m := fPositionSP_m;
+        (* '<S2>:1:82' v = v0; *)
+        VelocityRef_ms := fCylVel0_ms;
+    END_IF;
+
+    (* '<S2>:1:84' T = t0+t1+t2+t3+t4; *)
+END_IF;
+
+(* End of MATLAB Function: '<S1>/RampSignal' *)
+
+
+(* Switch: '<S1>/Switch' incorporates:
+ *  Switch: '<S1>/Switch1' *)
+
+IF  NOT bEnable THEN 
+    (* Outport: '<Root>/VelocityRef_ms' *)
+    VelocityRef_ms := fCylVel0_ms;
+    (* Outport: '<Root>/PositionRef_m' *)
+    PositionRef_m := fCylPos0_m;
+END_IF;
+
+(* End of Switch: '<S1>/Switch' *)
+(* End of Outputs for SubSystem: '<Root>/FB_RampMotionGenerator' *)
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="FB_RampMotionGenerator">
+      <LineId Id="3" Count="23" />
+      <LineId Id="228" Count="0" />
+      <LineId Id="227" Count="0" />
+      <LineId Id="27" Count="168" />
+      <LineId Id="2" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

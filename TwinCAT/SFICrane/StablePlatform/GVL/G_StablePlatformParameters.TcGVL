@@ -16,7 +16,8 @@ VAR_GLOBAL
 	fOffsetAngleRad					: LREAL := Tc2_Utilities.DEG_TO_RAD(fOffsetAngleDeg);
 	fLengthA						: LREAL := 0.513; //Length from platform bearing to cylinder upper mount
 	fLengthC						: LREAL := 1.353; //Length from platform bearing to cylinder lower mount
-	fPlatformAngle					: LREAL; //Platform angle theta1 in radians
+	fAngleOffsetDeg 				: LREAL := 0.0;
+	fMaxControlSignal				 : LREAL := 0.2; 
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

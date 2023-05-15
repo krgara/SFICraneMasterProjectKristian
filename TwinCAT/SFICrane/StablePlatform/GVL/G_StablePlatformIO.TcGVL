@@ -19,8 +19,47 @@ VAR_GLOBAL
 	
 	nPistonPosition AT %I* : INT;
 	nPistonVelocity AT %I* : INT;
-	
+
+	// TwinSAFE	
 	bEMG_OK AT %I* : BOOL;
+	
+	// Visualizer HMI
+	bEnable : BOOL;
+	bModeSelector : BOOL;
+	bManualMode : BOOL;
+	bAutoMode : BOOL;
+	bActivated : BOOL;
+	
+	// Stable Control
+	bEnableFeedForward 		: BOOL := TRUE;
+	fMaxValveFlow_lmin 		: LREAL := 45.0;
+	bEnableFeedBackControl	: BOOL := TRUE;
+	bEnableIntegralControl	: BOOL := FALSE;
+	fProportionalGain		: LREAL := 25.0;
+	fIntegralGain			: LREAL := 0.0;
+	fMaxPosError_mm			: LREAL := 0.5;
+	fCylVelRef_ms			: LREAL;
+	fCylPosRef_m			: LREAL;
+	fCylPos_m				: LREAL;
+	bMotionModeSelector : BOOL;
+	bStartMotionGenerator : BOOL;
+	bRampMotionFullPeriode : BOOL;
+	bRampMotionPos0_deg: LREAL := -2.0; 
+	bRampMotionCylVel0_ms : LREAL := 0.0; 
+	bRampMotionPositionSP_deg : LREAL := 0;
+	bRampMotionVelocitySP_ms : LREAL := 0.025; 
+	bRampMotiont0_s : LREAL := 1.0; 
+	bRampMotiontRamp_s : LREAL := 1.0; 
+	bRampMotiontHoldPos_s : LREAL := 2.0;
+
+	fTime : LREAL;
+	fWaveMotionAplitudeTheta0_deg : LREAL := -1.9; 
+	WaveMotionFreq_rads : LREAL := 0.5;
+	fWaveMotionOmega_degs : LREAL; 
+	fWaveMotionTheta_deg : LREAL; 
+	fAutoModeControlSignal :LREAL;
+	
+	fControlSignal : LREAL;
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>
