@@ -2312,7 +2312,7 @@ External Setpoint Generation:
 		</Motion>
 		<Plc>
 			<Project GUID="{64FB78BA-5775-4793-83DB-E4463DEFB246}" Name="SFICrane" PrjFilePath="SFICrane\SFICrane.plcproj" TmcFilePath="SFICrane\SFICrane.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="SFICrane\SFICrane.tmc" TmcHash="{2E2D0EBB-8248-2DFA-9A20-1CF170BD322C}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="SFICrane\SFICrane.tmc" TmcHash="{9AA5D360-FD67-2699-82CB-397AFBBF95CE}">
 					<Name>SFICrane Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
@@ -4945,6 +4945,18 @@ Bit1: Value smaller than Limit2]]></Comment>
 					<Box Id="35" BoxType="9099" BoxFlags="#x00000020">
 						<Name>Term 35 (EL3002)</Name>
 						<ImageId>1006</ImageId>
+						<Xml>
+							<BeckhoffEcatSlavePlugIn>
+								<Channel>
+									<ChannelNo>0</ChannelNo>
+									<Data>01000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</Data>
+								</Channel>
+								<Channel>
+									<ChannelNo>1</ChannelNo>
+									<Data>01000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000002000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</Data>
+								</Channel>
+							</BeckhoffEcatSlavePlugIn>
+						</Xml>
 						<EtherCAT SlaveType="2" PdiType="#x0005" MboxDataLinkLayer="true" StateMBoxPolling="true" CycleMBoxPollingTime="0" CoeType="7" FoeType="1" VendorId="#x00000002" ProductCode="#x0bba3052" RevisionNo="#x00150000" InfoDataAddr="true" TimeoutMailbox2="2000" CheckRevisionNoType="3" PortPhys="51" MaxSlotCount="256" MaxSlotGroupCount="1" SlotPdoIncrement="1" SlotIndexIncrement="16" Type="EL3002 2Ch. Ana. Input +/-10V" Desc="EL3002" PortABoxInfo="#x01000022">
 							<SyncMan>001080002600010001000000800080008000001026010000</SyncMan>
 							<SyncMan>801080002200010002000000800080008000801022010000</SyncMan>
@@ -4955,97 +4967,97 @@ Bit1: Value smaller than Limit2]]></Comment>
 							<BootStrapData>0010f400f410f400</BootStrapData>
 							<Pdo Name="AI Standard Channel 1" Index="#x1a00" Flags="#x0010" SyncMan="3">
 								<ExcludePdo>#x1a01</ExcludePdo>
-								<Entry Name="Status__Underrange" Index="#x6000" Sub="#x01">
+								<Entry Name="Status__Underrange" BitLen="1" Index="#x6000" Sub="#x01" Flags="#x00010000">
 									<Type>BIT</Type>
 									<Comment><![CDATA[Underrange event active]]></Comment>
 								</Entry>
-								<Entry Name="Status__Overrange" Index="#x6000" Sub="#x02">
+								<Entry Name="Status__Overrange" BitLen="1" Index="#x6000" Sub="#x02" Flags="#x00010000">
 									<Type>BIT</Type>
 									<Comment><![CDATA[Overrange event active]]></Comment>
 								</Entry>
-								<Entry Name="Status__Limit 1" Index="#x6000" Sub="#x03">
+								<Entry Name="Status__Limit 1" BitLen="2" Index="#x6000" Sub="#x03" Flags="#x00010000">
 									<Type>BIT2</Type>
 									<Comment><![CDATA[Bit0: Value smaller/equal Limit1
 Bit1: Value bigger/equal Limit1]]></Comment>
 								</Entry>
-								<Entry Name="Status__Limit 2" Index="#x6000" Sub="#x05">
+								<Entry Name="Status__Limit 2" BitLen="2" Index="#x6000" Sub="#x05" Flags="#x00010000">
 									<Type>BIT2</Type>
 									<Comment><![CDATA[Bit0: Value smaller/equal Limit2
 Bit1: Value bigger/equal Limit2]]></Comment>
 								</Entry>
-								<Entry Name="Status__Error" Index="#x6000" Sub="#x07">
+								<Entry Name="Status__Error" BitLen="1" Index="#x6000" Sub="#x07" Flags="#x00010000">
 									<Type>BIT</Type>
 									<Comment><![CDATA[Bit set when Over- or Underrange]]></Comment>
 								</Entry>
-								<Entry Name="Status__">
+								<Entry Name="Status__" BitLen="1">
 									<Type GUID="{18071995-0000-0000-0000-002000000001}">ARRAY [0..0] OF BIT</Type>
 								</Entry>
-								<Entry Name="Status__">
+								<Entry Name="Status__" BitLen="6">
 									<Type GUID="{18071995-0000-0000-0000-002000000006}">ARRAY [0..5] OF BIT</Type>
 								</Entry>
-								<Entry Name="Status__TxPDO State" Index="#x6000" Sub="#x0f">
+								<Entry Name="Status__TxPDO State" BitLen="1" Index="#x6000" Sub="#x0f" Flags="#x00010000">
 									<Type>BIT</Type>
 									<Comment><![CDATA[TRUE when this TxPDO is not valid]]></Comment>
 								</Entry>
-								<Entry Name="Status__TxPDO Toggle" Index="#x6000" Sub="#x10">
+								<Entry Name="Status__TxPDO Toggle" BitLen="1" Index="#x6000" Sub="#x10" Flags="#x00010000">
 									<Type>BIT</Type>
 									<Comment><![CDATA[Bit toggles everytime when new value available]]></Comment>
 								</Entry>
-								<Entry Name="Value" Index="#x6000" Sub="#x11" Flags="#x00010000">
+								<Entry Name="Value" BitLen="16" Index="#x6000" Sub="#x11" Flags="#x00010000">
 									<Type>INT</Type>
 								</Entry>
 							</Pdo>
 							<Pdo Name="AI Compact Channel 1" Index="#x1a01" Flags="#x0010">
 								<ExcludePdo>#x1a00</ExcludePdo>
-								<Entry Name="Value" Index="#x6000" Sub="#x11" Flags="#x00010000">
+								<Entry Name="Value" BitLen="16" Index="#x6000" Sub="#x11" Flags="#x00010000">
 									<Type>INT</Type>
 								</Entry>
 							</Pdo>
 							<Pdo Name="AI Standard Channel 2" Index="#x1a02" Flags="#x0010" SyncMan="3">
 								<ExcludePdo>#x1a03</ExcludePdo>
-								<Entry Name="Status__Underrange" Index="#x6010" Sub="#x01">
+								<Entry Name="Status__Underrange" BitLen="1" Index="#x6010" Sub="#x01" Flags="#x00010000">
 									<Type>BIT</Type>
 									<Comment><![CDATA[Underrange event active]]></Comment>
 								</Entry>
-								<Entry Name="Status__Overrange" Index="#x6010" Sub="#x02">
+								<Entry Name="Status__Overrange" BitLen="1" Index="#x6010" Sub="#x02" Flags="#x00010000">
 									<Type>BIT</Type>
 									<Comment><![CDATA[Overrange event active]]></Comment>
 								</Entry>
-								<Entry Name="Status__Limit 1" Index="#x6010" Sub="#x03">
+								<Entry Name="Status__Limit 1" BitLen="2" Index="#x6010" Sub="#x03" Flags="#x00010000">
 									<Type>BIT2</Type>
 									<Comment><![CDATA[Bit0: Value smaller/equal Limit1
 Bit1: Value bigger/equal Limit1]]></Comment>
 								</Entry>
-								<Entry Name="Status__Limit 2" Index="#x6010" Sub="#x05">
+								<Entry Name="Status__Limit 2" BitLen="2" Index="#x6010" Sub="#x05" Flags="#x00010000">
 									<Type>BIT2</Type>
 									<Comment><![CDATA[Bit0: Value smaller/equal Limit2
 Bit1: Value bigger/equal Limit2]]></Comment>
 								</Entry>
-								<Entry Name="Status__Error" Index="#x6010" Sub="#x07">
+								<Entry Name="Status__Error" BitLen="1" Index="#x6010" Sub="#x07" Flags="#x00010000">
 									<Type>BIT</Type>
 									<Comment><![CDATA[Bit set when Over- or Underrange]]></Comment>
 								</Entry>
-								<Entry Name="Status__">
+								<Entry Name="Status__" BitLen="1">
 									<Type GUID="{18071995-0000-0000-0000-002000000001}">ARRAY [0..0] OF BIT</Type>
 								</Entry>
-								<Entry Name="Status__">
+								<Entry Name="Status__" BitLen="6">
 									<Type GUID="{18071995-0000-0000-0000-002000000006}">ARRAY [0..5] OF BIT</Type>
 								</Entry>
-								<Entry Name="Status__TxPDO State" Index="#x6010" Sub="#x0f">
+								<Entry Name="Status__TxPDO State" BitLen="1" Index="#x6010" Sub="#x0f" Flags="#x00010000">
 									<Type>BIT</Type>
 									<Comment><![CDATA[TRUE when this TxPDO is not valid]]></Comment>
 								</Entry>
-								<Entry Name="Status__TxPDO Toggle" Index="#x6010" Sub="#x10">
+								<Entry Name="Status__TxPDO Toggle" BitLen="1" Index="#x6010" Sub="#x10" Flags="#x00010000">
 									<Type>BIT</Type>
 									<Comment><![CDATA[Bit toggles everytime when new value available]]></Comment>
 								</Entry>
-								<Entry Name="Value" Index="#x6010" Sub="#x11" Flags="#x00010000">
+								<Entry Name="Value" BitLen="16" Index="#x6010" Sub="#x11" Flags="#x00010000">
 									<Type>INT</Type>
 								</Entry>
 							</Pdo>
 							<Pdo Name="AI Compact Channel 2" Index="#x1a03" Flags="#x0010">
 								<ExcludePdo>#x1a02</ExcludePdo>
-								<Entry Name="Value" Index="#x6010" Sub="#x11" Flags="#x00010000">
+								<Entry Name="Value" BitLen="16" Index="#x6010" Sub="#x11" Flags="#x00010000">
 									<Type>INT</Type>
 								</Entry>
 							</Pdo>

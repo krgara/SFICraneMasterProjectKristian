@@ -17,7 +17,9 @@ VAR_GLOBAL
 	fLengthA						: LREAL := 0.513; //Length from platform bearing to cylinder upper mount
 	fLengthC						: LREAL := 1.353; //Length from platform bearing to cylinder lower mount
 	fAngleOffsetDeg 				: LREAL := 0.0;
-	fMaxControlSignal				 : LREAL := 0.2; 
+	fMaxControlSignal				: LREAL := 0.2; 
+	fCutoffFreq 					: LREAL := 0.1;
+	fDamping 						: LREAL := 0.707106781186547;
 END_VAR]]></Declaration>
   </GVL>
 </TcPlcObject>

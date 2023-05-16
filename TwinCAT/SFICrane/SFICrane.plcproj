@@ -155,6 +155,9 @@
     <Compile Include="StablePlatform\Function Blocks\FB_JoystickInputScaling_1.TcPOU">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="StablePlatform\Function Blocks\FB_LowpassFilter.TcPOU">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="StablePlatform\Function Blocks\FB_RampMotionGenerator.TcPOU">
       <SubType>Code</SubType>
     </Compile>

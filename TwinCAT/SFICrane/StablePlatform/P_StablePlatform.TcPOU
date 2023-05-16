@@ -12,6 +12,7 @@ VAR
 	fbJoystick  : FB_JoystickInputScaling;
 	fbSVOutput 	: FB_ValveOutput;
 	fbAutoModeControl : FB_AutoModeControl; 
+	fbLowPassFilter		: FB_LowpassFilter;
 END_VAR
 ]]></Declaration>
     <Implementation>
@@ -77,7 +78,7 @@ fbAutoModeControl(
 	bEnable := G_StablePlatformIO.bAutoMode,
 	bModeSelector := G_StablePlatformIO.bMotionModeSelector,
 	fSampleTime := G_MachineControl.fSampleTime,
-	fPistonPosition := G_StablePlatformScaledIO.fPistonPosition,
+	fPistonPosition := G_StablePlatformScaledIO.fPistionPosFiltered,
 	fControlSignal => G_StablePlatformIO.fAutoModeControlSignal
 );
 
@@ -100,6 +101,13 @@ fbPistonPos(
 	fOutput => G_StablePlatformScaledIO.fPistonPosition
 );
 
+fbLowPassFilter(
+	fInput := G_StablePlatformScaledIO.fPistonPosition,
+	fDeltaT := G_MachineControl.fSampleTime,
+	fCutoffFreq := G_StablePlatformParameters.fCutoffFreq,
+	fDamping := G_StablePlatformParameters.fDamping,
+	fOutput => G_StablePlatformScaledIO.fPistionPosFiltered
+);
 
 fbPistonVel(
 	nRawInput := G_StablePlatformIO.nPistonVelocity,
@@ -108,7 +116,7 @@ fbPistonVel(
 );
 
 
-G_StablePlatformScaledIO.fPlatformAngle := fPlatformAngleTheta1(fStroke:=G_StablePlatformScaledIO.fPistonPosition) + F_deg2rad(G_StablePlatformParameters.fAngleOffsetDeg);
+G_StablePlatformScaledIO.fPlatformAngle := fPlatformAngleTheta1(fStroke:=G_StablePlatformScaledIO.fPistionPosFiltered) + F_deg2rad(G_StablePlatformParameters.fAngleOffsetDeg);
 
 
 ]]></ST>
@@ -149,7 +157,15 @@ G_StablePlatformScaledIO.fPlatformAngle := fPlatformAngleTheta1(fStroke:=G_Stabl
       <LineId Id="45" Count="6" />
       <LineId Id="65" Count="1" />
       <LineId Id="70" Count="0" />
-      <LineId Id="95" Count="13" />
+      <LineId Id="95" Count="4" />
+      <LineId Id="207" Count="0" />
+      <LineId Id="206" Count="0" />
+      <LineId Id="209" Count="0" />
+      <LineId Id="211" Count="0" />
+      <LineId Id="213" Count="1" />
+      <LineId Id="210" Count="0" />
+      <LineId Id="212" Count="0" />
+      <LineId Id="101" Count="7" />
       <LineId Id="81" Count="0" />
       <LineId Id="185" Count="1" />
       <LineId Id="184" Count="0" />
