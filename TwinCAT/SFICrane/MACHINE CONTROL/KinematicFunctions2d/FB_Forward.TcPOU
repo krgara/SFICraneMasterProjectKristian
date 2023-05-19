@@ -34,13 +34,13 @@ END_VAR
 (* '<S1>:1:14' fLengthKnuckleArm		    = 1.158; *)
 (* '<S1>:1:16' fLengthAMain				= 0.614; *)
 (* '<S1>:1:17' fLengthBMain				= 0.571; *)
-(* '<S1>:1:18' fMinLengthActuatorMain		= 0.692; *)
+(* '<S1>:1:18' fMinLengthActuatorMain		= 0.691; *)
 (* '<S1>:1:19' fMaxStrokeActuatorMain		= 0.320; *)
 (* '<S1>:1:21' fOffsetAngleDegMainAct		= 62.1; *)
 (* '<S1>:1:22' fOffsetAngleRadMainAct		= deg2rad(fOffsetAngleDegMainAct); *)
 (* '<S1>:1:24' fLengthAKnuckle				= 0.767; *)
 (* '<S1>:1:25' fLengthBKnuckle				= 0.184; *)
-(* '<S1>:1:26' fMinLengthActuatorKnuckle	= 0.627; *)
+(* '<S1>:1:26' fMinLengthActuatorKnuckle	= 0.633; *)
 (* '<S1>:1:27' fMaxStrokeActuatorKnuckle	= 0.260; *)
 (* '<S1>:1:29' fOffsetAngleDegKnuckleAct	= 86.3; *)
 (* '<S1>:1:30' fOffsetAngleRadKnuckleAct	= deg2rad(fOffsetAngleDegKnuckleAct); *)
@@ -48,12 +48,12 @@ END_VAR
 (* '<S1>:1:33' fLengthActuatorMain = fStrokeActuatorMain + fMinLengthActuatorMain; *)
 (* '<S1>:1:35' fAngleMainArmAct = acos((fLengthBMain^2 + fLengthAMain^2 - fLengthActuatorMain^2) / (2 * fLengthBMain * fLengthAMain)); *)
 (* '<S1>:1:37' fTheta3 = fAngleMainArmAct - fOffsetAngleRadMainAct; *)
-fTheta3 := ACOS((0.70303699999999991 - ((fStrokeActuatorMain/1000 + 0.692) * (fStrokeActuatorMain/1000 + 0.692))) / 0.70118799999999992) - 1.0838494654884787;
+fTheta3 := ACOS((0.70303699999999991 - ((fStrokeActuatorMain/1000 + 0.691) * (fStrokeActuatorMain/1000 + 0.691))) / 0.70118799999999992) - 1.0838494654884787;
 (* Calculating angles for knuckle arm *)
 (* '<S1>:1:40' fLengthActuatorKnuckle = fStrokeActuatorKnuckle + fMinLengthActuatorKnuckle; *)
 (* '<S1>:1:42' fAngleKnuckleArmAct = acos((fLengthBKnuckle^2 + fLengthAKnuckle^2 - fLengthActuatorKnuckle^2) / (2 * fLengthBKnuckle * fLengthAKnuckle)); *)
 (* '<S1>:1:44' fTheta4 = fAngleKnuckleArmAct - fOffsetAngleRadKnuckleAct; *)
-fTheta4 := ACOS((0.62214500000000006 - ((fStrokeActuatorKnuckle/1000 + 0.627) * (fStrokeActuatorKnuckle/1000 + 0.627))) / 0.282256) - 1.5062191444711064;
+fTheta4 := ACOS((0.62214500000000006 - ((fStrokeActuatorKnuckle/1000 + 0.633) * (fStrokeActuatorKnuckle/1000 + 0.633))) / 0.282256) - 1.5062191444711064;
 
 (* fAngleMainArmAct			= fTheta3deg + fOffsetAngleDegMainAct; *)
 (* fAngleKnuckleArmAct         = fTheta4deg + fOffsetAngleDegKnuckleAct; *)
