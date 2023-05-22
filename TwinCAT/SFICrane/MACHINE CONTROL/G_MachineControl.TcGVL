@@ -36,8 +36,7 @@ VAR_GLOBAL
 	//Encoder values 
 	fEncoderValue0Turns		: LREAL := 0.0;
 	fEncoderValue5Turns		: LREAL := 0.0;
-	fEncoderValueLayer2		: LREAL := 0.0;
-	fEncoderValuePayload0	: LREAL := 2100.0;
+	fEncoderValueLayer2		: LREAL := 23666.0;
 	fEncoderValueStartAuto	: LREAL;
 	fTooltipYAutoStart		: LREAL;
 	fRefPosPayloadAutoStart	: LREAL;
