@@ -2175,8 +2175,8 @@ External Setpoint Generation:
 					</AxisPara>
 					<Encoder Name="Enc" EncType="19">
 						<EncPara ScaleFactorNumerator="60" ScaleFactorDenominator="1048576" MaxCount="#xffffffff">
-							<SoftEndMinControl Enable="true" Range="37591"/>
-							<SoftEndMaxControl Enable="true" Range="50818"/>
+							<SoftEndMinControl Enable="true" Range="-7763"/>
+							<SoftEndMaxControl Enable="true" Range="300"/>
 						</EncPara>
 						<Vars VarGrpType="1">
 							<Name>Inputs</Name>
@@ -2842,7 +2842,7 @@ stCylValveOutput 			: ST_ValveOutput;]]></Comment>
 							<SortId>0</SortId>
 							<DriveModuleType>128</DriveModuleType>
 							<TcLink>
-								<TcPrjPath>..\SFICraneNewSetup\SFICraneKristian.tsproj</TcPrjPath>
+								<TcPrjPath>..\TwinCAT\SFICraneKristian.tsproj</TcPrjPath>
 								<IoItemPathName>TIID^Device 5 (EtherCAT)^Box 24 (AMI8000-0100)</IoItemPathName>
 								<ItemId>24</ItemId>
 								<ObjectId>#x03020018</ObjectId>
@@ -2894,7 +2894,7 @@ stCylValveOutput 			: ST_ValveOutput;]]></Comment>
 								</Device>
 								<Channel ChnId="0">
 									<TcLink>
-										<TcPrjPath>..\SFICraneNewSetup\SFICraneKristian.tsproj</TcPrjPath>
+										<TcPrjPath>..\TwinCAT\SFICraneKristian.tsproj</TcPrjPath>
 										<IoItemPathName>TIID^Device 5 (EtherCAT)^Box 24 (AMI8000-0100)</IoItemPathName>
 										<NcItemPathName>TINC^NC-Task 1 SAF^Axes^Axis 4 - Winch Motor</NcItemPathName>
 									</TcLink>
