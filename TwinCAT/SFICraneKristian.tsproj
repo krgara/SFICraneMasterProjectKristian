@@ -1707,7 +1707,7 @@ External Setpoint Generation:
 		<ImageData Id="1008">424dd6020000000000003600000028000000100000000e0000000100180000000000a0020000c40e0000c40e00000000000000000000ff00ffff00ffff00ffff00ffff00ffff00ff808080808080808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ff007fff007fff007fff007fff007fff007fffc0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffff00ff</ImageData>
 		<ImageData Id="1009">424dd6020000000000003600000028000000100000000e0000000100180000000000a0020000c40e0000c40e00000000000000000000ff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080808080808080808080808080808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080c0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000bfff00bfffc0c0c0808080c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000bfff00bfffc0c0c0808080c0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000bfff00bfffc0c0c0808080c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080c0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000bfff00bfffc0c0c0808080c0c0c0000000c0c0c0000000808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000bfff00bfffc0c0c0808080c0c0c0c0c0c0c0c0c0c0c0c0808080ff00ffff00ffff00ffff00ffff00ffff00ffc0c0c000bfff00bfffc0c0c0808080c0c0c0000000c0c0c0000000808080007fff007fff007fff007fff007fffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080c0c0c0c0c0c0c0c0c0c0c0c0808080007fff007fff007fff007fff007fffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080c0c0c0c0c0c0c0c0c0c0c0c0808080007fff007fff007fff007fff007fffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080c0c0c0008000c0c0c0008000808080007fff007fff007fff007fff007fffff00ffc0c0c0c0c0c0c0c0c0c0c0c0808080c0c0c0c0c0c0c0c0c0c0c0c0808080007fff007fff007fff007fff007fff</ImageData>
 	</ImageDatas>
-	<Project ProjectGUID="{36AAB0B2-5D18-4D07-B9D0-56D7982BB26F}" TargetNetId="5.107.189.26.1.1" Target64Bit="true" ShowHideConfigurations="#x106">
+	<Project ProjectGUID="{36AAB0B2-5D18-4D07-B9D0-56D7982BB26F}" TargetNetId="5.118.61.77.1.1" Target64Bit="true" ShowHideConfigurations="#x106">
 		<System>
 			<Settings MaxCpus="4"/>
 			<Tasks>
@@ -2315,50 +2315,11 @@ External Setpoint Generation:
 		</Motion>
 		<Plc>
 			<Project GUID="{64FB78BA-5775-4793-83DB-E4463DEFB246}" Name="SFICrane" PrjFilePath="SFICrane\SFICrane.plcproj" TmcFilePath="SFICrane\SFICrane.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
-				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="SFICrane\SFICrane.tmc" TmcHash="{65399BB2-F6C6-4B89-9DC8-AEE5B42D4873}">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="SFICrane\SFICrane.tmc" TmcHash="{B62C7BAD-CA65-A2DC-04C6-2088BFF6CE0E}">
 					<Name>SFICrane Instance</Name>
 					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
 					<Vars VarGrpType="1">
 						<Name>PlcTask Inputs</Name>
-						<Var>
-							<Name>G_AXIS4.WMAxis.NcToPlc</Name>
-							<Type GUID="{25521FAA-EA5F-4C7F-8864-BBCCDACD2E98}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
-						</Var>
-						<Var>
-							<Name>G_StablePlatformIO.npA</Name>
-							<Comment><![CDATA[fJoyLeftX AT %I* : INT; 
-bJoyLeftPushButton AT %I* : BOOL; ]]></Comment>
-							<Type>INT</Type>
-						</Var>
-						<Var>
-							<Name>G_StablePlatformIO.npB</Name>
-							<Type>INT</Type>
-						</Var>
-						<Var>
-							<Name>G_StablePlatformIO.npS</Name>
-							<Type>INT</Type>
-						</Var>
-						<Var>
-							<Name>G_StablePlatformIO.nSVFeedback</Name>
-							<Type>INT</Type>
-						</Var>
-						<Var>
-							<Name>G_StablePlatformIO.bModeSwitchOff</Name>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>G_StablePlatformIO.bEMG_OK</Name>
-							<Comment><![CDATA[ TwinSAFE	]]></Comment>
-							<Type>BOOL</Type>
-						</Var>
-						<Var>
-							<Name>G_StablePlatformIO.nPistonPosition</Name>
-							<Type>INT</Type>
-						</Var>
-						<Var>
-							<Name>G_StablePlatformIO.nPistonVelocity</Name>
-							<Type>INT</Type>
-						</Var>
 						<Var>
 							<Name>G_AXIS1.BCAxis.NcToPlc</Name>
 							<Type GUID="{25521FAA-EA5F-4C7F-8864-BBCCDACD2E98}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
@@ -2372,7 +2333,15 @@ bJoyLeftPushButton AT %I* : BOOL; ]]></Comment>
 							<Type GUID="{25521FAA-EA5F-4C7F-8864-BBCCDACD2E98}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
 						</Var>
 						<Var>
+							<Name>G_AXIS4.WMAxis.NcToPlc</Name>
+							<Type GUID="{25521FAA-EA5F-4C7F-8864-BBCCDACD2E98}" Namespace="MC">NCTOPLC_AXIS_REF</Type>
+						</Var>
+						<Var>
 							<Name>G_Safety_AXIS4.ChA_STO_Active</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>G_Inputs.bManualModeSelector</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
@@ -2391,10 +2360,6 @@ bJoyLeftPushButton AT %I* : BOOL; ]]></Comment>
 						<Var>
 							<Name>G_MachineControl.fWinchMotorAngleEncoder</Name>
 							<Type>LREAL</Type>
-						</Var>
-						<Var>
-							<Name>G_Inputs.bManualModeSelector</Name>
-							<Type>BOOL</Type>
 						</Var>
 						<Var>
 							<Name>G_Inputs.bAutoModeSelector</Name>
@@ -2452,21 +2417,44 @@ bJoyLeftPushButton AT %I* : BOOL; ]]></Comment>
 							<Name>G_Inputs.stJoyRY.nValue</Name>
 							<Type>INT</Type>
 						</Var>
-					</Vars>
-					<Vars VarGrpType="2" AreaNo="1">
-						<Name>PlcTask Outputs</Name>
 						<Var>
-							<Name>G_AXIS4.WMAxis.PlcToNc</Name>
-							<Type GUID="{96B75FEB-2D84-43BE-A3EC-D9A681F27D52}" Namespace="MC">PLCTONC_AXIS_REF</Type>
-						</Var>
-						<Var>
-							<Name>G_StablePlatformIO.bSVEnable</Name>
+							<Name>G_StablePlatformIO.bModeSwitchOff</Name>
 							<Type>BOOL</Type>
 						</Var>
 						<Var>
-							<Name>G_StablePlatformIO.nSVControlSignal</Name>
+							<Name>G_StablePlatformIO.npA</Name>
+							<Comment><![CDATA[fJoyLeftX AT %I* : INT; 
+bJoyLeftPushButton AT %I* : BOOL; ]]></Comment>
 							<Type>INT</Type>
 						</Var>
+						<Var>
+							<Name>G_StablePlatformIO.npB</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>G_StablePlatformIO.npS</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>G_StablePlatformIO.nSVFeedback</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>G_StablePlatformIO.nPistonPosition</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>G_StablePlatformIO.nPistonVelocity</Name>
+							<Type>INT</Type>
+						</Var>
+						<Var>
+							<Name>G_StablePlatformIO.bEMG_OK</Name>
+							<Comment><![CDATA[ TwinSAFE	]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+					</Vars>
+					<Vars VarGrpType="2" AreaNo="1">
+						<Name>PlcTask Outputs</Name>
 						<Var>
 							<Name>G_AXIS1.BCAxis.PlcToNc</Name>
 							<Type GUID="{96B75FEB-2D84-43BE-A3EC-D9A681F27D52}" Namespace="MC">PLCTONC_AXIS_REF</Type>
@@ -2477,6 +2465,10 @@ bJoyLeftPushButton AT %I* : BOOL; ]]></Comment>
 						</Var>
 						<Var>
 							<Name>G_AXIS3.TCAxis.PlcToNc</Name>
+							<Type GUID="{96B75FEB-2D84-43BE-A3EC-D9A681F27D52}" Namespace="MC">PLCTONC_AXIS_REF</Type>
+						</Var>
+						<Var>
+							<Name>G_AXIS4.WMAxis.PlcToNc</Name>
 							<Type GUID="{96B75FEB-2D84-43BE-A3EC-D9A681F27D52}" Namespace="MC">PLCTONC_AXIS_REF</Type>
 						</Var>
 						<Var>
@@ -2516,6 +2508,14 @@ bJoyLeftPushButton AT %I* : BOOL; ]]></Comment>
 stWinchValveOutput 		: ST_ValveOutput;
 stCylValveOutput 			: ST_ValveOutput;]]></Comment>
 							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>G_StablePlatformIO.bSVEnable</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>G_StablePlatformIO.nSVControlSignal</Name>
+							<Type>INT</Type>
 						</Var>
 					</Vars>
 					<UnrestoredVarLinks ImportTime="2023-04-28T11:48:01">
@@ -2592,9 +2592,9 @@ stCylValveOutput 			: ST_ValveOutput;]]></Comment>
 				<Name>Device 5 (EtherCAT)</Name>
 				<AddressInfo>
 					<Pnp>
-						<DeviceDesc>X001 (TwinCAT-Intel PCI Ethernet Adapter (Gigabit) </DeviceDesc>
-						<DeviceName>\DEVICE\{87DBAEE6-C9C3-4B9C-96EC-B6295D8A1EFC}</DeviceName>
-						<DeviceData>0001056bbd1b</DeviceData>
+						<DeviceDesc>X001 (TwinCAT-Intel PCI Ethernet Adapter (Gigabit))</DeviceDesc>
+						<DeviceName>\DEVICE\{9EBB8B3D-336A-4BF9-A061-90A43E145D4F}</DeviceName>
+						<DeviceData>000105763d51</DeviceData>
 					</Pnp>
 				</AddressInfo>
 				<Image Id="4" AddrType="9" ImageType="3">
